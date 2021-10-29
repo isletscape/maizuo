@@ -1,0 +1,8 @@
+@media screen and (min-width: 560px) {
+  html {
+    font-size: 54px;
+  }
+  :root {
+    background-color: red;
+  }
+}

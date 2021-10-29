@@ -1,11 +1,22 @@
 <template>
-  <h1>movie</h1>
+  p123
+  <!-- 轮播图 -->
+  <Swipe></Swipe>
+  <!-- 标签页 -->
+  <Tab></Tab>
 </template>
 
 <script>
 import { getMovie } from '@/api/api.js'
+import Tab from '@/components/Tab/Tab.vue'
+import Swipe from '@/components/Swipe/Swipe.vue'
+
 export default {
   name: 'Movie',
+  components: {
+    Tab,
+    Swipe,
+  },
   created() {
     this.initMovies()
   },
@@ -18,3 +29,5 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped></style>
