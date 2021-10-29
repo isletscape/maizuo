@@ -4,4 +4,9 @@ import router from './router'
 import { Tabbar, TabbarItem, Icon } from 'vant'
 import 'vant/lib/index.css'
 
-createApp(App).use(router).use(Tabbar).use(TabbarItem).use(Icon).mount('#app')
+const app = createApp(App)
+app.use(router)
+app.use(Tabbar)
+app.use(TabbarItem)
+app.use(Icon)
+app.mount('#app')
