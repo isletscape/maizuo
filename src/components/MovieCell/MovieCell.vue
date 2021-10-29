@@ -1,11 +1,18 @@
 <template>
-  <van-card
-    num="2"
-    price="2.00"
-    desc="描述信息"
-    title="商品标题"
-    thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-  ></van-card>
+  <van-cell>
+    <div class="movieCell-thumb">
+      <img src="" alt="" />
+    </div>
+    <div class="movieCell-content">
+      <div class="title">无暇赴死</div>
+      <div class="tate">5.7</div>
+      <div class="staring"></div>
+      <div class="info"></div>
+    </div>
+    <div class="movieCell-action">
+      <button>购票</button>
+    </div>
+  </van-cell>
 </template>
 <script>
 export default {

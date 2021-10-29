@@ -7,7 +7,7 @@
         finished-text="没有更多了"
         @load="onLoad"
       >
-        <movie-cell></movie-cell>
+        <movie-cell v-for="item in movies" :key="item.id"></movie-cell>
         <movie-cell></movie-cell>
         <movie-cell></movie-cell>
         <movie-cell></movie-cell>
@@ -23,6 +23,9 @@ export default {
   name: 'Tab',
   components: {
     MovieCell,
+  },
+  props: {
+    movies: Array,
   },
 }
 </script>
