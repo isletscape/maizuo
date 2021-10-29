@@ -1,15 +1,16 @@
 <template>
-  <h1>cinema</h1>
+  <p>cinema</p>
   <div class="ddd"></div>
 </template>
 
 <style lang="less">
-h1 {
-  font-size: 0.2rem;
+p {
+  font-size: 15px;
 }
 .ddd {
-  width: 1rem;
-  height: 1rem;
+  width: 37.5px;
+  height: 37.5px;
   background-color: skyblue;
+  border: 1px solid red;
 }
 </style>
