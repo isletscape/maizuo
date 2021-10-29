@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import request from '@/utils/request.js'
+import { getMovie } from '@/api/api.js'
 export default {
   name: 'Movie',
   created() {
@@ -11,15 +11,8 @@ export default {
   },
   methods: {
     async initMovies() {
-      const { data: res } = await request.get('/gateway', {
-        params: {
-          cityId: 130800,
-          pageNum: 1,
-          pageSize: 10,
-          type: 1,
-          k: 3819095,
-        },
-      })
+      const { data: res } = await getMovie(130800, 1, 10)
+
       console.log(res)
     },
   },
