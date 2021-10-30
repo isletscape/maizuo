@@ -1,8 +1,6 @@
 <template>
-  <!-- 轮播图 -->
   <Swipe></Swipe>
-  <!-- 标签页 -->
-  <Tab :movies="movieList"></Tab>
+  <Tab :movies="movies"></Tab>
 </template>
 
 <script>
@@ -10,6 +8,7 @@ import { getMovie } from '@/api/api.js'
 import { handleRequest } from '@/utils/handleRequest.js'
 import Tab from '@/components/Tab/Tab.vue'
 import Swipe from '@/components/Swipe/Swipe.vue'
+import { reactive, toRefs } from '@vue/runtime-core'
 
 export default {
   name: 'Movie',
@@ -17,29 +16,33 @@ export default {
     Tab,
     Swipe,
   },
-  data() {
-    return {
-      movieList: [],
-    }
-  },
-  created() {
-    this.initMovies()
-  },
-  methods: {
-    async initMovies() {
+  setup() {
+    let list = reactive({
+      movies: [],
+    })
+
+    ;(async function () {
       const data = await getMovie(110100, 1, 10)
       if (!handleRequest(data)) return
-      console.log('继续执行')
       const {
         data: {
           data: { films },
         },
       } = data
-      this.movieList = [...films]
-      console.log(this.movieList)
-    },
+      list.movies = films
+      console.log(list.movies)
+    })()
+
+    return {
+      ...toRefs(list),
+    }
   },
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+#ddd {
+  height: 10px;
+  background-color: red;
+}
+</style>
