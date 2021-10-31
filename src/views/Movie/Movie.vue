@@ -1,5 +1,6 @@
 <template>
-  <Swipe></Swipe>
+  <TitleBar></TitleBar>
+  <Swipe :height="swipeHeight"></Swipe>
   <Tab></Tab>
 </template>
 
@@ -8,41 +9,24 @@
 // import { handleRequest } from '@/utils/handleRequest.js'
 import Tab from '@/components/Tab/Tab.vue'
 import Swipe from '@/components/Swipe/Swipe.vue'
-// import { reactive, toRefs } from '@vue/runtime-core'
+import TitleBar from '@/components/TitleBar/TitleBar.vue'
+// import { provide } from '@vue/runtime-core'
+import { swipeHeight } from '@/utils/styles/style.js'
+// import { ref } from '@vue/runtime-core'
 
 export default {
   name: 'Movie',
   components: {
     Tab,
     Swipe,
+    TitleBar,
   },
-  // setup() {
-  //   let list = reactive({
-  //     movies: [],
-  //   })
-
-  //   ;(async function () {
-  //     const data = await getMovie(110100, 1, 10)
-  //     if (!handleRequest(data)) return
-  //     const {
-  //       data: {
-  //         data: { films },
-  //       },
-  //     } = data
-  //     list.movies = films
-  //     console.log(list.movies)
-  //   })()
-
-  //   return {
-  //     ...toRefs(list),
-  //   }
-  // },
+  setup() {
+    return {
+      swipeHeight,
+    }
+  },
 }
 </script>
 
-<style lang="less" scoped>
-#ddd {
-  height: 10px;
-  background-color: red;
-}
-</style>
+<style lang="less" scoped></style>

@@ -10,6 +10,10 @@
 <script>
 export default {
   name: 'Swipe',
+  props: {
+    sHeight: Number,
+  },
+  setup() {},
 }
 </script>
 <style lang="less" scoped>

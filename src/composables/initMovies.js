@@ -16,7 +16,7 @@ export default async function initMovies(
       data: { films },
     },
   } = data
-
+  console.log(films)
   movies.value = [...movies.value, ...films]
   pageNum.value += 1
   loading.value = false
