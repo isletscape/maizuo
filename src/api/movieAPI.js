@@ -1,6 +1,7 @@
-import request from '@/utils/request.js'
+//发送请求
+import request from '@/utils/request/request.js'
 
-export const getMovie = function (cityId, pageNum, pageSize) {
+export const movieAPI = function (cityId, pageNum, pageSize) {
   return request.get('/gateway', {
     params: {
       cityId: cityId,

@@ -1,3 +1,4 @@
+// 设置根元素字体
 function getRem() {
   var html = document.querySelector('html') || document.documentElement
   var w = document.body.clientWidth || document.documentElement.clientWidth

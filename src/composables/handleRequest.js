@@ -2,7 +2,6 @@
 export const handleRequest = (data) => {
   var flag = true
   if (data.status === 200) {
-    console.log('请求成功')
     if (data.data.status === 0) {
       console.log('获得数据')
     } else {

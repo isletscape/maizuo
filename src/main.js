@@ -11,9 +11,10 @@ import {
   SwipeItem,
   Card,
   List,
+  PullRefresh,
 } from 'vant'
 import 'vant/lib/index.css'
-import '@/rem/rem.js'
+import '@/utils/rem/rem.js'
 
 const app = createApp(App)
 app.use(router)
@@ -26,4 +27,5 @@ app.use(Swipe)
 app.use(SwipeItem)
 app.use(Card)
 app.use(List)
+app.use(PullRefresh)
 app.mount('#app')
