@@ -15,16 +15,8 @@
         </span>
       </div>
       <div class="staring">
-        <!-- <span>主演：{{ actors.join(',') }}</span> -->
-        <span>
-          主演：{{
-            movie.actors
-              .map((item) => {
-                return item.name
-              })
-              .join(',')
-          }}
-        </span>
+        <!-- <span>主演：xxx</span> -->
+        <span>主演：{{ actors }}</span>
       </div>
       <div class="info">
         <span>{{ movie.nation }}</span>
@@ -43,10 +35,33 @@ import {} from '@vue/runtime-core'
 export default {
   name: 'MovieCell',
   props: {
-    movie: Object,
+    movie: {
+      type: Object,
+      default() {
+        return {
+          poster: {
+            type: String,
+            default: '',
+          },
+          actors: {
+            type: [Array, Object],
+            required: false,
+          },
+        }
+      },
+    },
   },
-  setup() {
-    return {}
+  setup(props) {
+    const actors = props.movie.actors
+      ? props.movie.actors
+          .map((item) => {
+            return item.name
+          })
+          .join(',')
+      : '-'
+    return {
+      actors,
+    }
   },
 }
 </script>

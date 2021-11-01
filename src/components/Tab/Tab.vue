@@ -9,7 +9,7 @@
       >
         <movie-cell
           v-for="item in movies"
-          :key="item.flimID"
+          :key="item.premiereAt"
           :movie="item"
         ></movie-cell>
       </van-list>
@@ -22,7 +22,7 @@
 import MovieCell from '@/components/MovieCell/MovieCell.vue'
 import { ref } from 'vue'
 import EventBus from '@/utils/EventBus/EventBus.js'
-// import initMovies from '@/composables/initMovies.js'
+import initMovies from '@/composables/initMovies.js'
 import { titleBarHeight, swipeHeight } from '@/utils/styles/style.js'
 
 export default {
@@ -31,12 +31,12 @@ export default {
     MovieCell,
   },
   setup() {
-    // var cityID = ref(110100)
-    // var pageNum = ref(1)
-    // var pageSize = ref(10)
+    var cityID = ref(110100)
+    var pageNum = ref(1)
+    var pageSize = ref(10)
     var loading = ref(false)
     var finished = ref(false)
-    var movies = ref([
+    var movies_x = ref([
       {
         poster: 'asd',
         name: 'asd',
@@ -170,15 +170,16 @@ export default {
         runtime: 123,
       },
     ])
-
+    var movies = ref([])
     //默认加载页面触发一次,上滑到底部再次触发
     const onLoad = () => {
-      // initMovies(movies, cityID, pageNum, pageSize, loading, finished)
+      initMovies(movies, cityID, pageNum, pageSize, loading, finished)
     }
 
     var offsetPercentage = ref(0)
 
     const onScroll = (arg) => {
+      console.log('ss')
       // offsetPercentage.value = arg.scrollTop / (swipeHeight - titleBarHeight)
       EventBus.emit('tabScrollTop', arg.scrollTop)
     }
@@ -192,6 +193,7 @@ export default {
       titleBarHeight,
       swipeHeight,
       offsetPercentage,
+      movies_x,
     }
   },
 }
