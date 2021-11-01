@@ -1,32 +1,41 @@
 <template>
-  <div id="titlebar" :style="heightStyleObject" @click="onclick">标题</div>
+  <div
+    id="titlebar"
+    :style="[heightStyleObject, titleBarOffset]"
+    ref="titlebar"
+  >
+    标题
+  </div>
 </template>
 
 <script>
-// import { toRefs } from '@vue/reactivity'
-import { titleBarHeight } from '@/utils/styles/style.js'
-import { inject } from '@vue/runtime-core'
-
-// import { ref } from '@vue/runtime-core'
+import { titleBarHeight, swipeHeight } from '@/utils/styles/style.js'
+import EventBus from '@/utils/EventBus/EventBus.js'
+import { computed, ref } from 'vue'
 export default {
   setup() {
-    //样式绑定响应式对象
-    const per = inject('offsetPercentage')
-
-    const onclick = () => {
-      console.log('title', per)
-    }
-
+    var offset = ref(0)
+    //监听tabScrollTop变化
+    EventBus.on('tabScrollTop', (val) => {
+      var per = val / (swipeHeight - titleBarHeight)
+      per = per >= 1 ? 1 : per
+      offset.value = per * titleBarHeight
+    })
+    //动态样式绑定
+    const titleBarOffset = computed(() => {
+      return { top: offset.value + 'px' }
+    })
+    //固定样式绑定
     var heightStyleObject = {
       height: titleBarHeight + 'px',
       lineHeight: titleBarHeight + 'px',
-      // top: -titleBarHeight + 3 + 'px',
+      transform: `translateY(${-titleBarHeight}px)`,
     }
-
     return {
       heightStyleObject,
-      onclick,
-      per,
+      titleBarHeight,
+      titleBarOffset,
+      offset,
     }
   },
 }
@@ -34,13 +43,11 @@ export default {
 
 <style lang="less" scoped>
 #titlebar {
-  position: absolute;
-  top: 0;
+  position: fixed;
   background-color: skyblue;
   width: 100%;
   z-index: 999;
   font-size: 18px;
   text-align: center;
-  line-height: 40px;
 }
 </style>

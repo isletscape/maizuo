@@ -20,7 +20,8 @@
 
 <script>
 import MovieCell from '@/components/MovieCell/MovieCell.vue'
-import { ref, provide } from '@vue/runtime-core'
+import { ref } from 'vue'
+import EventBus from '@/utils/EventBus/EventBus.js'
 // import initMovies from '@/composables/initMovies.js'
 import { titleBarHeight, swipeHeight } from '@/utils/styles/style.js'
 
@@ -178,15 +179,9 @@ export default {
     var offsetPercentage = ref(0)
 
     const onScroll = (arg) => {
-      offsetPercentage.value = arg.scrollTop / swipeHeight
-
-      // console.log('onscroll', offsetPercentage.value)
+      // offsetPercentage.value = arg.scrollTop / (swipeHeight - titleBarHeight)
+      EventBus.emit('tabScrollTop', arg.scrollTop)
     }
-    // watch(offsetPercentage, (a, b) => {
-    //   console.log(a, b)
-    // })
-    console.log(offsetPercentage)
-    provide('offsetPercentage', onScroll)
 
     return {
       movies,
@@ -195,6 +190,7 @@ export default {
       onLoad,
       onScroll,
       titleBarHeight,
+      swipeHeight,
       offsetPercentage,
     }
   },

@@ -11,7 +11,9 @@ import Tab from '@/components/Tab/Tab.vue'
 import Swipe from '@/components/Swipe/Swipe.vue'
 import TitleBar from '@/components/TitleBar/TitleBar.vue'
 // import { provide } from '@vue/runtime-core'
+
 import { swipeHeight } from '@/utils/styles/style.js'
+import {} from '@vue/runtime-core'
 // import { ref } from '@vue/runtime-core'
 
 export default {
@@ -22,8 +24,12 @@ export default {
     TitleBar,
   },
   setup() {
+    // provide('titleBarHeight', titleBarHeight)
+    // provide('swipeHeight', swipeHeight)
+
     return {
       swipeHeight,
+      // titleBarHeight,
     }
   },
 }
