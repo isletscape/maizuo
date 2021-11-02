@@ -25,7 +25,7 @@ export default {
     })
     //路由跳转
     const onClick = () => {
-      router.push({ name: 'Citys' })
+      router.push({ name: 'citys' })
     }
 
     return {

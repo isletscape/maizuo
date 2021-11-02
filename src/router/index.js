@@ -1,33 +1,43 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Movie from '../views/Movie/Movie.vue'
-import Cinema from '@/views/Cinema/Cinema.vue'
+import Movie from '@/views/Home/Movie/Movie.vue'
+import Cinema from '@/views/Home/Cinema/Cinema.vue'
 import Citys from '@/views/Citys/Citys.vue'
+import Home from '@/views/Home/Home.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/movie',
+    redirect: '/home',
   },
   {
-    path: '/movie',
-    name: 'Movie',
-    component: Movie,
+    path: '/home',
+    name: 'home',
+    component: Home,
+    redirect: '/movie',
+    children: [
+      {
+        path: '/movie',
+        name: 'movie',
+        component: Movie,
+      },
+
+      {
+        path: '/cinema',
+        name: 'cinema',
+        component: Cinema,
+      },
+      {
+        path: '/mine',
+        name: 'mine',
+        component: () =>
+          import(/* webpackChunkName: "about" */ '@/views/Home/Mine/Mine.vue'),
+      },
+    ],
   },
   {
     path: '/citys',
-    name: 'Citys',
+    name: 'citys',
     component: Citys,
-  },
-  {
-    path: '/cinema',
-    name: 'Cinema',
-    component: Cinema,
-  },
-  {
-    path: '/mine',
-    name: 'Mine',
-    component: () =>
-      import(/* webpackChunkName: "about" */ '@/views/Mine/Mine.vue'),
   },
 ]
 
