@@ -1,14 +1,14 @@
 //发送请求
 import request from '@/utils/request/request.js'
 
-export const movieAPI = function (cityId, pageNum, pageSize) {
+export const movieAPI = function (cityId, pageNum, pageSize, type) {
   return request.get('/gateway', {
     params: {
-      cityId: cityId,
-      pageNum: pageNum,
-      pageSize: pageSize,
-      type: 1,
-      k: 3819095,
+      cityId: cityId.value,
+      pageNum: pageNum.value,
+      pageSize: pageSize.value,
+      type: type.value,
+      k: 9707656,
     },
   })
 }

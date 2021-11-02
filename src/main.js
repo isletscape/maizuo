@@ -9,7 +9,6 @@ import {
   Tabs,
   Swipe,
   SwipeItem,
-  Card,
   List,
   PullRefresh,
 } from 'vant'
@@ -25,7 +24,6 @@ app.use(Tab)
 app.use(Tabs)
 app.use(Swipe)
 app.use(SwipeItem)
-app.use(Card)
 app.use(List)
 app.use(PullRefresh)
 app.mount('#app')

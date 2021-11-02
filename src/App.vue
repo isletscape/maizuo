@@ -6,3 +6,7 @@
     <van-tabbar-item replace to="/mine" icon="manager-o">我的</van-tabbar-item>
   </van-tabbar>
 </template>
+
+<script>
+export default {}
+</script>

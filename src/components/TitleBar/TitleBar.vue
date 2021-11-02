@@ -44,10 +44,11 @@ export default {
 <style lang="less" scoped>
 #titlebar {
   position: fixed;
-  background-color: skyblue;
+  background-color: #fff;
   width: 100%;
-  z-index: 999;
+  z-index: 10;
   font-size: 18px;
   text-align: center;
+  transform: translateZ(0);
 }
 </style>

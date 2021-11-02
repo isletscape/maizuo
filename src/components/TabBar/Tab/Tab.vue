@@ -1,41 +1,41 @@
 <template>
-  <van-tabs sticky :offset-top="titleBarHeight" @scroll="onScroll">
-    <van-tab title="正在热映">
-      <van-list
-        v-model:loading="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
-      >
-        <movie-cell
-          v-for="item in movies"
-          :key="item.premiereAt"
-          :movie="item"
-        ></movie-cell>
-      </van-list>
-    </van-tab>
-    <van-tab title="即将上映">内容 2</van-tab>
-  </van-tabs>
+  <!-- <div ref="listDom"></div> -->
+  <van-tab title="正在热映">
+    <van-list
+      v-model:loading="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <movie-cell
+        v-for="item in movies_x"
+        :key="item.premiereAt"
+        :movie="item"
+      ></movie-cell>
+    </van-list>
+  </van-tab>
 </template>
 
 <script>
-import MovieCell from '@/components/MovieCell/MovieCell.vue'
 import { ref } from 'vue'
-import EventBus from '@/utils/EventBus/EventBus.js'
-import initMovies from '@/composables/initMovies.js'
-import { titleBarHeight, swipeHeight } from '@/utils/styles/style.js'
+import MovieCell from '@/components/MovieCell/MovieCell.vue'
+
+// import initMovies from '@/composables/initMovies.js'
 
 export default {
-  name: 'Tab',
   components: {
     MovieCell,
   },
+  props: {
+    type: {
+      type: Number,
+      default: 1,
+    },
+    city: {
+      default: 110100,
+    },
+  },
   setup() {
-    var cityID = ref(110100)
-    var pageNum = ref(1)
-    var pageSize = ref(10)
-    var loading = ref(false)
-    var finished = ref(false)
     var movies_x = ref([
       {
         poster: 'asd',
@@ -171,29 +171,23 @@ export default {
       },
     ])
     var movies = ref([])
+    // var cityID = ref(props.city)
+    // var pageNum = ref(1)
+    // var pageSize = ref(10)
+    // var type = ref(1)
+    var loading = ref(false)
+    var finished = ref(false)
     //默认加载页面触发一次,上滑到底部再次触发
     const onLoad = () => {
-      initMovies(movies, cityID, pageNum, pageSize, loading, finished)
-    }
-
-    var offsetPercentage = ref(0)
-
-    const onScroll = (arg) => {
-      console.log('ss')
-      // offsetPercentage.value = arg.scrollTop / (swipeHeight - titleBarHeight)
-      EventBus.emit('tabScrollTop', arg.scrollTop)
+      // initMovies(movies, cityID, pageNum, pageSize, type, loading, finished)
     }
 
     return {
+      movies_x,
       movies,
+      onLoad,
       loading,
       finished,
-      onLoad,
-      onScroll,
-      titleBarHeight,
-      swipeHeight,
-      offsetPercentage,
-      movies_x,
     }
   },
 }

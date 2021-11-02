@@ -6,17 +6,18 @@ export default async function initMovies(
   cityID,
   pageNum,
   pageSize,
+  type,
   loading,
   finished
 ) {
-  const data = await movieAPI(cityID.value, pageNum.value, pageSize.value)
+  const data = await movieAPI(cityID, pageNum, pageSize, type)
   if (!handleRequest(data)) return
   const {
     data: {
       data: { films },
     },
   } = data
-  console.log(films)
+  console.log('pageNum', pageNum.value, films)
   movies.value = [...movies.value, ...films]
   pageNum.value += 1
   loading.value = false
