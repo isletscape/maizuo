@@ -17,8 +17,12 @@ export default {
     })
     //绑定按钮动态属性
     const dynamicStyle = computed(() => {
-      if (val.value <= 1) {
-        return { opacity: (1 - val.value) * 0.9 }
+      if (val.value < 1) {
+        return {
+          opacity: (1 - val.value) * 0.9,
+          color: '#000',
+          backgroundColor: '#fff',
+        }
       } else {
         return { color: '#000', backgroundColor: '#fff' }
       }

@@ -1,29 +1,7 @@
 <template>
   <van-tabs sticky :offset-top="titleBarHeight" @scroll="onScroll">
     <Tab :type="1" :city="110100" title="正在热映"></Tab>
-
     <Tab :type="2" :city="652900" title="xxx"></Tab>
-    <!-- <van-tab title="正在热映">
-      <van-list
-        v-model:loading="loading"
-        :finished="finished"
-        finished-text="没有更多了"
-        @load="onLoad"
-      >
-        <movie-cell
-          v-for="item in movies"
-          :key="item.premiereAt"
-          :movie="item"
-        ></movie-cell>
-      </van-list>
-    </van-tab>
-    <van-tab title="即将上映">
-      <movie-cell
-        v-for="item in movies_2"
-        :key="item.premiereAt"
-        :movie="item"
-      ></movie-cell>
-    </van-tab> -->
   </van-tabs>
 </template>
 
@@ -48,8 +26,6 @@ export default {
 
     const onScroll = (swipe) => {
       //注册监听滚动距离
-      EventBus.emit('tabScrollTop', swipe.scrollTop)
-      //注册监听是否滚动到顶部
       EventBus.emit(
         'scrollPercentage',
         swipe.scrollTop / (swipeHeight - titleBarHeight)

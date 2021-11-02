@@ -9,17 +9,16 @@
 </template>
 
 <script>
-import { titleBarHeight, swipeHeight } from '@/utils/styles/style.js'
+import { titleBarHeight } from '@/utils/styles/style.js'
 import EventBus from '@/utils/EventBus/EventBus.js'
 import { computed, ref } from 'vue'
 export default {
   setup() {
     var offset = ref(0)
     //监听tabScrollTop变化
-    EventBus.on('tabScrollTop', (val) => {
-      var per = val / (swipeHeight - titleBarHeight)
-      per = per >= 1 ? 1 : per
-      offset.value = per * titleBarHeight
+    EventBus.on('scrollPercentage', (val) => {
+      val = val >= 1 ? 1 : val
+      offset.value = val * titleBarHeight
     })
     //动态样式绑定
     const titleBarOffset = computed(() => {
