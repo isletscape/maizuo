@@ -66,6 +66,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+span {
+  display: inline-block;
+  height: 100%;
+}
 #movieCell-box {
   height: 94px;
   margin-left: 15px;
@@ -90,6 +94,7 @@ export default {
   height: 81px;
   overflow: hidden;
   .title {
+    height: 22px;
     display: flex;
     align-items: center;
     .name {
@@ -106,26 +111,36 @@ export default {
     }
   }
   .grade {
+    height: 21px;
     .score {
       font-size: 14px;
       color: #ffb232;
     }
   }
   .staring {
+    height: 19px;
     padding: 0;
+    font-size: 16px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .info {
+    height: 19px;
+    font-size: 16px;
   }
 }
 .movieCell-operating {
   button {
     width: 50px;
     height: 25px;
+    line-height: 25px;
     font-size: 13px;
-    border: 1px solid #ff5f16;
+    text-align: center;
+    border: 1px solid #1989fa;
     border-radius: 2px;
-    color: #ff5f16;
+    color: #1989fa;
+    padding: 0;
     background-color: #fff;
   }
 }

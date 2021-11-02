@@ -1,10 +1,9 @@
 <template>
-  <transition name="fade">
-    <div>
-      <p>123</p>
-      <button @click="onClick">button</button>
-    </div>
-  </transition>
+  <div id="citys">
+    <!-- <transition name="fade"> -->
+    <button @click="onClick">button</button>
+    <!-- </transition> -->
+  </div>
 </template>
 
 <script>
@@ -12,7 +11,7 @@ import Router from '@/router/index.js'
 export default {
   setup() {
     const onClick = () => {
-      Router.push('home')
+      Router.push('/movie')
     }
     return {
       onClick,
@@ -22,13 +21,38 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+#citys {
+  // position: absolute;
+  // top: 0;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
 }
+// .fade-enter-active {
+//   animation: moveIn 0.15s;
+// }
+// .fade-leave-active {
+//   animation: moveOut 0.15s;
+// }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+// @keyframes moveIn {
+//   0% {
+//     opacity: 0;
+//     transform: translateX(200px);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateX(0px);
+//   }
+// }
+
+// @keyframes moveOut {
+//   0% {
+//     opacity: 1;
+//     transform: translateX(0);
+//   }
+//   100% {
+//     opacity: 0;
+//     transform: translateX(-200px);
+//   }
+// }
 </style>

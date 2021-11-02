@@ -32,20 +32,4 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-// #citySelector {
-//   position: fixed;
-//   top: 18px;
-//   left: 7px;
-//   color: #fff;
-//   // width: 38px;
-//   height: 30px;
-//   padding: 0 5px 0 5px;
-//   font-size: 13px;
-//   background-color: rgba(0, 0, 0, 0.2);
-//   border-radius: 15px;
-//   border: none;
-//   outline-style: none;
-//   z-index: 20;
-// }
-</style>
+<style lang="less" scoped></style>
