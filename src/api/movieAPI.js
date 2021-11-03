@@ -1,4 +1,3 @@
-//发送请求
 import request from '@/utils/request/request.js'
 
 export const movieAPI = function (cityId, pageNum, pageSize, type) {
@@ -8,7 +7,10 @@ export const movieAPI = function (cityId, pageNum, pageSize, type) {
       pageNum: pageNum.value,
       pageSize: pageSize.value,
       type: type.value,
-      k: 9707656,
+      k: 3819095,
+    },
+    headers: {
+      'X-Host': 'mall.film-ticket.film.list',
     },
   })
 }

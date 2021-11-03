@@ -1,15 +1,13 @@
 <template>
   <van-tabs sticky :offset-top="titleBarHeight" @scroll="onScroll">
-    <Tab :type="1" :city="110100" title="正在热映"></Tab>
+    <Tab :type="1" :city="130100" title="正在热映"></Tab>
     <Tab :type="2" :city="652900" title="xxx"></Tab>
   </van-tabs>
 </template>
 
 <script>
-// import MovieCell from '@/components/MovieCell/MovieCell.vue'
 import { ref } from 'vue'
 import EventBus from '@/utils/EventBus/EventBus.js'
-// import initMovies from '@/composables/initMovies.js'
 import { titleBarHeight } from '@/utils/styles/style.js'
 import { swipeHeight } from '@/utils/styles/style.js'
 
@@ -19,7 +17,6 @@ export default {
   name: 'TabBar',
   components: {
     Tab,
-    // MovieCell,
   },
   setup() {
     const type = ref(1)

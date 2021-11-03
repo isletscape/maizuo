@@ -27,6 +27,10 @@ html,
 body,
 #app {
   height: 100%;
+  background-color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Microsoft YaHei, Tahoma, Helvetica, Arial, sans-serif;
 }
 .fade-enter-active {
   transition: opacity 0.4s ease;

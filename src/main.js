@@ -11,6 +11,9 @@ import {
   SwipeItem,
   List,
   PullRefresh,
+  IndexBar,
+  IndexAnchor,
+  Search,
 } from 'vant'
 import 'vant/lib/index.css'
 import '@/utils/rem/rem.js'
@@ -26,4 +29,7 @@ app.use(Swipe)
 app.use(SwipeItem)
 app.use(List)
 app.use(PullRefresh)
+app.use(IndexBar)
+app.use(IndexAnchor)
+app.use(Search)
 app.mount('#app')
