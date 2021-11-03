@@ -11,39 +11,42 @@
       <van-search v-model="keyword" placeholder="请输入搜索关键词" />
     </header>
 
-    <!-- 热门城市 -->
-    <div class="hot-citys">
-      <p>热门城市</p>
-      <ul>
-        <li>北京</li>
-        <li>上海</li>
-        <li>广州</li>
-        <li>深圳</li>
-      </ul>
-    </div>
+    <!-- 搜索列表 -->
+    <div class="result-list" v-if="keyword !== ''">结果</div>
 
-    <!-- 城市列表 -->
-    <van-index-bar :sticky-offset-top="offsettop">
-      <ul v-for="item in citys" :key="item.type">
-        <van-index-anchor :index="item.type" />
-        <li
-          class="city-name"
-          v-for="cityObj in item.list"
-          :key="cityObj.cityId"
-          @click="selectCity(cityObj)"
-        >
-          {{ cityObj.name }}
-        </li>
-      </ul>
-    </van-index-bar>
+    <!-- 展示列表 -->
+
+    <div class="show-list" v-if="keyword === ''">
+      <div class="hot-citys">
+        <p>热门城市</p>
+        <ul>
+          <li>北京</li>
+          <li>上海</li>
+          <li>广州</li>
+          <li>深圳</li>
+        </ul>
+      </div>
+      <van-index-bar :sticky-offset-top="offsettop">
+        <ul v-for="item in citys" :key="item.type">
+          <van-index-anchor :index="item.type" />
+          <li
+            class="city-name"
+            v-for="cityObj in item.list"
+            :key="cityObj.cityId"
+            @click="selectCity(cityObj)"
+          >
+            {{ cityObj.name }}
+          </li>
+        </ul>
+      </van-index-bar>
+    </div>
   </div>
 </template>
 
 <script setup>
 import Router from '@/router/index.js'
-import { ref } from '@vue/reactivity'
+import { watch, ref } from 'vue'
 import initCitys from '@/composables/initCitys.js'
-import { watch } from '@vue/runtime-core'
 import EventBus from '@/utils/EventBus/EventBus.js'
 
 const k = ref(3782949)
@@ -60,10 +63,20 @@ initCitys(citys, k)
 //   anchors.value.push(String.fromCharCode(65 + i))
 // }
 
-//搜索
+//实时检索结果
 const keyword = ref('')
+var serchResults = ref([])
 watch(keyword, (keyword) => {
-  console.log(keyword)
+  if (keyword === '') return (serchResults.value = [])
+  serchResults.value = []
+  citys.value.forEach((item) => {
+    serchResults.value = [
+      ...item.list.filter((i) => {
+        i.pinyin.includes(keyword) || i.name.includes(keyword)
+      }),
+      ...serchResults.value,
+    ]
+  })
 })
 
 //选择某个城市

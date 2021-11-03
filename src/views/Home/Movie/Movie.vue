@@ -9,27 +9,12 @@
   <TabBar></TabBar>
 </template>
 
-<script>
+<script setup>
 import CitySelector from '@/components/CitySelector/CitySelector.vue'
 import TabBar from '@/components/TabBar/TabBar.vue'
 import Swipe from '@/components/Swipe/Swipe.vue'
 import TitleBar from '@/components/TitleBar/TitleBar.vue'
-import { swipeHeight } from '@/utils/styles/style.js'
-
-export default {
-  name: 'Movie',
-  components: {
-    CitySelector,
-    TabBar,
-    Swipe,
-    TitleBar,
-  },
-  setup() {
-    return {
-      swipeHeight,
-    }
-  },
-}
+import { swipeHeight } from '@/global_styles/GlobalStyles.js'
 </script>
 
 <style lang="less" scoped></style>

@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { titleBarHeight } from '@/utils/styles/style.js'
+import { titleBarHeight } from '@/global_styles/GlobalStyles.js'
 import EventBus from '@/utils/EventBus/EventBus.js'
 import { computed, ref } from 'vue'
 

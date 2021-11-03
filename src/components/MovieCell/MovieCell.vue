@@ -30,40 +30,32 @@
     </div>
   </div>
 </template>
-<script>
-import {} from '@vue/runtime-core'
-export default {
-  name: 'MovieCell',
-  props: {
-    movie: {
-      type: Object,
-      default() {
-        return {
-          poster: {
-            type: String,
-            default: '',
-          },
-          actors: {
-            type: [Array, Object],
-            required: false,
-          },
-        }
-      },
+<script setup>
+// eslint-disable-next-line no-undef
+const props = defineProps({
+  movie: {
+    type: Object,
+    default() {
+      return {
+        poster: {
+          type: String,
+          default: '',
+        },
+        actors: {
+          type: [Array, Object],
+          required: false,
+        },
+      }
     },
   },
-  setup(props) {
-    const actors = props.movie.actors
-      ? props.movie.actors
-          .map((item) => {
-            return item.name
-          })
-          .join(',')
-      : '-'
-    return {
-      actors,
-    }
-  },
-}
+})
+const actors = props.movie.actors
+  ? props.movie.actors
+      .map((item) => {
+        return item.name
+      })
+      .join(',')
+  : '暂无信息'
 </script>
 <style lang="less" scoped>
 span {

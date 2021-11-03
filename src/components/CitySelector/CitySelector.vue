@@ -8,7 +8,7 @@
 import EventBus from '@/utils/EventBus/EventBus.js'
 import router from '@/router/index.js'
 import { computed, ref } from '@vue/reactivity'
-import { titleBarHeight } from '@/utils/styles/style.js'
+import { titleBarHeight } from '@/global_styles/GlobalStyles.js'
 
 const val = ref(0)
 const height = 25

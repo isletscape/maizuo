@@ -1,16 +1,4 @@
 <template>
-  <!--    
-              App                             
-               |                                  
-               |----Home  
-               |      |            
-               |      |----Movie         
-               |      |----Cinema        
-               |      |----Mine          
-               |                                  
-               |----City                          
-               |----                                                     
-  -->
   <div id="app">
     <router-view v-slot="{ Component }">
       <transition name="fade">
