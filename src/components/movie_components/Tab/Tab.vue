@@ -18,7 +18,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import MovieCell from '@/components/MovieCell/MovieCell.vue'
+import MovieCell from '@/components/movie_components/MovieCell/MovieCell.vue'
 
 import initMovies from '@/composables/initMovies.js'
 

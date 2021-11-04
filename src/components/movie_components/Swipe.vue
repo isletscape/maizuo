@@ -1,5 +1,10 @@
 <template>
-  <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+  <van-swipe
+    class="my-swipe"
+    :autoplay="3000"
+    indicator-color="white"
+    :height="swipeHeight"
+  >
     <van-swipe-item>1</van-swipe-item>
     <van-swipe-item>2</van-swipe-item>
     <van-swipe-item>3</van-swipe-item>
@@ -7,14 +12,8 @@
   </van-swipe>
 </template>
 
-<script>
-export default {
-  name: 'Swipe',
-  props: {
-    sHeight: Number,
-  },
-  setup() {},
-}
+<script setup>
+import { swipeHeight } from '@/global_styles/GlobalStyles.js'
 </script>
 <style lang="less" scoped>
 .my-swipe .van-swipe-item {

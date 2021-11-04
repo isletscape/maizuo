@@ -9,8 +9,7 @@
 // import { ref } from 'vue'
 import EventBus from '@/utils/EventBus/EventBus.js'
 import { titleBarHeight, swipeHeight } from '@/global_styles/GlobalStyles.js'
-
-import Tab from '@/components/TabBar/Tab/Tab.vue'
+import Tab from '@/components/movie_components/Tab/Tab.vue'
 
 // const type = ref(1)
 

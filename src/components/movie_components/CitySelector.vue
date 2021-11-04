@@ -43,7 +43,7 @@ const dynamicStyle = computed(() => {
 })
 
 const onClick = () => {
-  router.push({ name: 'citys' })
+  router.push({ name: 'city' })
 }
 </script>
 

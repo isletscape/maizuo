@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Movie from '@/views/Home/Movie/Movie.vue'
 import Cinema from '@/views/Home/Cinema/Cinema.vue'
-import Citys from '@/views/Citys/Citys.vue'
+import City from '@/views/City/City.vue'
 import Home from '@/views/Home/Home.vue'
 
 const routes = [
@@ -35,9 +35,9 @@ const routes = [
     ],
   },
   {
-    path: '/citys',
-    name: 'citys',
-    component: Citys,
+    path: '/city',
+    name: 'city',
+    component: City,
   },
 ]
 

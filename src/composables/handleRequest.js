@@ -1,4 +1,4 @@
-//请求结果处理
+//请求结果处理函数
 export const handleRequest = (data) => {
   var flag = true
   if (data.status === 200) {

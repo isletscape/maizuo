@@ -2,7 +2,7 @@ import { cityAPI } from '@/api/cityAPI.js'
 import { handleRequest } from './handleRequest'
 
 export default async function initCitys(citys, k) {
-  //发现本地存储，return
+  //发现本地存储，取得数据并return
   if (localStorage.getItem('citys'))
     return (citys.value = JSON.parse(localStorage.getItem('citys')))
 
@@ -14,7 +14,7 @@ export default async function initCitys(citys, k) {
       data: { cities },
     },
   } = data
-  // 按首字母序列化城市列表
+  //按首字母序列化城市列表
   const letterArr = []
   const newCities = []
   for (let code = 65; code < 91; code++) {
