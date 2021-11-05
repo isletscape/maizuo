@@ -1,15 +1,19 @@
 <template>
   <button id="citySelector" :style="[dynamicStyle, bindStyle]" @click="onClick">
-    {{ currentCity }}
+    {{ currentCityName }}
   </button>
 </template>
 
 <script setup>
 import EventBus from '@/utils/EventBus/EventBus.js'
 import router from '@/router/index.js'
-import { computed, ref } from '@vue/reactivity'
+import { computed, ref } from 'vue'
 import { titleBarHeight } from '@/global_styles/GlobalStyles.js'
+import { useStore } from 'vuex'
 
+const store = useStore()
+
+const currentCityName = store.state.currentCity.name
 const val = ref(0)
 const height = 25
 
@@ -18,10 +22,11 @@ EventBus.on('scrollPercentage', (percentage) => {
   val.value = percentage
 })
 //监听点城市列表点击事件
-const currentCity = ref('请选择城市')
-EventBus.on('currentCity', (city) => {
-  currentCity.value = city.name
-})
+// const currentCityName = ref('xxx')
+// EventBus.on('currentCity', (city) => {
+//   currentCityName.value = city.name
+//   console.log('on', currentCityName.value)
+// })
 
 //绑定样式
 const bindStyle = {

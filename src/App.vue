@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <router-view v-slot="{ Component }">
+    <!-- <router-view v-slot="{ Component }">
       <transition name="fade">
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
       </transition>
-    </router-view>
+    </router-view> -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -15,6 +16,8 @@ html,
 body,
 #app {
   height: 100%;
+  // overflow;
+  // -webkit-overflow-scrolling: touch;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

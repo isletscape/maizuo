@@ -1,5 +1,5 @@
 <template>
-  <div id="citys">
+  <div id="city">
     <!-- 固定头部区域 -->
     <header :style="{ height: `${offsettop}px` }">
       <div class="title">
@@ -35,14 +35,15 @@ import initCitys from '@/composables/initCitys.js'
 import Router from '@/router/index.js'
 import FullList from '@/components/city_components/FullList.vue'
 import SearchResultList from '@/components/city_components/SearchResultList.vue'
-import EventBus from '@/utils/EventBus/EventBus.js'
+import { useStore } from 'vuex'
+const store = useStore()
 
 //顶部固定区域的高度
 const offsettop = 100
 //请求参数
 const k = ref(3782949)
 //城市列表
-const citys = ref([])
+var citys = ref([])
 //搜索关键字
 const keyword = ref('')
 //搜索结果列表
@@ -64,18 +65,20 @@ watch(keyword, (keyword) => {
     ]
   })
 })
+
 const handleSelectCity = (city) => {
-  EventBus.emit('currentCity', city)
-  closepage()
+  closepage(city)
 }
+
 // 关闭页面
-const closepage = () => {
+const closepage = (city) => {
+  store.commit('updateCurrentCity', city)
   Router.push('/home')
 }
 </script>
 
 <style lang="less" scoped>
-#citys {
+#city {
   background-color: rgba(255, 255, 255, 0.5);
 }
 header {

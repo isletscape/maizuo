@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import Store from '@/utils/store.js'
 import {
   Tabbar,
   TabbarItem,
@@ -19,6 +20,7 @@ import 'vant/lib/index.css'
 import '@/utils/rem/rem.js'
 
 const app = createApp(App)
+app.use(Store)
 app.use(router)
 app.use(Tabbar)
 app.use(TabbarItem)

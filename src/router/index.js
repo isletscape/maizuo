@@ -19,6 +19,7 @@ const routes = [
         path: '/movie',
         name: 'movie',
         component: Movie,
+        props: true,
       },
 
       {
@@ -38,12 +39,18 @@ const routes = [
     path: '/city',
     name: 'city',
     component: City,
+    props: true,
   },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+  //滚动行为
+  // eslint-disable-next-line no-unused-vars
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0 }
+  },
 })
 
 export default router

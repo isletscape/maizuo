@@ -7,15 +7,9 @@
   </ul>
 </template>
 <script setup>
-import { toRefs } from 'vue'
 import { useAttrs } from '@vue/runtime-core'
 
-// eslint-disable-next-line no-undef
-const props = defineProps({
-  citys: Array,
-})
-const { citys } = toRefs(props)
-const { selectCity } = useAttrs()
+const { citys, selectCity } = useAttrs()
 
 //选择某个城市
 const onClickCity = (city) => {

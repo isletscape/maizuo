@@ -6,8 +6,8 @@ export default async function initCitys(citys, k) {
   if (localStorage.getItem('citys'))
     return (citys.value = JSON.parse(localStorage.getItem('citys')))
 
-  //请求数据
   const data = await cityAPI(k)
+  //请求出错，处理错误并return
   if (!handleRequest(data)) return
   const {
     data: {

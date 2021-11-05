@@ -1,16 +1,17 @@
 <template>
   <p>cinema</p>
-  <div class="ddd"></div>
+
+  <button @click="see">查看</button>
+  <button @click="add">加1</button>
 </template>
 
-<style lang="less">
-p {
-  font-size: 15px;
+<script setup>
+import { store } from '@/utils/store.js'
+
+const see = () => {
+  console.log(store.state)
 }
-.ddd {
-  width: 37.5px;
-  height: 37.5px;
-  background-color: skyblue;
-  border: 1px solid red;
+const add = () => {
+  store.commit('increment', { name: '上海', cityId: 1234, isHot: true })
 }
-</style>
+</script>

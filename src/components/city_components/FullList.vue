@@ -28,20 +28,9 @@
 </template>
 
 <script setup>
-// import EventBus from '@/utils/EventBus/EventBus.js'
-// import Router from '@/router/index.js'
-import { toRefs } from '@vue/reactivity'
 import { useAttrs } from '@vue/runtime-core'
 
-const { selectCity } = useAttrs()
-
-// eslint-disable-next-line no-undef
-const props = defineProps({
-  citys: Array,
-  keyword: String,
-})
-//直接使用es6解构props会导致失去响应，使用toRefs保留响应
-const { citys } = toRefs(props)
+const { citys, selectCity } = useAttrs()
 
 //选择某个城市
 const onClickCity = (city) => {
