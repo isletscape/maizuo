@@ -1,24 +1,26 @@
 <template>
   <!-- 搜索结果列表 -->
   <ul class="result-list">
-    <li v-for="item in citys" :key="item.cityID">
-      {{ item.name }}
+    <li v-for="city in citys" :key="city.cityID" @click="onClickCity(city)">
+      {{ city.name }}
     </li>
   </ul>
 </template>
 <script setup>
 import { toRefs } from 'vue'
+import { useAttrs } from '@vue/runtime-core'
+
 // eslint-disable-next-line no-undef
 const props = defineProps({
   citys: Array,
 })
 const { citys } = toRefs(props)
+const { selectCity } = useAttrs()
 
-// //创建A-Z的锚点列表
-// const anchors = ref([])
-// for (var i = 0; i < 26; i++) {
-//   anchors.value.push(String.fromCharCode(65 + i))
-// }
+//选择某个城市
+const onClickCity = (city) => {
+  selectCity(city)
+}
 </script>
 
 <style lang="less" scoped>

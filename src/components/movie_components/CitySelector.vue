@@ -19,8 +19,8 @@ EventBus.on('scrollPercentage', (percentage) => {
 })
 //监听点城市列表点击事件
 const currentCity = ref('请选择城市')
-EventBus.on('currentCityObj', (val) => {
-  currentCity.value = val.name
+EventBus.on('currentCity', (city) => {
+  currentCity.value = city.name
 })
 
 //绑定样式

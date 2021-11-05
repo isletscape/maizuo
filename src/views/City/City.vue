@@ -15,9 +15,17 @@
     </header>
 
     <!-- 全部城市列表 -->
-    <FullList v-if="keyword === ''" :citys="citys" />
+    <FullList
+      v-if="keyword === ''"
+      :citys="citys"
+      :selectCity="handleSelectCity"
+    />
     <!-- 搜索结果列表 -->
-    <SearchResultList v-if="keyword !== ''" :citys="serchResults" />
+    <SearchResultList
+      v-if="keyword !== ''"
+      :citys="serchResults"
+      :selectCity="handleSelectCity"
+    />
   </div>
 </template>
 
@@ -27,6 +35,7 @@ import initCitys from '@/composables/initCitys.js'
 import Router from '@/router/index.js'
 import FullList from '@/components/city_components/FullList.vue'
 import SearchResultList from '@/components/city_components/SearchResultList.vue'
+import EventBus from '@/utils/EventBus/EventBus.js'
 
 //顶部固定区域的高度
 const offsettop = 100
@@ -55,7 +64,10 @@ watch(keyword, (keyword) => {
     ]
   })
 })
-
+const handleSelectCity = (city) => {
+  EventBus.emit('currentCity', city)
+  closepage()
+}
 // 关闭页面
 const closepage = () => {
   Router.push('/home')

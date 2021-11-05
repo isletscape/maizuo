@@ -16,11 +16,11 @@
         <van-index-anchor :index="item.type" />
         <li
           class="city-name"
-          v-for="cityObj in item.list"
-          :key="cityObj.cityId"
-          @click="selectCity(cityObj)"
+          v-for="city in item.list"
+          :key="city.cityId"
+          @click="onClickCity(city)"
         >
-          {{ cityObj.name }}
+          {{ city.name }}
         </li>
       </ul>
     </van-index-bar>
@@ -28,9 +28,12 @@
 </template>
 
 <script setup>
-import EventBus from '@/utils/EventBus/EventBus.js'
-import Router from '@/router/index.js'
+// import EventBus from '@/utils/EventBus/EventBus.js'
+// import Router from '@/router/index.js'
 import { toRefs } from '@vue/reactivity'
+import { useAttrs } from '@vue/runtime-core'
+
+const { selectCity } = useAttrs()
 
 // eslint-disable-next-line no-undef
 const props = defineProps({
@@ -41,14 +44,8 @@ const props = defineProps({
 const { citys } = toRefs(props)
 
 //选择某个城市
-const selectCity = (currentCityObj) => {
-  EventBus.emit('currentCityObj', currentCityObj)
-  closepage()
-}
-
-// 关闭页面
-const closepage = () => {
-  Router.push('/home')
+const onClickCity = (city) => {
+  selectCity(city)
 }
 </script>
 
