@@ -42,14 +42,16 @@ const store = useStore()
 const offsettop = 100
 //请求参数
 const k = ref(3782949)
-//城市列表
+
+
+//全部城市
 var citys = ref([])
+//搜索结果
+var serchResults = ref([])
 //搜索关键字
 const keyword = ref('')
-//搜索结果列表
-var serchResults = ref([])
 
-//请求并处理城市列表数据
+//初始化城市数据
 initCitys(citys, k)
 
 //keyword改变实时触发生成检索结果
@@ -67,12 +69,12 @@ watch(keyword, (keyword) => {
 })
 
 const handleSelectCity = (city) => {
-  closepage(city)
+  store.commit('updateCurrentCity', city)
+  closepage()
 }
 
 // 关闭页面
-const closepage = (city) => {
-  store.commit('updateCurrentCity', city)
+const closepage = () => {
   Router.push('/home')
 }
 </script>
@@ -88,8 +90,9 @@ header {
   height: 100px;
   background: #fff;
 }
+
 .title {
-  height: 44px;
+  height: 44pX; /*no*/
   line-height: 44px;
   font-size: 17px;
   text-align: center;

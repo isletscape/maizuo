@@ -1,5 +1,5 @@
 <template>
-  <button id="citySelector" :style="[dynamicStyle, bindStyle]" @click="onClick">
+  <button id="citySelector" :style="[ bindStyle,dynamicStyle]" @click="onClick">
     {{ currentCityName }}
   </button>
 </template>

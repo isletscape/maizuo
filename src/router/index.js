@@ -3,16 +3,17 @@ import Movie from '@/views/Home/Movie/Movie.vue'
 import Cinema from '@/views/Home/Cinema/Cinema.vue'
 import City from '@/views/City/City.vue'
 import Home from '@/views/Home/Home.vue'
+import Detail from '@/views/Home/Movie/Detail.vue'
+import Tickets from '@/views/Home/Movie/Tickets.vue'
 
 const routes = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/movie',
   },
   {
-    path: '/home',
-    name: 'home',
     component: Home,
+    path: '/home',
     redirect: '/movie',
     children: [
       {
@@ -21,7 +22,6 @@ const routes = [
         component: Movie,
         props: true,
       },
-
       {
         path: '/cinema',
         name: 'cinema',
@@ -34,6 +34,16 @@ const routes = [
           import(/* webpackChunkName: "about" */ '@/views/Home/Mine/Mine.vue'),
       },
     ],
+  },
+  {
+    path: '/detail/:id',
+    name: 'detail',
+    component: Detail,
+  },
+  {
+    path: '/:id/tickets',
+    name: 'tickets',
+    component: Tickets,
   },
   {
     path: '/city',

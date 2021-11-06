@@ -23,6 +23,7 @@ body,
   -moz-osx-font-smoothing: grayscale;
   font-family: Microsoft YaHei, Tahoma, Helvetica, Arial, sans-serif;
 }
+
 // 路由切换动画
 .fade-enter-active {
   transition: opacity 0.4s ease;

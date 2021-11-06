@@ -6,7 +6,7 @@ const request = axios.create({
   timeout: 5000,
   headers: {
     'X-Client-Info':
-      '{"a":"3000","ch":"1002","v":"5.0.4","e":"1596502176387264316178433","bc":"310100"}',
+      '{"a":"3000","ch":"1002","v":"5.0.4","e":"16357488174324233203154945","bc":"110100"}',
     // 'X-Host': 'mall.film-ticket.film.list',
   },
 })

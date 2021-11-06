@@ -1,5 +1,5 @@
 <template>
-  <div id="movieCell-box">
+  <div id="movieCell-box" @click="cilckOn('电影详情',movie.filmId)">
     <div class="movieCell-thumb">
       <img :src="movie.poster" alt="" />
     </div>
@@ -26,11 +26,13 @@
       <p></p>
     </div>
     <div class="movieCell-operating">
-      <button>购票</button>
+      <button @click.stop="cilckOn('购票',movie.filmId)">购票</button>
     </div>
   </div>
 </template>
 <script setup>
+import { useAttrs } from "@vue/runtime-core"
+
 // eslint-disable-next-line no-undef
 const props = defineProps({
   movie: {
@@ -56,7 +58,21 @@ const actors = props.movie.actors
       })
       .join(',')
   : '暂无信息'
+
+const {clickAction} = useAttrs()
+
+
+const cilckOn = (type,filmId)=>{
+    clickAction(type,filmId)
+}
+
+
+
 </script>
+
+
+
+
 <style lang="less" scoped>
 span {
   display: inline-block;
