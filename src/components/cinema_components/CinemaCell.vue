@@ -1,19 +1,25 @@
 <template>
   <div id="cinema-cell">
     <div class="left">
-      <div class="name">爱上；打飞机啊；打飞机去骗我诶风景</div>
-      <div class="adress">发生的放弃我的皮肤废弃物地方i家2【法迪飞机啊都是</div>
+      <div class="name">{{ cinema.name }}</div>
+      <div class="adress">{{ cinema.address }}</div>
     </div>
     <div class="right">
       <div class="price">
         ¥
-        <span>49.9</span>
+        <span>{{ cinema.lowPrice }}</span>
         起
       </div>
-      <div class="distance">距离未知</div>
+      <div class="distance">{{ cinema.Distance }}公里</div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { useAttrs } from '@vue/runtime-core'
+
+const { cinema } = useAttrs()
+</script>
 
 <style lang="less" scoped>
 #cinema-cell {
@@ -30,6 +36,7 @@
     height: 22pX;
     line-height: 22pX;
     font-size: 15pX;
+    margin-bottom: 5pX;
   }
   .adress {
     height: 19pX;
@@ -45,6 +52,7 @@
     line-height: 22pX;
     color:#ff5f16;
     font-size: 8pX;
+    margin-bottom: 5pX;
     span {
       font-size: 15pX;
     }

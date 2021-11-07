@@ -23,6 +23,7 @@ import 'vant/lib/index.css'
 import '@/utils/rem/rem.js'
 
 const app = createApp(App)
+
 app.use(Store)
 app.use(router)
 app.use(Tabbar)

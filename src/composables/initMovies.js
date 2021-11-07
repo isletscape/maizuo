@@ -58,7 +58,6 @@ async function initSingleMovie(movie, filmId) {
   movie.value.actors.map((item) => {
     item.role = item.role.split(' ')[0]
   })
-  console.log(movie.value)
 }
 
 // export default async function initMovies(showState) {

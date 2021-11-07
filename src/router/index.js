@@ -1,10 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Movie from '@/views/Home/Movie/Movie.vue'
-import Cinema from '@/views/Home/Cinema/Cinema.vue'
+import Cinemas from '@/views/Home/Cinema/Cinemas.vue'
 import City from '@/views/City/City.vue'
 import Home from '@/views/Home/Home.vue'
 import Detail from '@/views/Home/Movie/Detail.vue'
 import Tickets from '@/views/Home/Movie/Tickets.vue'
+import CinemaPage from '@/views/Home/Cinema/CinemaPage.vue'
 
 const routes = [
   {
@@ -23,9 +24,9 @@ const routes = [
         props: true,
       },
       {
-        path: '/cinema',
-        name: 'cinema',
-        component: Cinema,
+        path: '/cinemas',
+        name: 'cinemas',
+        component: Cinemas,
       },
       {
         path: '/mine',
@@ -39,9 +40,15 @@ const routes = [
     path: '/detail/:id',
     name: 'detail',
     component: Detail,
+    props: true,
   },
   {
-    path: '/:id/tickets',
+    path: '/cinema/:id',
+    name: 'cinema',
+    component: CinemaPage,
+  },
+  {
+    path: '/tickets',
     name: 'tickets',
     component: Tickets,
   },

@@ -59,7 +59,10 @@ const handleSelectMovie = (type, filmId) => {
   if (type === '电影详情') {
     Router.push(`/detail/${filmId}`)
   } else if (type === '购票') {
-    Router.push(`/${filmId}/tickets`)
+    Router.push({
+      name: 'tickets',
+      params: { filmId: filmId },
+    })
   }
 }
 </script>

@@ -44,44 +44,32 @@
     </van-tabs>
   </div>
 
-  <!-- :style="{ top: '30px' }" -->
   <van-popup
     v-model:show="show"
     position="top"
     close-on-click-overlay
-    teleport="#cinema-type"
     @click-overlay="closePopup"
   >
     <template #default>
-      <ul class="choseCity">
-        <li>
-          <div class="city-name">123</div>
-        </li>
-        <li>
-          <div class="city-name">123</div>
-        </li>
-        <li>
-          <div class="city-name">123</div>
-        </li>
-        <li>
-          <div class="city-name">123</div>
-        </li>
-        <li>
-          <div class="city-name">123</div>
-        </li>
-      </ul>
+      <Popup />
     </template>
   </van-popup>
 </template>
 
 <script setup>
 import CinemaCell from '@/components/cinema_components/CinemaCell.vue'
+import Popup from '@/components/cinema_components/Popup.vue'
 import { ref } from '@vue/reactivity'
 import initCinemas from '@/composables/initCinemas.js'
+import { useRoute } from 'vue-router'
+import { useStore } from 'vuex'
 
+const route = useRoute()
+const { filmId } = route.params
+const { cityId } = useStore().state.currentCity
 const show = ref(false)
 const cinemas = ref([])
-initCinemas(cinemas, 5725, 110100, 1621169)
+initCinemas(cinemas, filmId, cityId, 1621169)
 
 const choseCinemaType = () => {
   show.value = true
@@ -107,28 +95,6 @@ const closePopup = () => {
   }
 }
 
-.choseCity{
-  display: flex;
-  list-style: none;
-  flex-flow: row wrap;
-  li {
-    display: block;
-    box-sizing: border-box;
-    width: 25%;
-    font-size: 12pX;
-    padding: 5pX;
-    .city-name{
-      margin: 0;
-      height: 30pX;
-      line-height: 30px;
-      text-align: center;
-      color: #797d82;
-      border: 1px solid #797d82;
-      border-radius: 2pX;
-    }
-  
-  }
-}
 
  
 </style>

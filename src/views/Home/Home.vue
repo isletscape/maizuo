@@ -9,7 +9,7 @@
     <router-view></router-view>
     <van-tabbar route fixed placeholder>
       <van-tabbar-item to="/movie" icon="gem-o">电影</van-tabbar-item>
-      <van-tabbar-item to="/cinema" icon="shop-o">影院</van-tabbar-item>
+      <van-tabbar-item to="/cinemas" icon="shop-o">影院</van-tabbar-item>
       <van-tabbar-item to="/mine" icon="manager-o">我的</van-tabbar-item>
     </van-tabbar>
   </div>

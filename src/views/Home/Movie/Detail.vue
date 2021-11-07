@@ -66,7 +66,10 @@ const backword = () => {
   Router.go(-1)
 }
 const buy = () => {
-  Router.push(`/${id}/tickets`)
+  Router.push({
+    name: 'tickets',
+    params: { filmId: id },
+  })
 }
 </script>
 
