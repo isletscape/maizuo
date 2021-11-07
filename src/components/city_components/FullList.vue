@@ -1,16 +1,6 @@
 <template>
   <!-- 全部城市列表 -->
   <div class="show-list">
-    <!-- <div class="hot-citys">
-        <p>热门城市</p>
-        <ul>
-          <li>北京</li>
-          <li>上海</li>
-          <li>广州</li>
-          <li>深圳</li>
-        </ul>
-      </div> -->
-    <!-- :sticky-offset-top="offsettop" -->
     <van-index-bar>
       <ul v-for="item in citys" :key="item.type">
         <van-index-anchor :index="item.type" />
@@ -29,10 +19,8 @@
 
 <script setup>
 import { useAttrs } from '@vue/runtime-core'
-
 const { citys, selectCity } = useAttrs()
 
-//选择某个城市
 const onClickCity = (city) => {
   selectCity(city)
 }

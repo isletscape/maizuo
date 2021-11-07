@@ -1,11 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Movie from '@/views/Home/Movie/Movie.vue'
-import Cinemas from '@/views/Home/Cinema/Cinemas.vue'
+import Movie from '@/views/Movie/Movie.vue'
+import Cinemas from '@/views/Cinema/Cinemas.vue'
 import City from '@/views/City/City.vue'
-import Home from '@/views/Home/Home.vue'
-import Detail from '@/views/Home/Movie/Detail.vue'
-import Tickets from '@/views/Home/Movie/Tickets.vue'
-import CinemaPage from '@/views/Home/Cinema/CinemaPage.vue'
+import Home from '@/views/Home.vue'
+import Mine from '@/views/Mine/Mine.vue'
 
 const routes = [
   {
@@ -31,26 +29,34 @@ const routes = [
       {
         path: '/mine',
         name: 'mine',
-        component: () =>
-          import(/* webpackChunkName: "about" */ '@/views/Home/Mine/Mine.vue'),
+        component: Mine,
       },
     ],
   },
   {
     path: '/detail/:id',
     name: 'detail',
-    component: Detail,
     props: true,
+    component: () =>
+      import(/* webpackChunkName: "detail" */ '@/views/Movie/Detail.vue'),
   },
   {
     path: '/cinema/:id',
     name: 'cinema',
-    component: CinemaPage,
+    component: () =>
+      import(/* webpackChunkName: "cinema" */ '@/views/Cinema/Cinema.vue'),
+  },
+  {
+    path: '/schedule/:id',
+    name: 'schedule',
+    component: () =>
+      import(/* webpackChunkName: "schedule" */ '@/views/Cinema/Schedule.vue'),
   },
   {
     path: '/tickets',
     name: 'tickets',
-    component: Tickets,
+    component: () =>
+      import(/* webpackChunkName: "tickets" */ '@/views/Movie/Tickets.vue'),
   },
   {
     path: '/city',

@@ -1,7 +1,7 @@
 <template>
   <ul class="type-0" v-if="type === 0">
     <li v-for="(item, index) in region" :key="index">
-      <div class="city-name">{{ item }}</div>
+      <div class="city-name" @click="onSelectRegion(item)">{{ item }}</div>
     </li>
   </ul>
   <ul class="type-1 costom" v-if="type === 1">
@@ -21,8 +21,12 @@
 const props = defineProps({
   type: Number,
   region: Array,
+  selectRegion: Function,
 })
-props
+
+const onSelectRegion = (regionName) => {
+  props.selectRegion(regionName)
+}
 </script>
 
 <style lang="less" scoped>
@@ -30,6 +34,7 @@ props
   display: flex;
   list-style: none;
   flex-flow: row wrap;
+  padding-bottom: 10pX;
   li {
     display: block;
     box-sizing: border-box;
@@ -42,17 +47,23 @@ props
       line-height: 30pX;
       text-align: center;
       color: #797d82;
-      border: 1px solid #797d82;
+      border: 1px solid #e6e7e9a4;
       border-radius: 2pX;
     }
   }
 }
 .costom{
+  padding-bottom: 10pX;
+  padding-top:10pX ;
   li {
     height: 30pX;
     line-height: 30pX;
     font-size: 16pX;
     text-indent: 1em;
+    color:#797d82 ;
+    &:nth-child(1) {
+      border-bottom: 1px solid #e6e7e9a4;
+    }
   }
 }
 </style>

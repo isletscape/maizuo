@@ -19,12 +19,11 @@ EventBus.on('scrollPercentage', (val) => {
   val = val >= 1 ? 1 : val
   offset.value = val * titleBarHeight
 })
-
-//动态样式绑定
+//动态样式
 const titleBarOffset = computed(() => {
   return { top: offset.value + 'px' }
 })
-//固定样式绑定
+//绑定样式
 var heightStyleObject = {
   height: titleBarHeight + 'px',
   lineHeight: titleBarHeight + 'px',

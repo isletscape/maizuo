@@ -1,7 +1,6 @@
 import { Toast } from 'vant'
 
 //0:请求成功，成功接收数据
-
 //1:请求成功，但未接到数据
 //2:请求出错
 export const handleRequest = (data) => {

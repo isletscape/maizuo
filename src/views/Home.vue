@@ -18,6 +18,5 @@
 <style lang="less" scoped>
 #home {
   height: 100vh;
-
 }
 </style>

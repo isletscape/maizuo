@@ -30,7 +30,6 @@ import Router from '@/router/index.js'
 const store = useStore()
 const { cityId } = store.state.currentCity
 
-//初始化不同Tab页面的参数
 const tabs = reactive([
   { title: '正在热映', type: 1 },
   { title: '即将上映', type: 2 },
@@ -44,17 +43,19 @@ tabs.forEach((item) => {
   item['finished'] = false
 })
 
-//list初始化之后默认触发load事件，用于加载第一屏的数据
 const onLoadWith = (params) => {
   initMovieList(params)
 }
+
+//注册监听滚动距离
 const onScroll = (swipe) => {
-  //注册监听滚动距离
   EventBus.emit(
     'scrollPercentage',
     swipe.scrollTop / (swipeHeight - titleBarHeight)
   )
 }
+
+//选择电影的回调
 const handleSelectMovie = (type, filmId) => {
   if (type === '电影详情') {
     Router.push(`/detail/${filmId}`)

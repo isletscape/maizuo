@@ -9,8 +9,6 @@ async function initMovieList(params) {
   // eslint-disable-next-line no-unused-vars
   const { movies, cityId, pageNum, pageSize, type, loading, finished } =
     toRefs(params)
-
-  //  缓存
   if (sessionStorage.getItem('someMovie')) {
     loading.value = false
     finished.value = true
@@ -47,7 +45,6 @@ async function initMovieList(params) {
 
 //请求单个电影
 async function initSingleMovie(movie, filmId) {
-  //如果没缓存就请求
   const data = await singleMovieAPI(filmId)
   switch (handleRequest(data)) {
     case 0:
@@ -65,12 +62,10 @@ async function initSingleMovie(movie, filmId) {
   } = data
 
   movie.value = film
-  //时间戳转日期
   movie.value.premiereAt = new Date(parseInt(movie.value.premiereAt) * 1000)
     .toLocaleString()
     .replace(/:\d{1,2}$/, ' ')
     .split(' ')[0]
-
   movie.value.actors.map((item) => {
     item.role = item.role.split(' ')[0]
   })

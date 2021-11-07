@@ -1,5 +1,6 @@
 import request from '@/api/request'
-const movieListAPI = function (cityId, pageNum, pageSize, type) {
+
+export const movieListAPI = function (cityId, pageNum, pageSize, type) {
   return request.get('/gateway', {
     params: {
       cityId: cityId,
@@ -14,7 +15,7 @@ const movieListAPI = function (cityId, pageNum, pageSize, type) {
   })
 }
 
-const singleMovieAPI = function (filmId) {
+export const singleMovieAPI = function (filmId) {
   return request.get('/gateway', {
     params: {
       filmId: filmId,
@@ -25,4 +26,3 @@ const singleMovieAPI = function (filmId) {
     },
   })
 }
-export { movieListAPI, singleMovieAPI }

@@ -40,11 +40,7 @@ const store = useStore()
 
 //顶部固定区域的高度
 const offsettop = 100
-//请求参数
 const k = ref(3782949)
-
-
-//全部城市
 var citys = ref([])
 //搜索结果
 var serchResults = ref([])
@@ -68,12 +64,12 @@ watch(keyword, (keyword) => {
   })
 })
 
+//选择城市的回调
 const handleSelectCity = (city) => {
   store.commit('updateCurrentCity', city)
   closepage()
 }
 
-// 关闭页面
 const closepage = () => {
   Router.push('/home')
 }

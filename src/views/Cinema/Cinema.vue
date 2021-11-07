@@ -1,5 +1,6 @@
 <template>
   <div v-if="cinemaMovieList">
+    <!-- 标题栏 -->
     <div class="cinema-page">
       <van-nav-bar title="影院">
         <template #left>
@@ -7,7 +8,7 @@
         </template>
       </van-nav-bar>
     </div>
-
+    <!-- 轮播 -->
     <div class="swiper">
       <CinemaSwiper
         :movies="cinemaMovieList"
@@ -16,7 +17,7 @@
       />
       <div class="no-movies" v-else>暂无电影信息</div>
     </div>
-
+    <!-- 电影信息 -->
     <div class="movie-cell" v-if="cinemaMovieList.length > 0">
       <p class="movie-name">
         {{ currentMovie.name }}
@@ -28,7 +29,7 @@
         }}|{{ currentMovie.director }}
       </p>
     </div>
-
+    <!-- 场次列表 -->
     <div class="tabs">
       <van-tabs v-if="movieHallList.length > 0">
         <van-tab :title="date">
@@ -37,6 +38,7 @@
               v-for="item in movieHallList"
               :key="item.scheduleId"
               :hall="item"
+              @click="selectHall(item.scheduleId)"
             />
           </van-list>
         </van-tab>
@@ -47,12 +49,10 @@
 </template>
 
 <script setup>
-// import CinemaSwipe from '@/components/cinema_components/CinemaSwipe.vue'
 import CinemaSwiper from '@/components/cinema_components/CinemaSwiper.vue'
 import Router from '@/router/index.js'
 import HallCell from '@/components/cinema_components/HallCell.vue'
 import { ref } from '@vue/reactivity'
-
 import {
   initCinemaMovieList,
   initMovieHallList,
@@ -61,31 +61,27 @@ import { useRoute } from 'vue-router'
 import { stamp, date } from '@/utils/time.js'
 import { watch } from '@vue/runtime-core'
 
-//请求当前影院放映的电影列表
 const cinemaMovieList = ref([])
 const cinemaId = useRoute().params.id
 const showDate = stamp
 const k = 3819095
-initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k)
-//请求当前选中电影的场次列表
 const movieHallList = ref([])
-// const currentMovieId = ref(0)
 const currentMovie = ref(null)
+//请求当前影院放映的电影列表
+initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k)
+//电影列表初始化完成后更新数据
 watch(cinemaMovieList, () => {
   // currentMovieId.value = newValue[0].filmId
   currentMovie.value = cinemaMovieList.value[0]
-  initMovieHallList(
-    movieHallList,
-    currentMovie.value.filmId,
-    cinemaId,
-    showDate,
-    k
-  )
+  updataMovieHallList()
 })
-
+//swipe切换电影更新数据
 const getCurrentMovie = (movie) => {
   // currentMovieId.value = movie.filmId
   currentMovie.value = movie
+  updataMovieHallList()
+}
+const updataMovieHallList = () => {
   initMovieHallList(
     movieHallList,
     currentMovie.value.filmId,
@@ -94,6 +90,10 @@ const getCurrentMovie = (movie) => {
     k
   )
 }
+const selectHall = (scheduleId) => {
+  Router.push(`/schedule/${scheduleId}`)
+}
+
 const closepage = () => {
   Router.go(-1)
 }

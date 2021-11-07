@@ -1,12 +1,15 @@
 <template>
   <div v-if="movie">
+    <!-- 头部 -->
     <div class="navbar">
       <!-- <van-icon class="backword" name="arrow-left" @click="backword" /> -->
       <van-icon class="backword" name="cross" size="27" @click="backword" />
     </div>
+    <!-- 头图 -->
     <div class="poster">
       <img :src="movie.poster" alt="" />
     </div>
+    <!-- 电影信息 -->
     <article class="content">
       <div class="title">
         <span class="name">{{ movie.name }}</span>
@@ -26,6 +29,7 @@
         隐退的邦德在牙买加过着平静的生活，直到他的中情局旧友费利克斯·莱特前来寻求帮助，短暂的平静就此告一段落。他们试图营救一名被绑架科学家，但这个任务不仅危险度远超预期，更是将邦德带上了追踪配备危险新科技的神秘反派之旅。
       </p>
     </article>
+    <!-- 演职人员 -->
     <div class="actors">
       <header>演职人员</header>
       <ul v-if="movie.actors && movie.actors.length >= 1">
@@ -38,6 +42,7 @@
       </ul>
       <div v-else class="no-data">暂无演员信息</div>
     </div>
+    <!-- 剧照 -->
     <div class="pictures">
       <header>剧照</header>
       <ul v-if="movie.photos && movie.photos.length >= 1">

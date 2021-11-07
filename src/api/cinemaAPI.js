@@ -1,6 +1,14 @@
 import request from '@/api/request'
 
-export const cinemaListAPI = function (cityId, ticketFlag, k) {
+export {
+  allCinemaAPI,
+  ticketsCinemaAPI,
+  cinemaListAPI,
+  cinemaMovieListAPI,
+  movieHallListAPI,
+}
+
+const allCinemaAPI = function (cityId, ticketFlag, k) {
   return request.get('/gateway', {
     params: {
       cityId: cityId,
@@ -13,10 +21,33 @@ export const cinemaListAPI = function (cityId, ticketFlag, k) {
   })
 }
 
-//1636300800
-//1636214400
+const ticketsCinemaAPI = function (filmId, cityId, k) {
+  return request.get('/gateway', {
+    params: {
+      filmId: filmId,
+      cityId: cityId,
+      k: k,
+    },
+    headers: {
+      'X-Host': 'mall.film-ticket.cinema.film-show-cinema',
+    },
+  })
+}
 
-export const cinemaMovieListAPI = function (cinemaId, date, k) {
+const cinemaListAPI = function (cityId, ticketFlag, k) {
+  return request.get('/gateway', {
+    params: {
+      cityId: cityId,
+      ticketFlag: ticketFlag,
+      k: k,
+    },
+    headers: {
+      'X-Host': 'mall.film-ticket.cinema.list',
+    },
+  })
+}
+
+const cinemaMovieListAPI = function (cinemaId, date, k) {
   return request.get('/gateway', {
     params: {
       cinemaId: cinemaId,
@@ -28,7 +59,8 @@ export const cinemaMovieListAPI = function (cinemaId, date, k) {
     },
   })
 }
-export const movieHallListAPI = function (filmId, cinemaId, date, k) {
+
+const movieHallListAPI = function (filmId, cinemaId, date, k) {
   return request.get('/gateway', {
     params: {
       filmId: filmId,

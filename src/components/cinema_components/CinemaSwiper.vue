@@ -10,7 +10,6 @@
 
 <script setup>
 import { onMounted } from 'vue'
-// import { toRefs } from '@vue/reactivity'
 import Swiper, {
   Autoplay,
   EffectCoverflow,
@@ -19,6 +18,7 @@ import Swiper, {
 } from 'swiper'
 Swiper.use([Autoplay, EffectCoverflow, Pagination, Navigation])
 import 'swiper/swiper.less'
+
 // eslint-disable-next-line no-undef
 const props = defineProps({
   movies: Array,
@@ -26,13 +26,15 @@ const props = defineProps({
 })
 
 onMounted(() => {
+  // eslint-disable-next-line no-unused-vars
   const mySwiper = new Swiper('.swiper-container', {
-    //循环
     loop: false,
+    //间隔距离
     spaceBetween: 60,
     effect: 'coverflow',
     grabCursor: true,
     centeredSlides: true,
+    //显示个数
     slidesPerView: 2.2,
     observer: true,
     observeParents: true,
@@ -47,12 +49,12 @@ onMounted(() => {
     },
     // watchSlidesProgress: true,
     on: {
+      //动画结束的回调
       slideChangeTransitionEnd: function (swiper) {
         props.getCurrentMovie(props.movies[swiper.activeIndex])
       },
     },
   })
-  console.log(mySwiper.progress)
 })
 </script>
 <style lang="less" scoped>

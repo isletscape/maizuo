@@ -54,12 +54,13 @@ import { initCinemasList } from '@/composables/initCinemas.js'
 import { useStore } from 'vuex'
 import Router from '@/router/index.js'
 
-//初始化电影院列表，地区列表
 const { cityId, name } = useStore().state.currentCity
 const ticketFlag = 1
 const k = 7845835
 const cinemaList = ref([])
 const regionList = ref([])
+
+//初始化电影院列表，地区列表
 initCinemasList(cinemaList, regionList, cityId, ticketFlag, k)
 
 //去往购票页
@@ -67,7 +68,7 @@ const choseCinema = (cinemaId) => {
   Router.push(`/cinema/${cinemaId}`)
 }
 
-//控制模态窗口
+//模态窗口
 const popupType = ref(0)
 const show = ref(false)
 const popup = (type) => {

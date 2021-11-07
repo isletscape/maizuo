@@ -1,5 +1,5 @@
 <template>
-  <button id="citySelector" :style="[ bindStyle,dynamicStyle]" @click="onClick">
+  <button id="citySelector" :style="[bindStyle, dynamicStyle]" @click="onClick">
     {{ currentCityName }}
   </button>
 </template>
@@ -12,7 +12,6 @@ import { titleBarHeight } from '@/global_styles/GlobalStyles.js'
 import { useStore } from 'vuex'
 
 const store = useStore()
-
 const currentCityName = store.state.currentCity.name
 const val = ref(0)
 const height = 25
@@ -21,12 +20,6 @@ const height = 25
 EventBus.on('scrollPercentage', (percentage) => {
   val.value = percentage
 })
-//监听点城市列表点击事件
-// const currentCityName = ref('xxx')
-// EventBus.on('currentCity', (city) => {
-//   currentCityName.value = city.name
-//   console.log('on', currentCityName.value)
-// })
 
 //绑定样式
 const bindStyle = {
