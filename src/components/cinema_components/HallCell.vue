@@ -1,20 +1,33 @@
 <template>
   <div id="session-cell">
     <div class="time">
-      <p class="time-start top-line">01：10</p>
-      <p class="time-end bottom-line">01：11散场</p>
+      <div class="time-start top-line">{{ showAt }}</div>
+      <div class="time-end bottom-line">{{ endAt }}散场</div>
     </div>
     <div class="hall">
-      <p class="hall-type top-line">英语3D</p>
-      <p class="hall-id bottom-line">英语3D</p>
+      <div class="hall-type top-line">{{ hall.imagery }}</div>
+      <div class="hall-id bottom-line">{{ hallName }}</div>
     </div>
     <div class="price">
       <span>¥</span>
-      12.5
+      {{ price }}
     </div>
     <div class="buy">购票</div>
   </div>
 </template>
+
+<script setup>
+import { useAttrs } from '@vue/runtime-core'
+import { timestampToDate } from '@/utils/time.js'
+const { hall } = useAttrs()
+const a = timestampToDate(hall.showAt).indexOf(' ')
+
+const showAt = timestampToDate(hall.showAt).slice(a)
+const endAt = timestampToDate(hall.endAt).slice(a)
+const b = hall.hallName.indexOf('（')
+const hallName = hall.hallName.slice(0, b)
+const price = String(hall.salePrice).slice(0, 2)
+</script>
 
 <style lang="less" scoped>
   #session-cell {
@@ -25,17 +38,19 @@
   }
   .time {
     width: 84pX;
-    
+    margin-right: 10pX;
   }
   .hall{
     flex: 1;
   }
   .top-line {
-      font-size: 15pX;
+      font-size: 14pX;
+      height: 21pX;
+      line-height: 21pX;
     }
   .bottom-line {
     margin-top: 2pX;
-    font-size: 13pX;
+    font-size: 10pX;
     color: #797d82;
   }
   .price {
@@ -59,4 +74,4 @@
     color: #ff5f16;
     text-align: center;
   }
-</style>
+</style>ian1

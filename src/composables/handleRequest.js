@@ -1,16 +1,20 @@
-//请求结果处理函数
+import { Toast } from 'vant'
+
+//0:请求成功，成功接收数据
+
+//1:请求成功，但未接到数据
+//2:请求出错
 export const handleRequest = (data) => {
-  var flag = true
   if (data.status === 200) {
     if (data.data.status === 0) {
       console.log('获得数据')
+      return 0
     } else {
-      flag = false
-      console.log(data.data.msg)
+      console.log('信息：', data.data.msg, '状态码：', data.data.status)
+      return 1
     }
   } else {
-    flag = false
-    console.log('请求失败')
+    Toast('请求出错')
+    return 2
   }
-  return flag
 }

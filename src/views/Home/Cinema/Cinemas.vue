@@ -50,7 +50,7 @@
 import { ref } from '@vue/reactivity'
 import Popup from '@/components/cinema_components/Popup.vue'
 import CinemaCell from '@/components/cinema_components/CinemaCell.vue'
-import initCinemas from '@/composables/initCinemas.js'
+import { initCinemasList } from '@/composables/initCinemas.js'
 import { useStore } from 'vuex'
 import Router from '@/router/index.js'
 
@@ -60,7 +60,7 @@ const ticketFlag = 1
 const k = 7845835
 const cinemaList = ref([])
 const regionList = ref([])
-initCinemas(cinemaList, regionList, cityId, ticketFlag, k)
+initCinemasList(cinemaList, regionList, cityId, ticketFlag, k)
 
 //去往购票页
 const choseCinema = (cinemaId) => {

@@ -1,4 +1,3 @@
-//请求基本配置
 import axios from 'axios'
 
 const request = axios.create({

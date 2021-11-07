@@ -1,4 +1,3 @@
-//状态共享
 import { createStore } from 'vuex'
 
 const Store = createStore({

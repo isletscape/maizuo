@@ -22,7 +22,15 @@ async function initMovieList(params) {
       pageSize.value,
       type.value
     )
-    if (!handleRequest(data)) return
+    switch (handleRequest(data)) {
+      case 0:
+        break
+      case 1:
+      case 2:
+        return
+      default:
+        break
+    }
     const {
       data: {
         data: { films },
@@ -41,7 +49,15 @@ async function initMovieList(params) {
 async function initSingleMovie(movie, filmId) {
   //如果没缓存就请求
   const data = await singleMovieAPI(filmId)
-  if (!handleRequest(data)) return
+  switch (handleRequest(data)) {
+    case 0:
+      break
+    case 1:
+    case 2:
+      return
+    default:
+      break
+  }
   const {
     data: {
       data: { film },

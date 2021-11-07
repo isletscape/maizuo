@@ -1,14 +1,8 @@
 <template>
-  <div class="swiper-container swiper">
+  <div class="swiper-container">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="@/img/007.jpg" alt="" />
-      </div>
-      <div class="swiper-slide">
-        <img src="@/img/007.jpg" alt="" />
-      </div>
-      <div class="swiper-slide">
-        <img src="@/img/007.jpg" alt="" />
+      <div class="swiper-slide" v-for="item in movies" :key="item.filmId">
+        <img :src="item.poster" alt="" />
       </div>
     </div>
   </div>
@@ -16,6 +10,7 @@
 
 <script setup>
 import { onMounted } from 'vue'
+// import { toRefs } from '@vue/reactivity'
 import Swiper, {
   Autoplay,
   EffectCoverflow,
@@ -23,39 +18,41 @@ import Swiper, {
   Navigation,
 } from 'swiper'
 Swiper.use([Autoplay, EffectCoverflow, Pagination, Navigation])
-
-// swiper-bundle.min.css 决定了小圆点和左右翻页标签，如果不需要可以不引用
-// import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.less'
+// eslint-disable-next-line no-undef
+const props = defineProps({
+  movies: Array,
+  getCurrentMovie: Function,
+})
+
 onMounted(() => {
-  const aa = new Swiper('.swiper', {
+  const mySwiper = new Swiper('.swiper-container', {
     //循环
-    loop: true,
-    spaceBetween: 50,
+    loop: false,
+    spaceBetween: 60,
     effect: 'coverflow',
     grabCursor: true,
     centeredSlides: true,
-    slidesPerView: 2.3,
-    // autoplay: {
-    //   delay: 4000,
-    //   stopOnLastSlide: false,
-    //   disableOnInteraction: false,
-    // },
+    slidesPerView: 2.2,
+    observer: true,
+    observeParents: true,
+    // observer: true,
+    // observeParents: false,
     coverflowEffect: {
       rotate: 0,
       stretch: 0,
       depth: 100,
       modifier: 1,
-      slideShadows: true,
+      slideShadows: false,
     },
     // watchSlidesProgress: true,
     on: {
       slideChangeTransitionEnd: function (swiper) {
-        console.log(swiper.activeIndex)
+        props.getCurrentMovie(props.movies[swiper.activeIndex])
       },
     },
   })
-  console.log(aa.progress)
+  console.log(mySwiper.progress)
 })
 </script>
 <style lang="less" scoped>
@@ -64,6 +61,8 @@ onMounted(() => {
 }
 .swiper-slide {
   img {
+    display: block;
+    margin: 0 auto;
     height: 100%;
   }
 }

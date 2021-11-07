@@ -1,51 +1,99 @@
 <template>
-  <div class="cinema-page">
-    <van-nav-bar title="影院">
-      <template #left>
-        <van-icon name="arrow-left" @click="closepage" />
-      </template>
-    </van-nav-bar>
-  </div>
+  <div v-if="cinemaMovieList">
+    <div class="cinema-page">
+      <van-nav-bar title="影院">
+        <template #left>
+          <van-icon name="arrow-left" @click="closepage" />
+        </template>
+      </van-nav-bar>
+    </div>
 
-  <div class="swiper">
-    <Swiper></Swiper>
-  </div>
+    <div class="swiper">
+      <CinemaSwiper
+        :movies="cinemaMovieList"
+        :getCurrentMovie="getCurrentMovie"
+        v-if="cinemaMovieList.length > 0"
+      />
+      <div class="no-movies" v-else>暂无电影信息</div>
+    </div>
 
-  <div class="movie-cell">
-    <p class="movie-name">
-      无暇赴死
-      <span class="movie-grade">4.9</span>
-    </p>
-    <p class="movie-info">
-      动作冒险|123分钟|阿水淀粉即可领取父啊；到健身房··阿萨德快乐；父
-    </p>
-  </div>
+    <div class="movie-cell" v-if="cinemaMovieList.length > 0">
+      <p class="movie-name">
+        {{ currentMovie.name }}
+        <span class="movie-grade">{{ currentMovie.grade }}</span>
+      </p>
+      <p class="movie-info">
+        {{ currentMovie.category }}|{{ currentMovie.runtime }}分钟|{{
+          currentMovie.nation
+        }}|{{ currentMovie.director }}
+      </p>
+    </div>
 
-  <div class="tabs">
-    <van-tabs>
-      <van-tab title="标签 1">
-        <van-list class="session-list" finished-text="没有更多了">
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-          <SessionCell />
-        </van-list>
-      </van-tab>
-    </van-tabs>
+    <div class="tabs">
+      <van-tabs v-if="movieHallList.length > 0">
+        <van-tab :title="date">
+          <van-list class="session-list" finished-text="没有更多了">
+            <HallCell
+              v-for="item in movieHallList"
+              :key="item.scheduleId"
+              :hall="item"
+            />
+          </van-list>
+        </van-tab>
+      </van-tabs>
+      <div class="no-hall" v-else>暂无场次信息</div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import Swiper from '@/components/cinema_components/Swiper.vue'
+// import CinemaSwipe from '@/components/cinema_components/CinemaSwipe.vue'
+import CinemaSwiper from '@/components/cinema_components/CinemaSwiper.vue'
 import Router from '@/router/index.js'
-import SessionCell from '@/components/cinema_components/SessionCell.vue'
+import HallCell from '@/components/cinema_components/HallCell.vue'
+import { ref } from '@vue/reactivity'
+
+import {
+  initCinemaMovieList,
+  initMovieHallList,
+} from '@/composables/initCinemas.js'
+import { useRoute } from 'vue-router'
+import { stamp, date } from '@/utils/time.js'
+import { watch } from '@vue/runtime-core'
+
+//请求当前影院放映的电影列表
+const cinemaMovieList = ref([])
+const cinemaId = useRoute().params.id
+const showDate = stamp
+const k = 3819095
+initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k)
+//请求当前选中电影的场次列表
+const movieHallList = ref([])
+// const currentMovieId = ref(0)
+const currentMovie = ref(null)
+watch(cinemaMovieList, () => {
+  // currentMovieId.value = newValue[0].filmId
+  currentMovie.value = cinemaMovieList.value[0]
+  initMovieHallList(
+    movieHallList,
+    currentMovie.value.filmId,
+    cinemaId,
+    showDate,
+    k
+  )
+})
+
+const getCurrentMovie = (movie) => {
+  // currentMovieId.value = movie.filmId
+  currentMovie.value = movie
+  initMovieHallList(
+    movieHallList,
+    currentMovie.value.filmId,
+    cinemaId,
+    showDate,
+    k
+  )
+}
 const closepage = () => {
   Router.go(-1)
 }
@@ -75,6 +123,13 @@ const closepage = () => {
     padding-left: 20px;
     padding-right: 20px;
     text-overflow: ellipsis;
+    text-align: center;
   }
+}
+.no-hall,
+.no-movies{
+  text-align: center;
+  font-size: 14pX;
+  color: gainsboro;
 }
 </style>

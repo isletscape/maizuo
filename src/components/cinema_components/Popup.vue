@@ -39,13 +39,12 @@ props
     .city-name{
       margin: 0;
       height: 30pX;
-      line-height: 30px;
+      line-height: 30pX;
       text-align: center;
       color: #797d82;
       border: 1px solid #797d82;
       border-radius: 2pX;
     }
-  
   }
 }
 .costom{

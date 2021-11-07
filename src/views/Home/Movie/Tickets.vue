@@ -60,7 +60,7 @@
 import CinemaCell from '@/components/cinema_components/CinemaCell.vue'
 import Popup from '@/components/cinema_components/Popup.vue'
 import { ref } from '@vue/reactivity'
-import initCinemas from '@/composables/initCinemas.js'
+import { initCinemasList } from '@/composables/initCinemas.js'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
@@ -69,7 +69,7 @@ const { filmId } = route.params
 const { cityId } = useStore().state.currentCity
 const show = ref(false)
 const cinemas = ref([])
-initCinemas(cinemas, filmId, cityId, 1621169)
+initCinemasList(cinemas, filmId, cityId, 1621169)
 
 const choseCinemaType = () => {
   show.value = true

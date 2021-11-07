@@ -20,24 +20,23 @@ import {
   Popup,
 } from 'vant'
 import 'vant/lib/index.css'
-import '@/utils/rem/rem.js'
+import '@/utils/rem.js'
 
-const app = createApp(App)
-
-app.use(Store)
-app.use(router)
-app.use(Tabbar)
-app.use(TabbarItem)
-app.use(Icon)
-app.use(Tab)
-app.use(Tabs)
-app.use(Swipe)
-app.use(SwipeItem)
-app.use(List)
-app.use(NavBar)
-app.use(PullRefresh)
-app.use(IndexBar)
-app.use(IndexAnchor)
-app.use(Search)
-app.use(Popup)
-app.mount('#app')
+createApp(App)
+  .use(Store)
+  .use(router)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Icon)
+  .use(Tab)
+  .use(Tabs)
+  .use(Swipe)
+  .use(SwipeItem)
+  .use(List)
+  .use(NavBar)
+  .use(PullRefresh)
+  .use(IndexBar)
+  .use(IndexAnchor)
+  .use(Search)
+  .use(Popup)
+  .mount('#app')

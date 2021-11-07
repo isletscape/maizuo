@@ -8,7 +8,15 @@ export default async function initCitys(citys, k) {
 
   const data = await cityAPI(k)
   //请求出错，处理错误并return
-  if (!handleRequest(data)) return
+  switch (handleRequest(data)) {
+    case 0:
+      break
+    case 1:
+    case 2:
+      return
+    default:
+      break
+  }
   const {
     data: {
       data: { cities },

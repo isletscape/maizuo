@@ -1,5 +1,4 @@
-import request from '@/utils/request/request.js'
-
+import request from '@/api/request'
 export const cityAPI = function (k) {
   console.log('请求城市列表')
   return request.get('/gateway', {

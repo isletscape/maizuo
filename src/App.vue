@@ -1,14 +1,12 @@
 <template>
-  <div id="app">
-    <!-- <router-view v-slot="{ Component }">
+  <!-- <router-view v-slot="{ Component }">
       <transition name="fade">
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
       </transition>
     </router-view> -->
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <style lang="less">

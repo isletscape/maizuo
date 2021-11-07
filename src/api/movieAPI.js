@@ -1,5 +1,4 @@
-import request from '@/utils/request/request.js'
-
+import request from '@/api/request'
 const movieListAPI = function (cityId, pageNum, pageSize, type) {
   return request.get('/gateway', {
     params: {
