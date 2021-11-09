@@ -90,9 +90,7 @@ initCinemasList(cinemas, regionList, cityId, ticketFlag, k)
 
 //选中地区的回调
 const handleSelectRegion = (regionName) => {
-  console.log(regionName)
   cinemas.value = cinemas.value.filter((item) => {
-    console.log(item.districtName)
     return item.districtName === regionName
   })
   closePopup()

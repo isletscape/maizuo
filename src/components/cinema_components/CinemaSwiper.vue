@@ -25,17 +25,20 @@ const props = defineProps({
   getCurrentMovie: Function,
 })
 
+//屏幕显示海报个数
+// const posterCountPerViewport = ref(2)
+
 onMounted(() => {
   // eslint-disable-next-line no-unused-vars
   const mySwiper = new Swiper('.swiper-container', {
     loop: false,
     //间隔距离
-    spaceBetween: 60,
+    spaceBetween: 0,
     effect: 'coverflow',
     grabCursor: true,
     centeredSlides: true,
     //显示个数
-    slidesPerView: 2.2,
+    slidesPerView: 2,
     observer: true,
     observeParents: true,
     // observer: true,

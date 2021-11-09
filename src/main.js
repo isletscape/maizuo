@@ -39,4 +39,5 @@ createApp(App)
   .use(IndexAnchor)
   .use(Search)
   .use(Popup)
+
   .mount('#app')

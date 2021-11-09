@@ -25,6 +25,7 @@ const props = defineProps({
 })
 
 const onSelectRegion = (regionName) => {
+  console.log(regionName)
   props.selectRegion(regionName)
 }
 </script>

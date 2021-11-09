@@ -4,7 +4,7 @@
     <div class="cinema-page">
       <van-nav-bar title="影院">
         <template #left>
-          <van-icon name="arrow-left" @click="closepage" />
+          <van-icon name="arrow-left" color="#444" @click="closepage" />
         </template>
       </van-nav-bar>
     </div>
@@ -58,27 +58,29 @@ import {
   initMovieHallList,
 } from '@/composables/initCinemas.js'
 import { useRoute } from 'vue-router'
-import { stamp, date } from '@/utils/time.js'
+import { date, tomorrowStamp } from '@/utils/time.js'
 import { watch } from '@vue/runtime-core'
 
 const cinemaMovieList = ref([])
 const cinemaId = useRoute().params.id
-const showDate = stamp
+const showDate = ref(tomorrowStamp)
 const k = 3819095
 const movieHallList = ref([])
 const currentMovie = ref(null)
 //请求当前影院放映的电影列表
-initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k)
+initCinemaMovieList(cinemaMovieList, cinemaId, showDate.value, k)
 //电影列表初始化完成后更新数据
 watch(cinemaMovieList, () => {
   // currentMovieId.value = newValue[0].filmId
   currentMovie.value = cinemaMovieList.value[0]
+  showDate.value = String(cinemaMovieList.value[0].showDate[0])
   updataMovieHallList()
 })
 //swipe切换电影更新数据
 const getCurrentMovie = (movie) => {
   // currentMovieId.value = movie.filmId
   currentMovie.value = movie
+  showDate.value = String(movie.premiereAt)
   updataMovieHallList()
 }
 const updataMovieHallList = () => {
@@ -86,7 +88,7 @@ const updataMovieHallList = () => {
     movieHallList,
     currentMovie.value.filmId,
     cinemaId,
-    showDate,
+    showDate.value,
     k
   )
 }

@@ -16,6 +16,7 @@ body,
   height: 100%;
   // overflow;
   // -webkit-overflow-scrolling: touch;
+  min-width: 280pX;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

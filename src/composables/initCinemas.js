@@ -58,10 +58,14 @@ async function initTicketsCinemaList(filmId, cityId, k) {
 }
 
 //影院列表数据,地区列表数据
-async function initCinemasList(cinemasList, regionList, cityId, ticketFlag, k) {
-  // if (localStorage.getItem('cinemas')) {
-  //   cinemasList.value = JSON.parse(localStorage.getItem('cinemas'))
-  // } else {
+async function initCinemasList(
+  allCinemaList,
+  regionCinemaList,
+  regionList,
+  cityId,
+  ticketFlag,
+  k
+) {
   const data = await cinemaListAPI(cityId, ticketFlag, k)
 
   switch (handleRequest(data)) {
@@ -81,8 +85,8 @@ async function initCinemasList(cinemasList, regionList, cityId, ticketFlag, k) {
     },
   } = data
 
-  cinemasList.value = cinemas
-  cinemasList.value.map((item) => {
+  allCinemaList.value = cinemas
+  allCinemaList.value.map((item) => {
     const price =
       String(item.lowPrice).slice(0, 2) + '.' + String(item.lowPrice).slice(2)
     const distance = String(item.Distance).slice(
@@ -93,14 +97,13 @@ async function initCinemasList(cinemasList, regionList, cityId, ticketFlag, k) {
     item.Distance = distance
   })
 
+  regionCinemaList.value = allCinemaList.value
+
   const aaa = []
-  cinemasList.value.forEach((item) => {
+  allCinemaList.value.forEach((item) => {
     aaa.push(item.districtName)
   })
   regionList.value = Array.from(new Set(aaa))
-
-  //   localStorage.setItem('cinemas', JSON.stringify(cinemasList.value))
-  // }
 }
 //影院电影数据
 async function initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k) {

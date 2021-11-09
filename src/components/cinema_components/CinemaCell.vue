@@ -29,16 +29,24 @@ const { cinema } = useAttrs()
   padding: 10pX;
   padding-bottom: 0;
 }
+
 .left {
   flex:1;
   text-align: left;
+  width: 0;
   .name {
+    width: auto;
     height: 22pX;
     line-height: 22pX;
     font-size: 15pX;
     margin-bottom: 5pX;
+    color:#444;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .adress {
+    width: auto;
     height: 19pX;
     font-size: 13pX;
     color: #797d82;

@@ -1,30 +1,30 @@
 <template>
   <div id="movieCell-box" @click="cilckOn('电影详情', movie.filmId)">
+    <!-- 电影图片 -->
     <div class="movieCell-thumb">
       <img :src="movie.poster" alt="" />
     </div>
+    <!-- 电影信息 -->
     <div class="movieCell-content">
       <div class="title">
-        <span class="name">{{ movie.name }}</span>
-        <span class="type">{{ movie.filmType.name }}</span>
+        <div class="name">{{ movie.name }}</div>
+        <div class="type">{{ movie.filmType.name }}</div>
       </div>
       <div class="grade">
-        <span>
+        <div>
           观众评分：
           <span class="score">{{ movie.grade }}</span>
-        </span>
+        </div>
       </div>
-      <div class="staring">
-        <!-- <span>主演：xxx</span> -->
-        <span>主演：{{ actors }}</span>
-      </div>
+      <div class="staring">主演：{{ actors }}</div>
       <div class="info">
-        <span>{{ movie.nation }}</span>
+        <div>{{ movie.nation }}</div>
         |
-        <span>{{ movie.runtime }}分钟</span>
+        <div>{{ movie.runtime }}分钟</div>
       </div>
       <p></p>
     </div>
+    <!-- 购票按钮 -->
     <div class="movieCell-operating">
       <button @click.stop="cilckOn('购票', movie.filmId)">购票</button>
     </div>
@@ -67,15 +67,12 @@ const cilckOn = (type, filmId) => {
 </script>
 
 <style lang="less" scoped>
-span {
-  display: inline-block;
-  height: 100%;
-}
 #movieCell-box {
   height: 94px;
   margin-left: 15px;
   padding: 15px 15px 15px 0;
   display: flex;
+  flex-flow: row nowrap;
   align-items: center;
 }
 
@@ -88,7 +85,7 @@ span {
   }
 }
 .movieCell-content {
-  font-size: 13px;
+  font-size: 13pX;
   color: #797d82;
   padding: 0 10px 0 10px;
   flex: 1;
@@ -120,15 +117,16 @@ span {
   }
   .staring {
     height: 19px;
+    width: 100%;
     padding: 0;
-    font-size: 16px;
+    font-size: 13px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .info {
     height: 19px;
-    font-size: 16px;
+    font-size: 16pX;
   }
 }
 .movieCell-operating {

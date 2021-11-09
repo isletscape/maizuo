@@ -1,16 +1,16 @@
 <template>
-  <div id="cinema" v-if="cinemaList">
+  <div id="cinema">
     <van-nav-bar title="影院">
       <template #left>{{ name }}</template>
       <template #right>
-        <van-icon name="search" size="18" />
+        <van-icon name="search" size="18" color="#333" />
       </template>
     </van-nav-bar>
 
     <div>
       <div id="cinema-filter">
         <div class="cinema-filter-child" @click="popup(0)">
-          全部影院
+          {{ currentregion }}
           <van-icon name="arrow-down" />
         </div>
         <div class="cinema-filter-child" @click="popup(1)">
@@ -26,7 +26,7 @@
 
     <van-list class="cinema-list" finished-text="没有更多了">
       <CinemaCell
-        v-for="item in cinemaList"
+        v-for="item in regionCinemaList"
         :key="item.cinemaId"
         :cinema="item"
         @click="choseCinema(item.cinemaId)"
@@ -41,7 +41,11 @@
     @click-overlay="closePopup"
   >
     <template #default>
-      <Popup :region="regionList" :type="popupType" />
+      <Popup
+        :region="regionList"
+        :type="popupType"
+        :selectRegion="handleSelectRegion"
+      />
     </template>
   </van-popup>
 </template>
@@ -57,15 +61,32 @@ import Router from '@/router/index.js'
 const { cityId, name } = useStore().state.currentCity
 const ticketFlag = 1
 const k = 7845835
-const cinemaList = ref([])
+const allCinemaList = ref([])
 const regionList = ref([])
+const regionCinemaList = ref([])
+const currentregion = ref('全部')
 
 //初始化电影院列表，地区列表
-initCinemasList(cinemaList, regionList, cityId, ticketFlag, k)
+initCinemasList(
+  allCinemaList,
+  regionCinemaList,
+  regionList,
+  cityId,
+  ticketFlag,
+  k
+)
 
 //去往购票页
 const choseCinema = (cinemaId) => {
   Router.push(`/cinema/${cinemaId}`)
+}
+//pop选择地区的回调
+const handleSelectRegion = (regionName) => {
+  currentregion.value = regionName
+  regionCinemaList.value = allCinemaList.value.filter((item) => {
+    return item.districtName === regionName
+  })
+  closePopup()
 }
 
 //模态窗口
