@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import Store from '@/utils/store.js'
-import 'default-passive-events'
+import 'default-passive-events' //解决控制台不停报错的问题
 import {
   Tabbar,
   TabbarItem,
@@ -22,7 +22,9 @@ import {
 import 'vant/lib/index.css'
 import '@/utils/rem.js'
 
-createApp(App)
+const app = createApp(App)
+
+app
   .use(Store)
   .use(router)
   .use(Tabbar)
@@ -39,5 +41,4 @@ createApp(App)
   .use(IndexAnchor)
   .use(Search)
   .use(Popup)
-
   .mount('#app')

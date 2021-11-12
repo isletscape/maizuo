@@ -42,7 +42,6 @@ const store = useStore()
 const offsettop = 100
 const k = ref(3782949)
 var citys = ref([])
-//搜索结果
 var serchResults = ref([])
 //搜索关键字
 const keyword = ref('')

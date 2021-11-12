@@ -2,7 +2,9 @@
   <div
     class="seat"
     :style="{ backgroundColor: info.isBroken ? 'red' : 'white' }"
-  ></div>
+  >
+    {{ info.isBroken }}
+  </div>
 </template>
 
 <script setup>
@@ -16,10 +18,7 @@ const info = useAttrs().info[0]
 
 <style lang="less" scoped>
 .seat {
-  width: 100%;
-  height: 100%;
-  color: red;
+  background-color: red;
   font-size: 5px;
 }
-  
 </style>

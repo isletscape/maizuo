@@ -1,3 +1,4 @@
+//当前时间戳，明天0点时间戳，当前日期，时间戳转日期
 export { stamp, tomorrowStamp, date, timestampToDate }
 
 const stamp = Math.round(new Date() / 1000)
