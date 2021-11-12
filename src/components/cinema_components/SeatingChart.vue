@@ -1,11 +1,16 @@
 <template>
-  <!-- 座次图 -->
   <div class="container" ref="containerRef">
+    <!-- 索引条 -->
     <div
       class="index-bar"
       :style="[indexBarStyle, indexBarTransStyle]"
       ref="indexBarRef"
-    ></div>
+    >
+      <div class="indexCell" v-for="rowCount in numbersOfRows" :key="rowCount">
+        {{ rowCount }}
+      </div>
+    </div>
+    <!-- 座位区域 -->
     <div class="seats" ref="seatsRef">
       <div
         class="row"
@@ -46,7 +51,7 @@
 import { computed, ref, watch } from 'vue'
 // import { useAttrs } from 'vue'
 import Seat from '@/components/cinema_components/Seat.vue'
-import { hammerIt, tMatrix } from '@/utils/zoom2.js'
+import { hammerIt, tMatrix } from '@/utils/gestuter.js'
 
 // eslint-disable-next-line no-undef
 const props = defineProps({
@@ -69,8 +74,6 @@ const rowStyle = ref(null)
 const cellStyle = ref(null)
 //索引栏样式
 const indexBarStyle = ref(null)
-//座位间距
-// const seatMargin = 2
 //单元格尺寸
 const cellSize = ref(null)
 
@@ -85,23 +88,21 @@ watch(
     hammerIt(seatsRef)
 
     rowStyle.value = {
-      width: cellSize.value * maxNumbersOfCells.value + 'px',
-      height: cellSize.value + 4 + 'px',
+      width: cellSize.value * maxNumbersOfCells.value + 'pX',
+      height: cellSize.value + 4 + 'pX',
     }
     cellStyle.value = {
-      width: cellSize.value + 'px',
-      height: cellSize.value + 'px',
+      width: cellSize.value + 'pX',
+      height: cellSize.value + 'pX',
     }
     indexBarStyle.value = {
-      width: 15 + 'px',
-      height: (cellSize.value + 4) * numbersOfRows.value + 'px',
+      height: (cellSize.value + 4) * numbersOfRows.value + 'pX',
     }
   }
 )
 
-// pinchScale
 const indexBarTransStyle = computed(() => {
-  return `transform: translate(0px, ${tMatrix.value[5]}px) scale(${tMatrix.value[3]})`
+  return `transform: translate(0pX, ${tMatrix.value[5]}pX) scale(${tMatrix.value[3]})`
 })
 </script>
 
@@ -110,8 +111,8 @@ const indexBarTransStyle = computed(() => {
 .container {
   width: 100%;
   height: 100%;
-  background-color: gray;
-  z-index: 99;
+  background-color: rgb(245, 239, 239);
+  z-index: 9;
   overflow: hidden;
   display: flex;
   flex-flow: row nowrap;
@@ -119,10 +120,22 @@ const indexBarTransStyle = computed(() => {
 }
 .index-bar {
   position:absolute;
-  background-color: rgba(87, 143, 196, 0.884);
+  left: 3pX;
+  background-color: rgba(141, 141, 141, 0.493);
   z-index: 99;
+  width: 20pX;
+  border-radius: 10pX;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+  
 }
-
+.indexCell{
+  width: 100%;
+  text-align: center;
+  font-size: 5pX;
+}
 
 .seats {
   background-color: steelblue;    
@@ -138,6 +151,6 @@ const indexBarTransStyle = computed(() => {
   display: inline-block;
   vertical-align: top;
   margin: 2pX;
-  background-color: cadetblue;
+  
 }
 </style>

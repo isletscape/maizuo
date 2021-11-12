@@ -67,16 +67,16 @@ const showDate = ref(tomorrowStamp)
 const k = 3819095
 const movieHallList = ref([])
 const currentMovie = ref(null)
-//请求当前影院放映的电影列表
+//当前影院放映的电影
 initCinemaMovieList(cinemaMovieList, cinemaId, showDate.value, k)
-//电影列表初始化完成后更新数据
+//更新放映厅数据
 watch(cinemaMovieList, () => {
   // currentMovieId.value = newValue[0].filmId
   currentMovie.value = cinemaMovieList.value[0]
   showDate.value = String(cinemaMovieList.value[0].showDate[0])
   updataMovieHallList()
 })
-//swipe切换电影更新数据
+//swipe切换更新放映厅数据
 const getCurrentMovie = (movie) => {
   // currentMovieId.value = movie.filmId
   currentMovie.value = movie
