@@ -1,5 +1,5 @@
-//当前时间戳，明天0点时间戳，当前日期，时间戳转日期
-export { stamp, tomorrowStamp, date, timestampToDate }
+//当前时间戳，明天0点时间戳，当前日期，时间戳转日期，事件戳转时间
+export { stamp, tomorrowStamp, date, timestampToDate, timestampToTime }
 
 const stamp = Math.round(new Date() / 1000)
 
@@ -19,7 +19,16 @@ const date =
   new Date().getDate()
 
 function timestampToDate(stamp) {
-  return new Date(parseInt(stamp) * 1000)
+  const fullDate = new Date(parseInt(stamp) * 1000)
     .toLocaleString()
     .replace(/:\d{1,2}$/, ' ')
+  const indexOfSpace = fullDate.indexOf(' ')
+  return fullDate.slice(0, indexOfSpace)
+}
+function timestampToTime(stamp) {
+  const fullDate = new Date(parseInt(stamp) * 1000)
+    .toLocaleString()
+    .replace(/:\d{1,2}$/, ' ')
+  const indexOfSpace = fullDate.indexOf(' ')
+  return fullDate.slice(indexOfSpace)
 }

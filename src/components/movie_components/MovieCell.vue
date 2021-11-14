@@ -17,12 +17,7 @@
         </div>
       </div>
       <div class="staring">主演：{{ actors }}</div>
-      <div class="info">
-        <div>{{ movie.nation }}</div>
-        |
-        <div>{{ movie.runtime }}分钟</div>
-      </div>
-      <p></p>
+      <div class="info">{{ movie.nation }} | {{ movie.runtime }}分钟</div>
     </div>
     <!-- 购票按钮 -->
     <div class="movieCell-operating">
@@ -68,17 +63,17 @@ const cilckOn = (type, filmId) => {
 
 <style lang="less" scoped>
 #movieCell-box {
-  height: 94px;
-  margin-left: 15px;
-  padding: 15px 15px 15px 0;
+  height: 94pX;
+  margin-left: 15pX;
+  padding: 15pX 15pX 15pX 0;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
 }
 
 .movieCell-thumb {
-  width: 66px;
-  height: 97.5px;
+  width: 66pX;
+  height: 97.5pX;
   img {
     width: 100%;
     height: 100%;
@@ -89,16 +84,20 @@ const cilckOn = (type, filmId) => {
   color: #797d82;
   padding: 0 10px 0 10px;
   flex: 1;
-  height: 81px;
+  height: 81pX;
   overflow: hidden;
   .title {
-    height: 22px;
+    height: 22pX;
     display: flex;
     align-items: center;
+
     .name {
-      font-size: 16px;
+      font-size: 16pX;
       color: #555;
-      margin-right: 3px;
+      margin-right: 3pX;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .type {
       background-color: lightgray;
@@ -109,32 +108,34 @@ const cilckOn = (type, filmId) => {
     }
   }
   .grade {
-    height: 21px;
+    height: 21pX;
     .score {
-      font-size: 14px;
+      font-size: 14pX;
       color: #ffb232;
     }
   }
   .staring {
-    height: 19px;
+    height: 19pX;
     width: 100%;
     padding: 0;
-    font-size: 13px;
+    line-height: 19pX;
+    font-size: 13pX;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .info {
-    height: 19px;
-    font-size: 16pX;
+    height: 19pX;
+    line-height: 19pX;
+    font-size: 13pX;
   }
 }
 .movieCell-operating {
   button {
-    width: 50px;
-    height: 25px;
-    line-height: 25px;
-    font-size: 13px;
+    width: 50pX;
+    height: 25pX;
+    line-height: 25pX;
+    font-size: 13pX;
     text-align: center;
     border: 1px solid #1989fa;
     border-radius: 2px;

@@ -58,7 +58,7 @@
 
 <script setup>
 // import Tickets from '@/views/Home/Movie/Tickets.vue'
-import Router from '@/router/index.js'
+import router from '@/router/index.js'
 import { ref } from '@vue/reactivity'
 import { useRoute } from 'vue-router'
 import { initSingleMovie } from '@/composables/initMovies.js'
@@ -68,10 +68,10 @@ const movie = ref()
 initSingleMovie(movie, id)
 
 const backword = () => {
-  Router.go(-1)
+  router.go(-1)
 }
 const buy = () => {
-  Router.push({
+  router.push({
     name: 'tickets',
     params: { filmId: id },
   })

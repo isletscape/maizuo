@@ -18,7 +18,7 @@ export {
 //全部影院
 async function initAllCinemaList(cinemasList, cityId, ticketFlag, k) {
   const data = await allCinemaAPI(cityId, ticketFlag, k)
-  console.log('all-cinema', data)
+
   switch (handleRequest(data)) {
     case 0:
       break
@@ -37,7 +37,7 @@ async function initAllCinemaList(cinemasList, cityId, ticketFlag, k) {
   cinemasList.value = cinemas
 }
 //购票页影院数据
-async function initTicketsCinemaList(filmId, cityId, k) {
+async function initTicketsCinemaList(cinameList, filmId, cityId, k) {
   const data = await ticketsCinemaAPI(filmId, cityId, k)
   switch (handleRequest(data)) {
     case 0:
@@ -130,6 +130,7 @@ async function initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k) {
 }
 //影厅数据
 async function initMovieHallList(movieHallList, filmId, cinemaId, date, k) {
+  // console.log('init data', filmId, cinemaId, date)
   const data = await movieHallListAPI(filmId, cinemaId, date, k)
 
   switch (handleRequest(data)) {

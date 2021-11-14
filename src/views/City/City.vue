@@ -9,7 +9,7 @@
           size="25px"
           @click="closepage"
         />
-        当前城市
+        当前城市-{{ cityName }}
       </div>
       <van-search v-model="keyword" placeholder="请输入搜索关键词" />
     </header>
@@ -32,24 +32,22 @@
 <script setup>
 import { watch, ref } from 'vue'
 import initCitys from '@/composables/initCitys.js'
-import Router from '@/router/index.js'
+import router from '@/router/index.js'
 import FullList from '@/components/city_components/FullList.vue'
 import SearchResultList from '@/components/city_components/SearchResultList.vue'
 import { useStore } from 'vuex'
 const store = useStore()
 
-//顶部固定区域的高度
-const offsettop = 100
 const k = ref(3782949)
 var citys = ref([])
 var serchResults = ref([])
 //搜索关键字
 const keyword = ref('')
 
-//初始化城市数据
+//城市数据
 initCitys(citys, k)
 
-//keyword改变实时触发生成检索结果
+//检索结果
 watch(keyword, (keyword) => {
   // if (keyword === '') return (serchResults.value = [])
   serchResults.value = []
@@ -62,39 +60,41 @@ watch(keyword, (keyword) => {
     ]
   })
 })
-
-//选择城市的回调
+const { name: cityName } = useStore().state.currentCity
 const handleSelectCity = (city) => {
   store.commit('updateCurrentCity', city)
   closepage()
 }
-
 const closepage = () => {
-  Router.push('/home')
+  router.push('/movie')
 }
+
+//顶部固定区域的高度
+const offsettop = 100
 </script>
 
 <style lang="less" scoped>
 #city {
+  height: 100vh;
   background-color: rgba(255, 255, 255, 0.5);
 }
 header {
   z-index: 99;
   position: sticky;
   top: 0;
-  height: 100px;
+  height: 100pX;
   background: #fff;
 }
 
 .title {
   height: 44pX; /*no*/
-  line-height: 44px;
-  font-size: 17px;
+  line-height: 44pX;
+  font-size: 17pX;
   text-align: center;
   .colse_icon {
     float: left;
-    top: 19/2px;
-    left: 15px;
+    top: 19/2pX;
+    left: 15pX;
   }
 }
 </style>

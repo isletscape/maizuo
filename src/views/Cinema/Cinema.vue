@@ -1,8 +1,8 @@
 <template>
-  <div v-if="cinemaMovieList">
+  <div id="cinema" v-if="cinemaMovieList">
     <!-- 标题栏 -->
     <div class="cinema-page">
-      <van-nav-bar title="影院">
+      <van-nav-bar :title="cinemaName">
         <template #left>
           <van-icon name="arrow-left" color="#444" @click="closepage" />
         </template>
@@ -18,7 +18,7 @@
       <div class="no-movies" v-else>暂无电影信息</div>
     </div>
     <!-- 电影信息 -->
-    <div class="movie-cell" v-if="cinemaMovieList.length > 0">
+    <div class="movie-cell" v-if="currentMovie">
       <p class="movie-name">
         {{ currentMovie.name }}
         <span class="movie-grade">{{ currentMovie.grade }}</span>
@@ -29,79 +29,56 @@
         }}|{{ currentMovie.director }}
       </p>
     </div>
-    <!-- 场次列表 -->
-    <div class="tabs">
-      <van-tabs v-if="movieHallList.length > 0">
-        <van-tab :title="date">
-          <van-list class="session-list" finished-text="没有更多了">
-            <HallCell
-              v-for="item in movieHallList"
-              :key="item.scheduleId"
-              :hall="item"
-              @click="selectHall(item.scheduleId)"
-            />
-          </van-list>
-        </van-tab>
-      </van-tabs>
-      <div class="no-hall" v-else>暂无场次信息</div>
-    </div>
+    <!-- 场次分页列表 -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script setup>
 import CinemaSwiper from '@/components/cinema_components/CinemaSwiper.vue'
-import Router from '@/router/index.js'
-import HallCell from '@/components/cinema_components/HallCell.vue'
-import { ref } from '@vue/reactivity'
-import {
-  initCinemaMovieList,
-  initMovieHallList,
-} from '@/composables/initCinemas.js'
+import router from '@/router/index.js'
+import { computed, ref } from '@vue/reactivity'
+import { initCinemaMovieList } from '@/composables/initCinemas.js'
 import { useRoute } from 'vue-router'
-import { date, tomorrowStamp } from '@/utils/time.js'
+import { tomorrowStamp } from '@/utils/time.js'
 import { watch } from '@vue/runtime-core'
+import { useStore } from 'vuex'
 
+const store = useStore()
 const cinemaMovieList = ref([])
-const cinemaId = useRoute().params.id
+const { cinemaId } = useRoute().params
 const showDate = ref(tomorrowStamp)
 const k = 3819095
-const movieHallList = ref([])
 const currentMovie = ref(null)
-//当前影院放映的电影
+
+const cinemaName = computed(() => {
+  return store.state.currentCinema.name
+})
+
 initCinemaMovieList(cinemaMovieList, cinemaId, showDate.value, k)
 //更新放映厅数据
-watch(cinemaMovieList, () => {
-  // currentMovieId.value = newValue[0].filmId
-  currentMovie.value = cinemaMovieList.value[0]
-  showDate.value = String(cinemaMovieList.value[0].showDate[0])
-  updataMovieHallList()
+watch(cinemaMovieList, (cinemaMovieList) => {
+  currentMovie.value = cinemaMovieList[0]
+  showDate.value = String(cinemaMovieList[0].showDate[0])
+  store.commit('updateCurrentMovie', currentMovie.value)
+  router.push(`/cinema/${cinemaId}/movies/${currentMovie.value.filmId}`)
 })
-//swipe切换更新放映厅数据
+
 const getCurrentMovie = (movie) => {
-  // currentMovieId.value = movie.filmId
-  currentMovie.value = movie
-  showDate.value = String(movie.premiereAt)
-  updataMovieHallList()
-}
-const updataMovieHallList = () => {
-  initMovieHallList(
-    movieHallList,
-    currentMovie.value.filmId,
-    cinemaId,
-    showDate.value,
-    k
-  )
-}
-const selectHall = (scheduleId) => {
-  Router.push(`/schedule/${scheduleId}`)
+  store.commit('updateCurrentMovie', movie)
+  router.push(`/cinema/${cinemaId}/movies/${movie.filmId}`)
 }
 
 const closepage = () => {
-  Router.go(-1)
+  router.push('/cinemas')
+  sessionStorage.removeItem('cinema_movie_date_status')
 }
 </script>
 
 <style lang="less" scoped>
+#cinema{
+  height: 100vh;
+}
 .swiper {
   background-color: skyblue;
   padding-bottom: 10pX;

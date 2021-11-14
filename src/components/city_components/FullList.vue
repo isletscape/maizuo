@@ -8,7 +8,7 @@
           class="city-name"
           v-for="city in item.list"
           :key="city.cityId"
-          @click="onClickCity(city)"
+          @click="choseCity(city)"
         >
           {{ city.name }}
         </li>
@@ -18,12 +18,16 @@
 </template>
 
 <script setup>
-import { useAttrs } from '@vue/runtime-core'
+import { useAttrs, onBeforeMount } from '@vue/runtime-core'
 const { citys, selectCity } = useAttrs()
 
-const onClickCity = (city) => {
+const choseCity = (city) => {
   selectCity(city)
 }
+
+onBeforeMount(() => {
+  document.getElementById('app').scrollIntoView()
+})
 </script>
 
 <style lang="less" scoped>

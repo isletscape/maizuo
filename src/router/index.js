@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Movie from '@/views/Movie/Movie.vue'
 import Cinemas from '@/views/Cinema/Cinemas.vue'
 import City from '@/views/City/City.vue'
-import Home from '@/views/Home.vue'
 import Mine from '@/views/Mine/Mine.vue'
 
 const routes = [
@@ -11,52 +10,56 @@ const routes = [
     redirect: '/movie',
   },
   {
-    component: Home,
-    path: '/home',
-    redirect: '/movie',
-    children: [
-      {
-        path: '/movie',
-        name: 'movie',
-        component: Movie,
-        props: true,
-      },
-      {
-        path: '/cinemas',
-        name: 'cinemas',
-        component: Cinemas,
-      },
-      {
-        path: '/mine',
-        name: 'mine',
-        component: Mine,
-      },
-    ],
+    path: '/movie',
+    name: 'movie',
+    component: Movie,
+    props: true,
+    meta: {
+      showNav: true,
+    },
+  },
+  {
+    path: '/cinemas',
+    name: 'cinemas',
+    component: Cinemas,
+    meta: {
+      showNav: true,
+    },
+  },
+  {
+    path: '/mine',
+    name: 'mine',
+    component: Mine,
+    meta: {
+      showNav: true,
+    },
   },
   {
     path: '/detail/:id',
     name: 'detail',
     props: true,
-    component: () =>
-      import(/* webpackChunkName: "detail" */ '@/views/Movie/Detail.vue'),
+    component: () => import('@/views/Movie/Detail.vue'),
   },
   {
-    path: '/cinema/:id',
+    path: '/cinema/:cinemaId',
     name: 'cinema',
-    component: () =>
-      import(/* webpackChunkName: "cinema" */ '@/views/Cinema/Cinema.vue'),
+    component: () => import('@/views/Cinema/Cinema.vue'),
+    children: [
+      {
+        path: 'movies/:movieId',
+        component: () => import('@/views/Cinema/Halls.vue'),
+      },
+    ],
   },
   {
     path: '/schedule/:id',
     name: 'schedule',
-    component: () =>
-      import(/* webpackChunkName: "schedule" */ '@/views/Cinema/Schedule.vue'),
+    component: () => import('@/views/Cinema/Schedule.vue'),
   },
   {
     path: '/tickets',
     name: 'tickets',
-    component: () =>
-      import(/* webpackChunkName: "tickets" */ '@/views/Movie/Tickets.vue'),
+    component: () => import('@/views/Movie/Tickets.vue'),
   },
   {
     path: '/city',

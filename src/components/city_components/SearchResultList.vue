@@ -7,14 +7,21 @@
   </ul>
 </template>
 <script setup>
-import { useAttrs } from '@vue/runtime-core'
-
-const { citys, selectCity } = useAttrs()
+import { defineProps, onBeforeMount } from 'vue'
+// eslint-disable-next-line no-undef
+const props = defineProps({
+  citys: Array,
+  selectCity: Function,
+})
 
 //选择某个城市
 const onClickCity = (city) => {
-  selectCity(city)
+  props.selectCity(city)
 }
+
+onBeforeMount(() => {
+  document.getElementById('app').scrollIntoView()
+})
 </script>
 
 <style lang="less" scoped>

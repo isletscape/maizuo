@@ -18,6 +18,7 @@ import {
   Search,
   NavBar,
   Popup,
+  Sticky,
 } from 'vant'
 import 'vant/lib/index.css'
 import '@/utils/rem.js'
@@ -41,4 +42,5 @@ app
   .use(IndexAnchor)
   .use(Search)
   .use(Popup)
+  .use(Sticky)
   .mount('#app')

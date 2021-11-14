@@ -5,8 +5,10 @@
       <div class="time-end bottom-line">{{ endAt }}散场</div>
     </div>
     <div class="hall">
-      <div class="hall-type top-line">{{ hall.imagery }}</div>
-      <div class="hall-id bottom-line">{{ hallName }}</div>
+      <div class="hall-type top-line">
+        {{ hall.filmLanguage }}{{ hall.imagery }}
+      </div>
+      <div class="hall-id bottom-line">{{ hall.hallName }}</div>
     </div>
     <div class="price">
       <span>¥</span>
@@ -17,16 +19,20 @@
 </template>
 
 <script setup>
-import { useAttrs } from '@vue/runtime-core'
-import { timestampToDate } from '@/utils/time.js'
-const { hall } = useAttrs()
-const a = timestampToDate(hall.showAt).indexOf(' ')
+import { defineProps } from 'vue'
+import { timestampToTime } from '@/utils/time.js'
+// eslint-disable-next-line no-undef
+const props = defineProps({
+  hall: Object,
+})
+// const { hall } = toRefs(props)
+// const spaceIndex = timestampToDate(hall.value.showAt).indexOf(' ')
 
-const showAt = timestampToDate(hall.showAt).slice(a)
-const endAt = timestampToDate(hall.endAt).slice(a)
-const b = hall.hallName.indexOf('（')
-const hallName = hall.hallName.slice(0, b)
-const price = String(hall.salePrice).slice(0, 2)
+const showAt = timestampToTime(props.hall.showAt)
+const endAt = timestampToTime(props.hall.endAt)
+// const b = props.hall.hallName.indexOf('（')
+// const hallName = props.hall.hallName
+const price = String(props.hall.salePrice).slice(0, 2)
 </script>
 
 <style lang="less" scoped>

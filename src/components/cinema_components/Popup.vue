@@ -25,7 +25,6 @@ const props = defineProps({
 })
 
 const onSelectRegion = (regionName) => {
-  console.log(regionName)
   props.selectRegion(regionName)
 }
 </script>
@@ -35,7 +34,7 @@ const onSelectRegion = (regionName) => {
   display: flex;
   list-style: none;
   flex-flow: row wrap;
-  padding-bottom: 10pX;
+  padding-bottom: 5pX;
   li {
     display: block;
     box-sizing: border-box;
@@ -54,12 +53,10 @@ const onSelectRegion = (regionName) => {
   }
 }
 .costom{
-  padding-bottom: 10pX;
-  padding-top:10pX ;
   li {
     height: 30pX;
     line-height: 30pX;
-    font-size: 16pX;
+    font-size: 13pX;
     text-indent: 1em;
     color:#797d82 ;
     &:nth-child(1) {

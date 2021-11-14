@@ -25,7 +25,7 @@ import { reactive } from 'vue'
 import MovieCell from '@/components/movie_components/MovieCell.vue'
 import { initMovieList } from '@/composables/initMovies.js'
 import { useStore } from 'vuex'
-import Router from '@/router/index.js'
+import router from '@/router/index.js'
 
 const store = useStore()
 const { cityId } = store.state.currentCity
@@ -58,9 +58,9 @@ const onScroll = (swipe) => {
 //选择电影的回调
 const handleSelectMovie = (type, filmId) => {
   if (type === '电影详情') {
-    Router.push(`/detail/${filmId}`)
+    router.push(`/detail/${filmId}`)
   } else if (type === '购票') {
-    Router.push({
+    router.push({
       name: 'tickets',
       params: { filmId: filmId },
     })

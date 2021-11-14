@@ -34,7 +34,7 @@ import SeatingChart from '@/components/cinema_components/SeatingChart.vue'
 // import SeatSelect from '@/components/cinema_components/SeatSelect.vue'
 
 import { useRoute } from 'vue-router'
-import Router from '@/router'
+import router from '@/router'
 
 const seatingChart = ref(null)
 const schedules = ref(null)
@@ -52,7 +52,7 @@ const navStyle = {
 }
 
 const goBack = () => {
-  Router.go(-1)
+  router.go(-1)
 }
 </script>
 

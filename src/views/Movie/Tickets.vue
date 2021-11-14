@@ -1,70 +1,54 @@
 <template>
-  <div id="tickets" v-if="cinemas">
-    <van-nav-bar title="标题" left-arrow @click-left="goback">
-      <template #right>
-        <!-- <van-icon name="search" size="18" /> -->
-      </template>
+  <div id="tickets" v-if="allCinemaList">
+    <!-- title -->
+    <van-nav-bar
+      title="影院列表"
+      fixed
+      placeholder
+      left-arrow
+      @click-left="goback"
+    >
+      <template #right></template>
     </van-nav-bar>
-
-    <van-tabs sticky>
-      <template #nav-bottom>
-        <div id="cinema-type">
-          <div class="cinema-type-child" @click="choseCinemaType(0)">
-            全部影院
-            <van-icon name="arrow-down" />
-          </div>
-          <div class="cinema-type-child" @click="choseCinemaType(2)">
-            去过的影院
-            <van-icon name="arrow-down" />
-          </div>
+    <van-sticky :offset-top="46">
+      <!-- 筛选器 -->
+      <div class="cinema-filter">
+        <div class="cinema-filter-child" @click="popup(0)">
+          {{ currentregion }}
+          <van-icon name="arrow-down" />
         </div>
-      </template>
-      <van-tab title="今天">
-        <van-list finished-text="没有更多了">
-          <CinemaCell
-            v-for="item in cinemas"
-            :key="item.districtId"
-            :cinema="item"
-            @click="selectCinema(item.cinemaId)"
-          />
-        </van-list>
-      </van-tab>
-      <van-tab title="明天">
-        <van-list finished-text="没有更多了">
-          <CinemaCell
-            v-for="item in cinemas"
-            :key="item.districtId"
-            :cinema="item"
-            @click="selectCinema(item.cinemaId)"
-          />
-        </van-list>
-      </van-tab>
-      <van-tab title="后天">
-        <van-list finished-text="没有更多了">
-          <CinemaCell
-            v-for="item in cinemas"
-            :key="item.districtId"
-            :cinema="item"
-            @click="selectCinema(item.cinemaId)"
-          />
-        </van-list>
-      </van-tab>
-    </van-tabs>
+        <div class="cinema-filter-child" @click="popup(1)">
+          去过
+          <van-icon name="arrow-down" />
+        </div>
+      </div>
+    </van-sticky>
+    <!-- 列表 -->
+    <div class="cinema-list">
+      <van-list finished-text="没有更多了">
+        <CinemaCell
+          v-for="item in regionCinemaList"
+          :key="item.districtId"
+          :cinema="item"
+          @click="selectCinema(item.cinemaId)"
+        />
+      </van-list>
+    </div>
   </div>
-
+  <!-- 模态框 -->
   <van-popup
     v-model:show="show"
     position="top"
     close-on-click-overlay
     @click-overlay="closePopup"
   >
-    <!-- <template #default> -->
-    <Popup
-      :region="regionList"
-      :type="filterType"
-      :selectRegion="handleSelectRegion"
-    />
-    <!-- </template> -->
+    <template #default>
+      <Popup
+        :region="regionList"
+        :type="popupType"
+        :selectRegion="handleSelectRegion"
+      />
+    </template>
   </van-popup>
 </template>
 
@@ -75,59 +59,80 @@ import { ref } from '@vue/reactivity'
 import { initCinemasList } from '@/composables/initCinemas.js'
 // import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
-import Router from '@/router'
+import router from '@/router'
 
 // const route = useRoute()
 // const { filmId } = route.params
 const { cityId } = useStore().state.currentCity
-const show = ref(false)
-const cinemas = ref([])
+const allCinemaList = ref([])
+const regionCinemaList = ref([])
 const regionList = ref([])
 const ticketFlag = 1
 const k = 6748065
-const filterType = ref(0)
-initCinemasList(cinemas, regionList, cityId, ticketFlag, k)
+const currentregion = ref('全部')
+
+initCinemasList(
+  allCinemaList,
+  regionCinemaList,
+  regionList,
+  cityId,
+  ticketFlag,
+  k
+)
 
 //选中地区的回调
 const handleSelectRegion = (regionName) => {
-  cinemas.value = cinemas.value.filter((item) => {
+  currentregion.value = regionName
+  regionCinemaList.value = allCinemaList.value.filter((item) => {
     return item.districtName === regionName
   })
   closePopup()
 }
 const selectCinema = (cinemaId) => {
-  Router.push(`/cinema/${cinemaId}`)
+  router.push(`/cinema/${cinemaId}`)
 }
 
 //模态窗口
-const choseCinemaType = (type) => {
+const popupType = ref(0)
+const show = ref(false)
+const popup = (type) => {
   show.value = true
-  filterType.value = type
+  popupType.value = type
 }
 const closePopup = () => {
   show.value = false
 }
 
 const goback = () => {
-  Router.go(-1)
+  router.go(-1)
 }
 </script>
 
 <style lang="less" scoped>
-#cinema-type {
-  display: flex;
-  height: 49pX;
+@cinema-filter-height:44pX;
+@placerholder-height :@cinema-filter-height + 46px;
+.bordered {
   border-top: 1px solid #f8f8f8;
   border-bottom: 1px solid #f8f8f8;
+}
+.cinema-filter {
+  display: flex;
+  width: 100vw;
+  height: @cinema-filter-height;
+  .bordered();
   background-color: #fff;
-  .cinema-type-child {
+  .cinema-filter-child {
     flex: 1;
     text-align: center;
-    height: 49pX;
-    line-height: 49pX;
+    line-height: @cinema-filter-height;
     font-size: 14pX;
   }
 } 
+
+.cinema-list{
+  position: sticky;
+  width: 100vw;
+}
 </style>
 
 <style lang="less">
