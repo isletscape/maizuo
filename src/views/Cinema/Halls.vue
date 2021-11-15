@@ -14,6 +14,7 @@
           v-for="hall in hallList"
           :key="hall.scheduleId"
           :hall="hall"
+          :selectHall="handleSelectHall"
         />
       </van-list>
       <div class="no-data" v-else>暂无数据</div>
@@ -29,6 +30,7 @@ import { timestampToDate } from '@/utils/time.js'
 import { initMovieHallList } from '@/composables/initCinemas.js'
 import { onMounted, watch } from '@vue/runtime-core'
 import HallCell from '@/components/cinema_components/HallCell.vue'
+import router from '@/router/index.js'
 
 const route = useRoute()
 const store = useStore()
@@ -46,6 +48,11 @@ const cinemaId = computed(() => {
 const showDates = computed(() => {
   return store.state.currentMovie.showDate
 })
+
+const handleSelectHall = (scheduleId) => {
+  router.push(`/schedule/${scheduleId}`)
+  // sessionStorage.removeItem('cinema_movie_date_status')
+}
 
 // 切换电影时刷新数据
 watch(movieId, (val) => {
@@ -71,7 +78,6 @@ const changeTab = (e) => {
     8767641
   )
 }
-
 //刷新页面重新请求数据
 onMounted(() => {
   if (sessionStorage.getItem('cinema_movie_date_status')) {

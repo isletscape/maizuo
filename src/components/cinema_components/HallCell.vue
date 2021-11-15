@@ -1,5 +1,5 @@
 <template>
-  <div id="session-cell">
+  <div id="hall-cell" @click="onCilckHall">
     <div class="time">
       <div class="time-start top-line">{{ showAt }}</div>
       <div class="time-end bottom-line">{{ endAt }}散场</div>
@@ -24,9 +24,13 @@ import { timestampToTime } from '@/utils/time.js'
 // eslint-disable-next-line no-undef
 const props = defineProps({
   hall: Object,
+  selectHall: Function,
 })
 // const { hall } = toRefs(props)
 // const spaceIndex = timestampToDate(hall.value.showAt).indexOf(' ')
+const onCilckHall = () => {
+  props.selectHall(props.hall.scheduleId)
+}
 
 const showAt = timestampToTime(props.hall.showAt)
 const endAt = timestampToTime(props.hall.endAt)
@@ -36,7 +40,7 @@ const price = String(props.hall.salePrice).slice(0, 2)
 </script>
 
 <style lang="less" scoped>
-  #session-cell {
+  #hall-cell {
     display: flex;
     flex-flow: row nowrap;
     padding: 15pX;

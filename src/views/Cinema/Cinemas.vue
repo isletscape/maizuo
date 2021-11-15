@@ -40,7 +40,7 @@
         v-for="cinema in regionCinemaList"
         :key="cinema.cinemaId"
         :cinema="cinema"
-        @click="choseCinema(cinema)"
+        @click="goCinema(cinema)"
       />
     </van-list>
   </div>
@@ -88,9 +88,10 @@ initCinemasList(
 )
 
 //去往购票页
-const choseCinema = (cinema) => {
+const goCinema = (cinema) => {
   console.log('cinema', cinema)
   store.commit('updateCurrentCinema', cinema)
+  sessionStorage.removeItem('cinema_movie_date_status')
   router.push(`/cinema/${cinema.cinemaId}`)
 }
 const goSearchCityPage = () => {

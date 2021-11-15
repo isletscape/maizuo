@@ -32,10 +32,10 @@ async function initSeatingChart(seatingCharts, scheduleId, k) {
 }
 
 async function initSchedule(schedules, scheduleId, k) {
-  if (localStorage.getItem('schedules')) {
-    schedules.value = JSON.parse(localStorage.getItem('schedules'))
-    return
-  }
+  // if (localStorage.getItem('schedules')) {
+  //   schedules.value = JSON.parse(localStorage.getItem('schedules'))
+  //   return
+  // }
 
   const data = await scheduleAPI(scheduleId, k)
 
@@ -56,7 +56,7 @@ async function initSchedule(schedules, scheduleId, k) {
   } = data
 
   schedules.value = schedule
-  console.log('schedules', schedule)
+  // console.log('schedules', schedule)
 
-  localStorage.setItem('schedules', JSON.stringify(schedules.value))
+  // localStorage.setItem('schedules', JSON.stringify(schedules.value))
 }

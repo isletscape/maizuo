@@ -1,5 +1,12 @@
-//当前时间戳，明天0点时间戳，当前日期，时间戳转日期，事件戳转时间
-export { stamp, tomorrowStamp, date, timestampToDate, timestampToTime }
+//当前时间戳，明天0点时间戳，当前日期，时间戳转日期，事件戳转时间，时间转完整时间
+export {
+  stamp,
+  tomorrowStamp,
+  date,
+  timestampToDate,
+  timestampToTime,
+  timestampToFullTime,
+}
 
 const stamp = Math.round(new Date() / 1000)
 
@@ -31,4 +38,11 @@ function timestampToTime(stamp) {
     .replace(/:\d{1,2}$/, ' ')
   const indexOfSpace = fullDate.indexOf(' ')
   return fullDate.slice(indexOfSpace)
+}
+function timestampToFullTime(stamp) {
+  const fullDate = new Date(parseInt(stamp) * 1000)
+    .toLocaleString()
+    .replace(/:\d{1,2}$/, ' ')
+
+  return fullDate
 }
