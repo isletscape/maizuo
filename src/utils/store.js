@@ -4,13 +4,12 @@ const Store = createStore({
   state() {
     return {
       isLogin: false,
+      currentMovie: {},
+      currentCinema: {},
       currentCity: {
-        //默认城市
         name: '北京',
         cityId: 110100,
       },
-      currentMovie: {},
-      currentCinema: {},
     }
   },
   mutations: {

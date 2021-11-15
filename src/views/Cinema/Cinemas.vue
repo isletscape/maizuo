@@ -68,6 +68,7 @@ import CinemaCell from '@/components/cinema_components/CinemaCell.vue'
 import { initCinemasList } from '@/composables/initCinemas.js'
 import { useStore } from 'vuex'
 import router from '@/router/index.js'
+
 const store = useStore()
 const { cityId, name: cityName } = store.state.currentCity
 const ticketFlag = 1

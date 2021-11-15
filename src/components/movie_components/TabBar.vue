@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import EventBus from '@/utils/EventBus/EventBus.js'
+import mitt from '@/utils/mitt.js'
 import { titleBarHeight, swipeHeight } from '@/global_styles/GlobalStyles.js'
 import { reactive } from 'vue'
 import MovieCell from '@/components/movie_components/MovieCell.vue'
@@ -49,7 +49,7 @@ const onLoadWith = (params) => {
 
 //注册监听滚动距离
 const onScroll = (swipe) => {
-  EventBus.emit(
+  mitt.emit(
     'scrollPercentage',
     swipe.scrollTop / (swipeHeight - titleBarHeight)
   )

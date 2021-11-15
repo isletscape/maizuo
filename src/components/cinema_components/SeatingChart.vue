@@ -49,7 +49,6 @@
 </template>
 <script setup>
 import { computed, ref, watch } from 'vue'
-// import { useAttrs } from 'vue'
 import Seat from '@/components/cinema_components/Seat.vue'
 import { hammerIt, tMatrix } from '@/utils/gestuter.js'
 

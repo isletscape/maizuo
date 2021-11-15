@@ -26,4 +26,3 @@ const seatingChartAPI = function (scheduleId, k) {
     },
   })
 }
-// 影厅信息

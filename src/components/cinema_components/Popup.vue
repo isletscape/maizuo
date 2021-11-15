@@ -15,8 +15,6 @@
 </template>
 
 <script setup>
-// import { useAttrs } from '@vue/runtime-core'
-
 // eslint-disable-next-line no-undef
 const props = defineProps({
   type: Number,

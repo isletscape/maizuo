@@ -7,7 +7,7 @@
   </ul>
 </template>
 <script setup>
-import { defineProps, onBeforeMount } from 'vue'
+import { onBeforeMount } from 'vue'
 // eslint-disable-next-line no-undef
 const props = defineProps({
   citys: Array,

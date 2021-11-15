@@ -6,7 +6,6 @@
 </template>
 
 <script setup>
-// import { ref, useAttrs } from '@vue/runtime-core'
 import Icon from '@/icon/icon.vue'
 import { computed, toRefs, ref } from '@vue/reactivity'
 import { inject } from '@vue/runtime-core'

@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import EventBus from '@/utils/EventBus/EventBus.js'
+import mitt from '@/utils/mitt.js'
 import router from '@/router/index.js'
 import { computed, ref } from 'vue'
 import { titleBarHeight } from '@/global_styles/GlobalStyles.js'
@@ -17,7 +17,7 @@ const val = ref(0)
 const height = 25
 
 //接收监听到的滚动状态
-EventBus.on('scrollPercentage', (percentage) => {
+mitt.on('scrollPercentage', (percentage) => {
   val.value = percentage
 })
 
