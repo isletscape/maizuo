@@ -7,12 +7,12 @@
         finished-text="没有更多了"
         @load="onLoadWith(item)"
       >
-        <movie-cell
+        <MovieCell
           v-for="movie in item.movies"
           :key="movie.filmId"
           :movie="movie"
           :clickAction="handleSelectMovie"
-        ></movie-cell>
+        />
       </van-list>
     </van-tab>
   </van-tabs>

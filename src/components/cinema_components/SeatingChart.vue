@@ -41,7 +41,7 @@
                 )
               })
             "
-          ></Seat>
+          />
         </div>
       </div>
     </div>
@@ -56,7 +56,6 @@ import { hammerIt, tMatrix } from '@/utils/gestuter.js'
 // eslint-disable-next-line no-undef
 const props = defineProps({
   seatingChart: Object,
-  navHeight: Number,
 })
 
 const seatsRef = ref(null)
@@ -111,7 +110,7 @@ const indexBarTransStyle = computed(() => {
 .container {
   width: 100%;
   height: 100%;
-  background-color: rgb(245, 239, 239);
+  background-color: #f4f4f4;
   z-index: 9;
   overflow: hidden;
   display: flex;
@@ -137,8 +136,7 @@ const indexBarTransStyle = computed(() => {
   font-size: 5pX;
 }
 
-.seats {
-  background-color: steelblue;    
+.seats { 
   position: absolute;          
   display: block;       
 }

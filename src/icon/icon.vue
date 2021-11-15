@@ -6,8 +6,9 @@
  
 <script setup>
 import { computed } from '@vue/reactivity'
-import { defineProps } from 'vue'
+// import { defineProps } from 'vue'
 
+// eslint-disable-next-line no-undef
 const props = defineProps({
   name: {
     type: String,

@@ -52,6 +52,11 @@ const routes = [
     ],
   },
   {
+    path: '/order/:orderId',
+    name: 'order',
+    component: () => import('@/views/Cinema/Order.vue'),
+  },
+  {
     path: '/schedule/:id',
     name: 'schedule',
     component: () => import('@/views/Cinema/Schedule.vue'),
@@ -66,6 +71,11 @@ const routes = [
     name: 'city',
     component: City,
     props: true,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Mine/Login.vue'),
   },
 ]
 

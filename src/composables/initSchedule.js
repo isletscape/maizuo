@@ -60,3 +60,5 @@ async function initSchedule(schedules, scheduleId, k) {
 
   // localStorage.setItem('schedules', JSON.stringify(schedules.value))
 }
+
+// https://m.maizuo.com/gateway/?filmId=5741&cinemaId=65&date=1636992000&k=5367885

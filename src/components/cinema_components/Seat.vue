@@ -1,24 +1,53 @@
 <template>
-  <div class="seat" @click="checked = !checked">
-    <icon :name="iconName"></icon>
+  <div class="seat" @click="selectSeat">
+    <Icon :name="iconName" />
   </div>
-  <!-- <div class="seat"></div> -->
+  <!-- <div class="seat">1</div> -->
 </template>
 
 <script setup>
-import { ref, useAttrs } from '@vue/runtime-core'
-import icon from '@/icon/icon.vue'
-const seatInfo = useAttrs().info[0]
+// import { ref, useAttrs } from '@vue/runtime-core'
+import Icon from '@/icon/icon.vue'
+import { computed, toRefs, ref } from '@vue/reactivity'
+import { inject } from '@vue/runtime-core'
+import { Toast } from 'vant'
 
+// eslint-disable-next-line no-undef
+const props = defineProps({
+  info: Array,
+})
+const { info } = toRefs(props)
+
+// 座位信息
+const seatInfo = computed(() => {
+  return info.value[0]
+})
+// 座位状态
 const checked = ref(false)
-const iconName = ref('')
-iconName.value = seatInfo.isBroken
-  ? 'broken'
-  : seatInfo.isOccupied
-  ? 'occupied'
-  : checked.value
-  ? 'checked'
-  : 'danrenzuoweikexuan'
+
+const selectSeat = () => {
+  if (!seatInfo.value.isBroken && !seatInfo.value.isOccupied) {
+    // 改变座位状态
+    checked.value = !checked.value
+    // 让schedule处理业务
+    scheduleHandleSelectSeat(seatInfo.value, checked.value)
+  } else {
+    Toast('不可选')
+  }
+}
+
+// 座位样式
+const iconName = computed(() => {
+  return seatInfo.value.isBroken
+    ? 'broken'
+    : seatInfo.value.isOccupied
+    ? 'occupied'
+    : checked.value
+    ? 'checked'
+    : 'danrenzuoweikexuan'
+})
+
+const scheduleHandleSelectSeat = inject('selectSeatEvent')
 </script>
 
 <style lang="less" scoped>

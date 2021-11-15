@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 const Store = createStore({
   state() {
     return {
+      isLogin: false,
       currentCity: {
         //默认城市
         name: '北京',
@@ -13,6 +14,9 @@ const Store = createStore({
     }
   },
   mutations: {
+    updateLoginStatus(state, isLogin) {
+      state.isLogin = isLogin
+    },
     updateCurrentCity(state, newCity) {
       state.currentCity = newCity
     },
