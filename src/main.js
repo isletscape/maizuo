@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import Store from '@/utils/store.js'
+import store from '@/store/'
 import 'default-passive-events' //解决控制台不停报错的问题
 import {
   Tabbar,
@@ -26,7 +26,7 @@ import '@/utils/rem.js'
 const app = createApp(App)
 
 app
-  .use(Store)
+  .use(store)
   .use(router)
   .use(Tabbar)
   .use(TabbarItem)

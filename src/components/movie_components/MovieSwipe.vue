@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { swipeHeight } from '@/global_styles/GlobalStyles.js'
+import { swipeHeight } from '@/style/'
 </script>
 <style lang="less" scoped>
 .my-swipe .van-swipe-item {

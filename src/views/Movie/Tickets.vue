@@ -57,7 +57,6 @@ import CinemaCell from '@/components/cinema_components/CinemaCell.vue'
 import Popup from '@/components/cinema_components/Popup.vue'
 import { ref } from '@vue/reactivity'
 import { initCinemasList } from '@/composables/initCinemas.js'
-// import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 import router from '@/router'
 

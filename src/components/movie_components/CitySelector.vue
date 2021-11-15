@@ -8,7 +8,7 @@
 import mitt from '@/utils/mitt.js'
 import router from '@/router/index.js'
 import { computed, ref } from 'vue'
-import { titleBarHeight } from '@/global_styles/GlobalStyles.js'
+import { titleBarHeight } from '@/style'
 import { useStore } from 'vuex'
 
 const store = useStore()

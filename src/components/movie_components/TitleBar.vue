@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { titleBarHeight } from '@/global_styles/GlobalStyles.js'
+import { titleBarHeight } from '@/style/'
 import mitt from '@/utils/mitt.js'
 import { computed, ref } from 'vue'
 

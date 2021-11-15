@@ -20,7 +20,7 @@
 
 <script setup>
 import mitt from '@/utils/mitt.js'
-import { titleBarHeight, swipeHeight } from '@/global_styles/GlobalStyles.js'
+import { titleBarHeight, swipeHeight } from '@/style'
 import { reactive } from 'vue'
 import MovieCell from '@/components/movie_components/MovieCell.vue'
 import { initMovieList } from '@/composables/initMovies.js'
