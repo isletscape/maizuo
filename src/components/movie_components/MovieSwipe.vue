@@ -1,18 +1,19 @@
 <template>
-  <van-swipe
+  <Swipe
     class="my-swipe"
     :autoplay="3000"
     indicator-color="white"
     :height="swipeHeight"
   >
-    <van-swipe-item>1</van-swipe-item>
-    <van-swipe-item>2</van-swipe-item>
-    <van-swipe-item>3</van-swipe-item>
-    <van-swipe-item>4</van-swipe-item>
-  </van-swipe>
+    <SwipeItem>1</SwipeItem>
+    <SwipeItem>2</SwipeItem>
+    <SwipeItem>3</SwipeItem>
+    <SwipeItem>4</SwipeItem>
+  </Swipe>
 </template>
 
 <script setup>
+import { Swipe, SwipeItem } from 'vant'
 import { swipeHeight } from '@/style/'
 </script>
 <style lang="less" scoped>

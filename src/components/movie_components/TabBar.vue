@@ -1,6 +1,6 @@
 <template>
-  <van-tabs sticky :offset-top="titleBarHeight" @scroll="onScroll">
-    <van-tab v-for="item in tabs" :key="item.type" :title="item.title">
+  <Tabs sticky :offset-top="titleBarHeight" @scroll="onScroll">
+    <Tab v-for="item in tabs" :key="item.type" :title="item.title">
       <van-list
         v-model:loading="item.loading"
         :finished="item.finished"
@@ -14,8 +14,8 @@
           :clickAction="handleSelectMovie"
         />
       </van-list>
-    </van-tab>
-  </van-tabs>
+    </Tab>
+  </Tabs>
 </template>
 
 <script setup>
@@ -25,6 +25,7 @@ import { reactive } from 'vue'
 import MovieCell from '@/components/movie_components/MovieCell.vue'
 import { initMovieList } from '@/composables/initMovies.js'
 import { useStore } from 'vuex'
+import { Tab, Tabs } from 'vant'
 import router from '@/router/index.js'
 
 const store = useStore()

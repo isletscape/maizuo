@@ -19,7 +19,6 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import { timestampToTime } from '@/utils/time.js'
 
 // eslint-disable-next-line no-undef

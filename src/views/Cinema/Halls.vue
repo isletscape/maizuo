@@ -1,7 +1,7 @@
 <template>
   <!-- tab分页 -->
-  <van-tabs class="hall-tabs" @click-tab="changeTab">
-    <van-tab
+  <Tabs class="hall-tabs" @click-tab="changeTab">
+    <Tab
       class="hall-tab"
       v-for="(showDate, index) in showDates"
       :key="index"
@@ -18,14 +18,15 @@
         />
       </van-list>
       <div class="no-data" v-else>暂无数据</div>
-    </van-tab>
-  </van-tabs>
+    </Tab>
+  </Tabs>
 </template>
 
 <script setup>
 import { computed, ref } from '@vue/reactivity'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+import { Tab, Tabs } from 'vant'
 import { timestampToDate } from '@/utils/time.js'
 import { initMovieHallList } from '@/composables/initCinemas.js'
 import { onMounted, watch } from '@vue/runtime-core'

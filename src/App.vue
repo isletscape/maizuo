@@ -78,6 +78,8 @@ nav {
 
 
 <style lang="less">
+@import url('/src/style/root.css');
+
 html,
 body,
 #app {

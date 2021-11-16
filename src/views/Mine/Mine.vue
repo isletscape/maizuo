@@ -5,73 +5,87 @@
         round
         width="70pX"
         height="70pX"
-        src="https://img.yzcdn.cn/vant/cat.jpeg"
+        :src="
+          store.state.userInfo
+            ? require('@/assets/cat.png')
+            : require('@/assets/default.png')
+        "
         @click="loginAction"
       />
-      <div class="nav-title" @click="loginAction">立即登录</div>
-    </div>
-    <!-- <div class="nav">
-      <img class="nav-icon" src="" alt="" />
-      <div class="nav-title">188****8888</div>
-    </div> -->
-
-    <div class="margin-set" @click="clickOn('unable')">
-      <span class="label">卖座券</span>
-      <div class="arrow">
-        <Icon name="arrow" />
+      <div class="nav-title" @click="loginAction">
+        {{ store.state.userInfo ? store.state.userInfo.id : '立即登录' }}
       </div>
     </div>
-    <div class="margin-set" @click="clickOn('unable')">
-      <span class="label">组合红包</span>
-      <div class="arrow">
-        <Icon name="arrow" />
-      </div>
-    </div>
-    <div class="margin-set" @click="clickOn('unable')">
-      <span class="label">余额</span>
-      <div class="arrow">
-        <Icon name="arrow" />
-      </div>
-    </div>
-    <div class="margin-set" @click="clickOn('setting')">
-      <span class="label">设置</span>
-      <div class="arrow">
-        <Icon name="arrow" />
-      </div>
-    </div>
-    <div class="margin-set" @click="clickOn('singout')">
-      <span class="label">退出登录</span>
-      <div class="arrow">
-        <Icon name="arrow" />
-      </div>
-    </div>
+    <van-cell
+      title="优惠券"
+      size="large"
+      is-link
+      value="需要登录验证"
+      @click="clickOn('coupons')"
+    />
+    <van-cell
+      title="余额"
+      size="large"
+      is-link
+      value="暂未开放"
+      @click="clickOn('unable')"
+    />
+    <van-cell
+      title="设置"
+      size="large"
+      is-link
+      value="暂未开放"
+      @click="clickOn('unable')"
+    />
+    <van-cell
+      title="退出登录"
+      size="large"
+      is-link
+      v-if="store.state.userInfo"
+      @click="clickOn('singout')"
+    />
   </div>
+  <VanDialog />
 </template>
 
 <script setup>
-import { Image as VanImage } from 'vant'
-import Icon from '@/icon/icon.vue'
-import { Toast } from 'vant'
+import { Toast, Dialog, Image as VanImage, Cell as VanCell } from 'vant'
+import router from '@/router'
+import store from '@/store'
 
 const loginAction = () => {
-  console.log('login')
+  if (!store.state.userInfo) {
+    router.push('/login')
+  }
 }
 const clickOn = (type) => {
-  console.log(type)
   switch (type) {
     case 'unable':
       Toast('暂未开放')
       break
-    case 'setting':
-      console.log('setting')
+    case 'coupons':
+      router.push('/coupons')
+      break
+    case 'clear':
+      console.log('clear')
       break
     case 'singout':
-      console.log('singout')
+      Dialog.confirm({
+        title: '确认退出账号',
+      })
+        .then(() => {
+          store.commit('clearUserInfo')
+          router.go(0)
+        })
+        .catch(() => {})
+
       break
     default:
       break
   }
 }
+
+const VanDialog = Dialog.Component
 </script>
 
 <style scoped>

@@ -1,6 +1,6 @@
 <template>
   <div id="cinema">
-    <van-sticky>
+    <Sticky>
       <!-- title -->
       <van-nav-bar title="影院">
         <template #left>
@@ -32,7 +32,7 @@
           </div>
         </div>
       </div>
-    </van-sticky>
+    </Sticky>
 
     <!-- list -->
     <van-list class="cinema-list" finished-text="没有更多了">
@@ -63,6 +63,7 @@
 
 <script setup>
 import { ref } from '@vue/reactivity'
+import { Sticky } from 'vant'
 import Popup from '@/components/cinema_components/Popup.vue'
 import CinemaCell from '@/components/cinema_components/CinemaCell.vue'
 import { initCinemasList } from '@/composables/initCinemas.js'

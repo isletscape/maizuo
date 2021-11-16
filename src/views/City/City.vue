@@ -11,7 +11,7 @@
         />
         当前城市-{{ cityName }}
       </div>
-      <van-search v-model="keyword" placeholder="请输入搜索关键词" />
+      <Search v-model="keyword" placeholder="请输入搜索关键词" />
     </header>
 
     <!-- 全部城市列表 -->
@@ -33,6 +33,7 @@
 import { watch, ref } from 'vue'
 import initCitys from '@/composables/initCitys.js'
 import router from '@/router/index.js'
+import { Search } from 'vant'
 import FullList from '@/components/city_components/FullList.vue'
 import SearchResultList from '@/components/city_components/SearchResultList.vue'
 import { useStore } from 'vuex'

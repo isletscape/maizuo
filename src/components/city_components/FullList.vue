@@ -1,9 +1,9 @@
 <template>
   <!-- 全部城市列表 -->
   <div class="show-list">
-    <van-index-bar>
+    <IndexBar>
       <ul v-for="item in citys" :key="item.type">
-        <van-index-anchor :index="item.type" />
+        <IndexAnchor :index="item.type" />
         <li
           class="city-name"
           v-for="city in item.list"
@@ -13,12 +13,13 @@
           {{ city.name }}
         </li>
       </ul>
-    </van-index-bar>
+    </IndexBar>
   </div>
 </template>
 
 <script setup>
 import { useAttrs, onBeforeMount } from '@vue/runtime-core'
+import { IndexBar, IndexAnchor } from 'vant'
 const { citys, selectCity } = useAttrs()
 
 const choseCity = (city) => {

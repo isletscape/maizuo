@@ -10,7 +10,7 @@
     >
       <template #right></template>
     </van-nav-bar>
-    <van-sticky :offset-top="46">
+    <Sticky :offset-top="46">
       <!-- 筛选器 -->
       <div class="cinema-filter">
         <div class="cinema-filter-child" @click="popup(0)">
@@ -22,7 +22,7 @@
           <van-icon name="arrow-down" />
         </div>
       </div>
-    </van-sticky>
+    </Sticky>
     <!-- 列表 -->
     <div class="cinema-list">
       <van-list finished-text="没有更多了">
@@ -56,6 +56,7 @@
 import CinemaCell from '@/components/cinema_components/CinemaCell.vue'
 import Popup from '@/components/cinema_components/Popup.vue'
 import { ref } from '@vue/reactivity'
+import { Sticky } from 'vant'
 import { initCinemasList } from '@/composables/initCinemas.js'
 import { useStore } from 'vuex'
 import router from '@/router'
