@@ -58,19 +58,21 @@
       <div
         class="confirm-button"
         :style="{ color: selectedSeats.length > 0 ? '#fff' : '#f58f5e' }"
+        @click="confirmSchedule"
       >
         {{ selectedSeats.length > 0 ? '付款' : '请先选座' }}
         {{ selectedSeats.length > 0 ? amount : '' }}
       </div>
     </div>
   </div>
+  <VanDialog />
 </template>
 
 
 <script setup>
 import { initSeatingChart, initSchedule } from '@/composables/initSchedule.js'
 import { computed, provide, ref } from 'vue'
-import { NoticeBar } from 'vant'
+import { NoticeBar, Dialog } from 'vant'
 import SeatingChart from '@/components/cinema_components/SeatingChart.vue'
 import { timestampToFullTime } from '@/utils/time.js'
 import { useRoute } from 'vue-router'
@@ -81,7 +83,8 @@ const schedules = ref(null)
 const scheduleId = useRoute().params.id
 const k = 9983952
 // 默认不显示影厅列表
-const switcherStatus = ref(true)
+const switcherStatus = ref(false)
+const VanDialog = Dialog.Component
 
 // 票务信息
 initSchedule(schedules, scheduleId, k)
@@ -109,6 +112,15 @@ const handleSelectSeat = (seatInfo, checked) => {
   }
 }
 provide('selectSeatEvent', handleSelectSeat)
+// 跳转支付页面
+const confirmSchedule = () => {
+  Dialog.confirm({
+    title: '未登录',
+    message: '是否跳转登录界面',
+  }).then(() => {
+    router.push(`/order`)
+  })
+}
 
 const goBack = () => {
   router.go(-1)

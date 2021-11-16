@@ -10,7 +10,7 @@
           <van-icon
             name="search"
             @click="goSearchCinemaPage"
-            size="18"
+            size="18pX"
             color="#333"
           />
         </template>
@@ -91,7 +91,6 @@ initCinemasList(
 
 //去往购票页
 const goCinema = (cinema) => {
-  console.log('cinema', cinema)
   store.commit('updateCurrentCinema', cinema)
   sessionStorage.removeItem('cinema_movie_date_status')
   router.push(`/cinema/${cinema.cinemaId}`)

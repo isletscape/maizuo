@@ -1,14 +1,15 @@
 import {
   allCinemaAPI,
+  cinemaAPI,
   ticketsCinemaAPI,
   cinemaListAPI,
   cinemaMovieListAPI,
   movieHallListAPI,
 } from '@/api/cinemaAPI.js'
-import { handleRequest } from './handleRequest'
 
 export {
   initAllCinemaList,
+  initCinema,
   initTicketsCinemaList,
   initCinemasList,
   initCinemaMovieList,
@@ -18,42 +19,17 @@ export {
 //全部影院
 async function initAllCinemaList(cinemasList, cityId, ticketFlag, k) {
   const data = await allCinemaAPI(cityId, ticketFlag, k)
+  cinemasList.value = data ? data.cinemas : null
+}
 
-  switch (handleRequest(data)) {
-    case 0:
-      break
-    case 1:
-    case 2:
-      return
-    default:
-      break
-  }
-  const {
-    data: {
-      //cinemaExtendList
-      data: { cinemas },
-    },
-  } = data
-  cinemasList.value = cinemas
+// 影院信息
+async function initCinema(cinemaObj, cinemaId, k) {
+  const data = await cinemaAPI(cinemaId, k)
+  cinemaObj.value = data ? data.cinema : null
 }
 //购票页影院数据
 async function initTicketsCinemaList(cinameList, filmId, cityId, k) {
-  const data = await ticketsCinemaAPI(filmId, cityId, k)
-  switch (handleRequest(data)) {
-    case 0:
-      break
-    case 1:
-    case 2:
-      return
-    default:
-      break
-  }
-  const {
-    data: {
-      //cinemaExtendList
-      data: { cinemas },
-    },
-  } = data
+  const { cinemas } = await ticketsCinemaAPI(filmId, cityId, k)
   cinemas
 }
 
@@ -68,23 +44,11 @@ async function initCinemasList(
 ) {
   const data = await cinemaListAPI(cityId, ticketFlag, k)
 
-  switch (handleRequest(data)) {
-    case 0:
-      break
-    case 1:
-    case 2:
-      return
-    default:
-      break
+  const cinemas = data ? data.cinemas : null
+  if (cinemas === null) {
+    allCinemaList.value = regionCinemaList.value = regionList.value = null
+    return
   }
-
-  const {
-    data: {
-      //cinemaExtendList
-      data: { cinemas },
-    },
-  } = data
-
   allCinemaList.value = cinemas
   allCinemaList.value.map((item) => {
     const price =
@@ -108,45 +72,10 @@ async function initCinemasList(
 //影院电影数据
 async function initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k) {
   const data = await cinemaMovieListAPI(cinemaId, showDate, k)
-
-  switch (handleRequest(data)) {
-    case 0:
-      break
-    case 1:
-    case 2:
-      return
-    default:
-      break
-  }
-
-  const {
-    data: {
-      //cinemaExtendList
-      data: { films },
-    },
-  } = data
-
-  cinemaMovieList.value = films
+  cinemaMovieList.value = data ? data.films : null
 }
 //影厅数据
 async function initMovieHallList(movieHallList, filmId, cinemaId, date, k) {
-  // console.log('init data', filmId, cinemaId, date)
   const data = await movieHallListAPI(filmId, cinemaId, date, k)
-
-  switch (handleRequest(data)) {
-    case 0:
-      break
-    case 1:
-    case 2:
-      return
-    default:
-      break
-  }
-
-  const {
-    data: {
-      data: { schedules },
-    },
-  } = data
-  movieHallList.value = schedules
+  movieHallList.value = data ? data.schedules : null
 }

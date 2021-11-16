@@ -1,5 +1,4 @@
 import { movieListAPI, singleMovieAPI } from '../api/movieAPI'
-import { handleRequest } from './handleRequest'
 import { toRefs } from '@vue/reactivity'
 
 export { initMovieList, initSingleMovie }
@@ -14,53 +13,24 @@ async function initMovieList(params) {
     finished.value = true
     movies.value = JSON.parse(sessionStorage.getItem('someMovie'))
   } else {
-    const data = await movieListAPI(
+    const { films } = await movieListAPI(
       cityId.value,
       pageNum.value,
       pageSize.value,
       type.value
     )
-    switch (handleRequest(data)) {
-      case 0:
-        break
-      case 1:
-      case 2:
-        return
-      default:
-        break
-    }
-    const {
-      data: {
-        data: { films },
-      },
-    } = data
+
     movies.value = [...movies.value, ...films]
     pageNum.value += 1
     loading.value = false
     if (films.length < 9) finished.value = true
   }
-
   sessionStorage.setItem('someMovie', JSON.stringify(movies.value))
 }
 
 //请求单个电影
 async function initSingleMovie(movie, filmId) {
-  const data = await singleMovieAPI(filmId)
-  switch (handleRequest(data)) {
-    case 0:
-      break
-    case 1:
-    case 2:
-      return
-    default:
-      break
-  }
-  const {
-    data: {
-      data: { film },
-    },
-  } = data
-
+  const { film } = await singleMovieAPI(filmId)
   movie.value = film
   movie.value.premiereAt = new Date(parseInt(movie.value.premiereAt) * 1000)
     .toLocaleString()

@@ -60,11 +60,12 @@ const routes = [
     component: () => import('@/views/Cinema/Schedule.vue'),
   },
   {
-    path: '/order/:orderId',
+    path: '/order',
     name: 'order',
     component: () => import('@/views/Cinema/Order.vue'),
     meta: {
       requireAuth: true,
+      needToast: true,
     },
   },
   {

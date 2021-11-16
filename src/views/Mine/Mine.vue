@@ -72,12 +72,10 @@ const clickOn = (type) => {
     case 'singout':
       Dialog.confirm({
         title: '确认退出账号',
+      }).then(() => {
+        store.commit('clearUserInfo')
+        router.go(0)
       })
-        .then(() => {
-          store.commit('clearUserInfo')
-          router.go(0)
-        })
-        .catch(() => {})
 
       break
     default:

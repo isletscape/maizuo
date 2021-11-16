@@ -2,6 +2,7 @@ import request from '@/api/request'
 
 export {
   allCinemaAPI,
+  cinemaAPI,
   ticketsCinemaAPI,
   cinemaListAPI,
   cinemaMovieListAPI,
@@ -20,7 +21,17 @@ const allCinemaAPI = function (cityId, ticketFlag, k) {
     },
   })
 }
-
+const cinemaAPI = function (cinemaId, k) {
+  return request.get('/gateway', {
+    params: {
+      cinemaId: cinemaId,
+      k: k,
+    },
+    headers: {
+      'X-Host': 'mall.film-ticket.cinema.info',
+    },
+  })
+}
 const ticketsCinemaAPI = function (filmId, cityId, k) {
   return request.get('/gateway', {
     params: {

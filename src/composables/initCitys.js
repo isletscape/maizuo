@@ -1,27 +1,10 @@
 import { cityAPI } from '@/api/cityAPI.js'
-import { handleRequest } from './handleRequest'
 
 export default async function initCitys(citys, k) {
   if (localStorage.getItem('citys'))
     return (citys.value = JSON.parse(localStorage.getItem('citys')))
 
-  const data = await cityAPI(k)
-
-  switch (handleRequest(data)) {
-    case 0:
-      break
-    case 1:
-    case 2:
-      return
-    default:
-      break
-  }
-  const {
-    data: {
-      data: { cities },
-    },
-  } = data
-
+  const { cities } = await cityAPI(k)
   //按首字母序列化城市列表
   const letterArr = []
   const newCities = []
@@ -42,5 +25,4 @@ export default async function initCitys(citys, k) {
 
   localStorage.setItem('citys', JSON.stringify(newCities))
   citys.value = newCities
-  console.log('城市列表初始化', citys.value)
 }

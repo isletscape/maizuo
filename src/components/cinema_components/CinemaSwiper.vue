@@ -61,6 +61,9 @@ onMounted(() => {
 })
 </script>
 <style lang="less" scoped>
+.swiper-container{
+  z-index: 0;
+}
 .swiper-wrapper {
   height: 200pX;
 }

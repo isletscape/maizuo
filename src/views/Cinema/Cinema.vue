@@ -1,8 +1,8 @@
 <template>
-  <div id="cinema" v-if="cinemaMovieList">
+  <div id="cinema">
     <!-- 标题栏 -->
-    <div class="cinema-page">
-      <van-nav-bar :title="cinemaName">
+    <div class="nav">
+      <van-nav-bar v-if="cinema" :title="cinema.name" fixed placeholder>
         <template #left>
           <van-icon name="arrow-left" color="#444" @click="closepage" />
         </template>
@@ -37,34 +37,35 @@
 <script setup>
 import CinemaSwiper from '@/components/cinema_components/CinemaSwiper.vue'
 import router from '@/router/index.js'
-import { computed, ref } from '@vue/reactivity'
-import { initCinemaMovieList } from '@/composables/initCinemas.js'
+import { ref } from '@vue/reactivity'
+import { initCinemaMovieList, initCinema } from '@/composables/initCinemas.js'
 import { useRoute } from 'vue-router'
 import { tomorrowStamp } from '@/utils/time.js'
 import { watch } from '@vue/runtime-core'
 import { useStore } from 'vuex'
 
 const store = useStore()
+const cinema = ref(null)
 const cinemaMovieList = ref([])
 const { cinemaId } = useRoute().params
 const showDate = ref(tomorrowStamp)
 const k = 3819095
 const currentMovie = ref(null)
 
-const cinemaName = computed(() => {
-  return store.state.currentCinema.name
-})
-
+initCinema(cinema, cinemaId, k)
 initCinemaMovieList(cinemaMovieList, cinemaId, showDate.value, k)
-//更新放映厅数据
+
+// 更新放映厅数据
 watch(cinemaMovieList, (cinemaMovieList) => {
   currentMovie.value = cinemaMovieList[0]
-  showDate.value = String(cinemaMovieList[0].showDate[0])
+  // showDate.value = String(cinemaMovieList[0].showDate[0])
   store.commit('updateCurrentMovie', currentMovie.value)
   router.push(`/cinema/${cinemaId}/movies/${currentMovie.value.filmId}`)
 })
 
+// 轮播图切换电影的处理函数
 const getCurrentMovie = (movie) => {
+  currentMovie.value = movie
   store.commit('updateCurrentMovie', movie)
   router.push(`/cinema/${cinemaId}/movies/${movie.filmId}`)
 }
@@ -79,9 +80,13 @@ const closepage = () => {
 #cinema{
   height: 100vh;
 }
+.nav{
+  z-index: 99999;
+}
 .swiper {
   background-color: skyblue;
   padding-bottom: 10pX;
+  z-index: 1;
 }
 .movie-cell {
   .movie-name {
