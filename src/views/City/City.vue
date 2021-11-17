@@ -67,7 +67,7 @@ const handleSelectCity = (city) => {
   closepage()
 }
 const closepage = () => {
-  router.push('/movie')
+  router.go(-1)
 }
 
 //顶部固定区域的高度

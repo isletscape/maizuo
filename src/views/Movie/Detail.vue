@@ -196,7 +196,7 @@ const buy = () => {
   
 }
 .buy{
-  position: sticky;
+  position: fixed;
   bottom: 0;
   width: 100vw;
   height: 49pX;

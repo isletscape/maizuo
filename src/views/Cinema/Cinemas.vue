@@ -6,14 +6,14 @@
         <template #left>
           <div class="city-name" @click="goSearchCityPage">{{ cityName }}</div>
         </template>
-        <template #right>
+        <!-- <template #right>
           <van-icon
             name="search"
             @click="goSearchCinemaPage"
             size="18pX"
             color="#333"
           />
-        </template>
+        </template> -->
       </van-nav-bar>
       <!-- 筛选器 -->
       <div>
@@ -92,15 +92,16 @@ initCinemasList(
 //去往购票页
 const goCinema = (cinema) => {
   store.commit('updateCurrentCinema', cinema)
-  sessionStorage.removeItem('cinema_movie_date_status')
+  sessionStorage.removeItem('hall_params')
+
   router.push(`/cinema/${cinema.cinemaId}`)
 }
 const goSearchCityPage = () => {
   router.push({ name: 'city' })
 }
-const goSearchCinemaPage = () => {
-  console.log('go search cinema')
-}
+// const goSearchCinemaPage = () => {
+//   console.log('go search cinema')
+// }
 //pop选择地区的回调
 const handleSelectRegion = (regionName) => {
   currentregion.value = regionName

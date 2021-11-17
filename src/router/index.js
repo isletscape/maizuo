@@ -79,6 +79,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
+    props: true,
     component: () => import('@/views/Mine/Login.vue'),
   },
   {
@@ -108,7 +109,10 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth && !store.state.userInfo) {
-    router.push('/login')
+    next({
+      name: 'login',
+      params: { fromPath: from.fullPath }, // 将要跳转路由的path作为参数，传递到登录页面
+    })
   } else {
     next()
   }

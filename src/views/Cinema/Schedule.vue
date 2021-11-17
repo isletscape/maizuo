@@ -113,13 +113,20 @@ const handleSelectSeat = (seatInfo, checked) => {
 }
 provide('selectSeatEvent', handleSelectSeat)
 // 跳转支付页面
+// const confirmSchedule = () => {
+//   Dialog.confirm({
+//     title: '未登录',
+//     message: '是否跳转登录界面',
+//   }).then(() => {
+//     // router.push({
+//     //   name: 'login',
+//     //   params: { redirect: router.currentRoute.value.fullPath }, //从哪个页面跳转
+//     // })
+//     router.push('/login')
+//   })
+// }
 const confirmSchedule = () => {
-  Dialog.confirm({
-    title: '未登录',
-    message: '是否跳转登录界面',
-  }).then(() => {
-    router.push(`/order`)
-  })
+  router.push('/order')
 }
 
 const goBack = () => {

@@ -32,6 +32,7 @@ import { initMovieHallList } from '@/composables/initCinemas.js'
 import { onMounted, onUnmounted, watch } from '@vue/runtime-core'
 import HallCell from '@/components/cinema_components/HallCell.vue'
 import router from '@/router/index.js'
+// import { isEmpty } from '@/utils/isEmpty.js'
 
 const route = useRoute()
 const store = useStore()
@@ -83,6 +84,7 @@ const handleSelectHall = (scheduleId) => {
 // 刷新页面重新请求数据
 onMounted(() => {
   if (sessionStorage.getItem('hall_params')) {
+    console.log('session')
     const status = JSON.parse(sessionStorage.getItem('hall_params'))
     initMovieHallList(
       hallList,
@@ -92,6 +94,7 @@ onMounted(() => {
       8767641
     )
   } else {
+    console.log('init')
     initMovieHallList(
       hallList,
       movieId.value,
@@ -102,18 +105,18 @@ onMounted(() => {
   }
 })
 onUnmounted(() => {
-  sessionStorage.removeItem('hall_params')
-}),
-  window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem(
-      'hall_params',
-      JSON.stringify({
-        cinemaId: cinemaId.value,
-        movieId: movieId.value,
-        showDate: showDates.value[0],
-      })
-    )
-  })
+  // sessionStorage.removeItem('hall_params')
+})
+window.addEventListener('beforeunload', () => {
+  sessionStorage.setItem(
+    'hall_params',
+    JSON.stringify({
+      cinemaId: cinemaId.value,
+      movieId: movieId.value,
+      showDate: showDates.value[0],
+    })
+  )
+})
 </script>
 
 <style lang="less" scoped>

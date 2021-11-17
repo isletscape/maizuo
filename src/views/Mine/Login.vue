@@ -1,5 +1,9 @@
 <template>
   <div id="login">
+    <div class="navbar">
+      <!-- <van-icon class="backword" name="arrow-left" @click="backword" /> -->
+      <van-icon class="backword" name="cross" size="27" @click="back" />
+    </div>
     <van-form @submit="onSubmit" validate-trigger="onBlur">
       <van-cell-group inset>
         <van-field
@@ -81,17 +85,37 @@ const verifySuccess = () => {
     id: tel.value,
     keepLogin: keepLoginState.value,
   })
-  router.push('/mine')
+
+  if (router.currentRoute.value.params.fromPath) {
+    router.push(router.currentRoute.value.params.fromPath)
+  } else {
+    router.push('/mine')
+  }
+  // if (router.query.redirect) { //如果存在参数
+  //            let redirect = router.query.redirect
+  //            router.push(redirect)//则跳转至进入登录页前的路由
+  //          } else {
+  //            router.push('/')//否则跳转至首页
+  //          }
   Toast('登录成功')
 }
 
 const verifyFailure = () => {
   Toast('帐号或密码错误')
 }
+
+const back = () => {
+  router.go(-1)
+}
 </script>
 
 <style lang="less" scoped>
   #login {
     margin-top: 200pX;
+  }
+  .navbar{
+    position: absolute;
+    top: 20pX;
+    left: 20pX;
   }
 </style>
