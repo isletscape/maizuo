@@ -71,12 +71,14 @@
 
 <script setup>
 import { initSeatingChart, initSchedule } from '@/composables/initSchedule.js'
-import { computed, provide, ref } from 'vue'
+import { initSingleMovie } from '@/composables/initMovies.js'
+import { computed, provide, ref, watch } from 'vue'
 import { NoticeBar, Dialog } from 'vant'
 import SeatingChart from '@/components/cinema_components/SeatingChart.vue'
 import { timestampToFullTime } from '@/utils/time.js'
 import { useRoute } from 'vue-router'
 import router from '@/router'
+import store from '@/store'
 
 const seatingChart = ref(null)
 const schedules = ref(null)
@@ -85,11 +87,14 @@ const k = 9983952
 // 默认不显示影厅列表
 const switcherStatus = ref(false)
 const VanDialog = Dialog.Component
-
+const movie = ref()
 // 票务信息
 initSchedule(schedules, scheduleId, k)
 // 座次信息
 initSeatingChart(seatingChart, scheduleId, k)
+watch(schedules, (schedules) => {
+  initSingleMovie(movie, schedules.film.filmId)
+})
 
 // 用户选中的座位数组
 const selectedSeats = ref([])
@@ -126,6 +131,18 @@ provide('selectSeatEvent', handleSelectSeat)
 //   })
 // }
 const confirmSchedule = () => {
+  if (store.state.userInfo) {
+    store.commit('saveOrderInfo', {
+      movieName: movie.value.name,
+      poster: movie.value.poster,
+      cinemaName: schedules.value.cinema.name,
+      date: timestampToFullTime(schedules.value.showAt),
+      user: { tel: '188 8888 8888' },
+      hallName: schedules.value.hall.name,
+      seats: selectedSeats.value,
+      amount: amount.value,
+    })
+  }
   router.push('/order')
 }
 

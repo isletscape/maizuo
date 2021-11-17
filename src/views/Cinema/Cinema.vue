@@ -72,7 +72,6 @@ const getCurrentMovie = (movie) => {
 
 const closepage = () => {
   router.push('/cinemas')
-  sessionStorage.removeItem('cinema_movie_date_status')
 }
 </script>
 

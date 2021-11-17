@@ -19,7 +19,7 @@
         <van-icon name="sign" size="30pX" />
       </template>
       <template #title>
-        <span class="custom-title">188 8888 8888</span>
+        <span class="custom-title">{{ tel }}</span>
       </template>
       <template #label>
         <span class="custom-title">温馨提示：请确认您的订单信息</span>
@@ -28,16 +28,16 @@
 
     <div class="movie-info">
       <div class="poster">
-        <img src="@/assets/poster.jpg" alt="" />
+        <img :src="poster" alt="" />
       </div>
       <div class="content">
-        <p class="content-name">铁道英雄(2D订座票)</p>
-        <p class="content-common">星期五 2021-11-19 11:05</p>
-        <p class="content-common">大地影院（大红门合生广场店）</p>
-        <p class="content-common">6号厅(影厅冠名招商)(1张)</p>
+        <p class="content-name">{{ movieName }}</p>
+        <p class="content-common">{{ date }}</p>
+        <p class="content-common">{{ cinemaName }}</p>
+        <p class="content-common">{{ hallName }}{{ seatsString }}</p>
       </div>
     </div>
-    <cell class="price" title="商品金额" value="¥12.15" />
+    <cell class="price" title="金额" :value="`¥${amount}`" />
 
     <cell-group>
       <cell icon="bill-o" title="代金券" value="0张可用" size="large" is-link />
@@ -51,14 +51,11 @@
       />
     </cell-group>
 
-    <cell-group class="notice-message" inset>
-      <cell
-        title="单元格"
-        label="描述信息述信息述信息述/n${``}信息述信息述信息述信息述信息述信息述信息述信息述信息述信息述信息述信息述信息述信息述信息"
-      />
-    </cell-group>
-
-    <submit-bar :price="3050" button-text="提交订单" @submit="submitOrder" />
+    <submit-bar
+      :price="Number(amount) * 100"
+      button-text="提交订单"
+      @submit="submitOrder"
+    />
 
     <van-dialog />
   </div>
@@ -68,17 +65,34 @@
 import { useCountDown } from '@vant/use'
 import { Dialog } from 'vant'
 import { Cell, CellGroup, SubmitBar } from 'vant'
-
+import store from '@/store'
 import router from '@/router'
+import { ref } from '@vue/reactivity'
 const VanDialog = Dialog.Component
 
+const {
+  user: { tel },
+  poster,
+  movieName,
+  date,
+  cinemaName,
+  hallName,
+  seats,
+  amount,
+} = store.state.orderInfo
+
+const seatsString = ref('')
+seats.forEach((item) => {
+  seatsString.value += item.rowId + '排' + item.columnId + '座' + '  '
+})
+// {{ item.rowId }}排{{ item.columnId }}座
 const submitOrder = () => {}
 
 const back = () => {
   router.go(-1)
 }
 const countDown = useCountDown({
-  time: 10 * 1000, // 倒计时 10 秒
+  time: 30 * 1000, // 倒计时 10 秒
   onFinish: () => {
     Dialog.alert({
       title: '标题',
@@ -127,9 +141,7 @@ const { current } = countDown
 .price{
   margin-bottom: 14pX;
 }
-.notice-message{
-  margin-top: 15pX;
-}
+
 .count-down{
   color: #f3632a;
 }

@@ -12,6 +12,7 @@ const store = createStore({
         name: '北京',
         cityId: 110100,
       },
+      orderInfo: {},
     }
   },
   mutations: {
@@ -43,6 +44,9 @@ const store = createStore({
     },
     updateCurrentCinema(state, newCinema) {
       state.currentCinema = newCinema
+    },
+    saveOrderInfo(state, order) {
+      state.orderInfo = order
     },
   },
 })
