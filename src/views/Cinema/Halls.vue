@@ -84,17 +84,15 @@ const handleSelectHall = (scheduleId) => {
 // 刷新页面重新请求数据
 onMounted(() => {
   if (sessionStorage.getItem('hall_params')) {
-    console.log('session')
     const status = JSON.parse(sessionStorage.getItem('hall_params'))
     initMovieHallList(
       hallList,
-      status.movieId,
-      status.cinemaId,
+      movieId.value,
+      cinemaId.value,
       status.showDate,
       8767641
     )
   } else {
-    console.log('init')
     initMovieHallList(
       hallList,
       movieId.value,
@@ -107,7 +105,8 @@ onMounted(() => {
 onUnmounted(() => {
   // sessionStorage.removeItem('hall_params')
 })
-window.addEventListener('beforeunload', () => {
+window.addEventListener('beforeunload', (e) => {
+  console.log('e', e)
   sessionStorage.setItem(
     'hall_params',
     JSON.stringify({

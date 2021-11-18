@@ -30,7 +30,7 @@
       </p>
     </div>
     <!-- 场次分页列表 -->
-    <router-view></router-view>
+    <router-view v-if="currentMovie"></router-view>
   </div>
 </template>
 
