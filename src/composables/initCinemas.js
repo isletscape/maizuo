@@ -16,7 +16,7 @@ export {
   initMovieHallList,
 }
 
-//全部影院
+// 全部影院数组
 async function initAllCinemaList(cinemasList, cityId, ticketFlag, k) {
   const data = await allCinemaAPI(cityId, ticketFlag, k)
   cinemasList.value = data ? data.cinemas : null
@@ -27,6 +27,7 @@ async function initCinema(cinemaObj, cinemaId, k) {
   const data = await cinemaAPI(cinemaId, k)
   cinemaObj.value = data ? data.cinema : null
 }
+
 // 购票页影院数据
 async function initTicketsCinemaList(cinameList, filmId, cityId, k) {
   const { cinemas } = await ticketsCinemaAPI(filmId, cityId, k)
@@ -70,13 +71,13 @@ async function initCinemasList(
   regionList.value = Array.from(new Set(aaa))
 }
 
-//影院电影数据
+// 影院电影数据
 async function initCinemaMovieList(cinemaMovieList, cinemaId, showDate, k) {
   const data = await cinemaMovieListAPI(cinemaId, showDate, k)
   cinemaMovieList.value = data ? data.films : null
 }
 
-//影厅数据
+// 影厅数据
 async function initMovieHallList(movieHallList, filmId, cinemaId, date, k) {
   const data = await movieHallListAPI(filmId, cinemaId, date, k)
   movieHallList.value = data ? data.schedules : null

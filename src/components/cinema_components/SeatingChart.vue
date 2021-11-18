@@ -1,8 +1,8 @@
 <template>
   <div class="container" ref="containerRef">
     <!-- 索引条 -->
-    <div class="index-bar" :style="[indexBarStyle, indexBarTransStyle]">
-      <div class="indexCell" v-for="rowCount in numbersOfRows" :key="rowCount">
+    <div class="index-bar" :style="[indexBarStyle, indexBarAnimation]">
+      <div class="index-cell" v-for="rowCount in numbersOfRows" :key="rowCount">
         {{ rowCount }}
       </div>
     </div>
@@ -46,10 +46,11 @@
     </div>
   </div>
 </template>
+
 <script setup>
 import { computed, ref, watch } from 'vue'
+import { hammerIt, hammerObj } from '@/utils/gestuter.js'
 import Seat from '@/components/cinema_components/Seat.vue'
-import { hammerIt, tMatrix } from '@/utils/gestuter.js'
 
 // eslint-disable-next-line no-undef
 const props = defineProps({
@@ -60,19 +61,21 @@ const seatsRef = ref(null)
 const containerRef = ref(null)
 // const indexBarRef = ref(null)
 
-//横排的总数量（矩阵高度）
+// 横排的总数量（矩阵高度）
 const numbersOfRows = ref(props.seatingChart.height)
-//所有横排中格子数量最多的单元格格数（矩阵宽度）
+// 所有横排中格子数量最多的单元格格数（矩阵宽度）
 const maxNumbersOfCells = ref(props.seatingChart.width)
 
-//横排样式
+// 横排样式
 const rowStyle = ref(null)
-//每个格子的样式
+// 每个格子的样式
 const cellStyle = ref(null)
-//索引栏样式
+// 索引栏样式
 const indexBarStyle = ref(null)
-//单元格尺寸
+// 单元格尺寸
 const cellSize = ref(null)
+// 索引条宽度
+const indexBarWidth = ref(20)
 
 watch(seatsRef, (seatsRef) => {
   cellSize.value =
@@ -89,12 +92,15 @@ watch(seatsRef, (seatsRef) => {
     height: cellSize.value + 'pX',
   }
   indexBarStyle.value = {
+    width: indexBarWidth.value + 'pX',
     height: (cellSize.value + 4) * numbersOfRows.value + 'pX',
   }
 })
 
-const indexBarTransStyle = computed(() => {
-  return `transform: translate(0pX, ${tMatrix.value[5]}pX) scale(${tMatrix.value[3]})`
+const indexBarAnimation = computed(() => {
+  return `transform: translate(${
+    (indexBarWidth.value / 2) * hammerObj.value[3]
+  }pX, ${hammerObj.value[5]}pX) scale(${hammerObj.value[3]})`
 })
 </script>
 
@@ -112,21 +118,21 @@ const indexBarTransStyle = computed(() => {
 }
 .index-bar {
   position:absolute;
-  left: 3pX;
+  // left: 5pX;
   background-color: rgba(141, 141, 141, 0.493);
   z-index: 99;
-  width: 20pX;
   border-radius: 10pX;
   display: flex;
   flex-flow: column nowrap;
   justify-content: space-around;
   align-items: center;
-  
 }
-.indexCell{
+.index-cell{
+  height: 20pX;
   width: 100%;
   text-align: center;
   font-size: 5pX;
+  
 }
 
 .seats { 

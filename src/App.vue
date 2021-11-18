@@ -2,9 +2,7 @@
   <div class="xxx">
     <router-view v-slot="{ Component }">
       <transition name="fade">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
+        <component :is="Component" />
       </transition>
     </router-view>
 
@@ -75,7 +73,7 @@ nav {
 html,
 body,
 #app {
-  height: 100%;
+  height: 100vh;
   // overflow;
   // -webkit-overflow-scrolling: touch;
   min-width: 280pX;
@@ -100,7 +98,7 @@ body,
 }
 // 路由切换动画
 .fade-enter-active {
-  transition: opacity 4s ease;
+  transition: opacity .5s ease;
 }
 .fade-enter-from,
 .fade-leave-to {

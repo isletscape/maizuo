@@ -64,8 +64,8 @@
         {{ selectedSeats.length > 0 ? amount : '' }}
       </div>
     </div>
+    <VanDialog />
   </div>
-  <VanDialog />
 </template>
 
 

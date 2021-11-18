@@ -53,6 +53,9 @@ const routes = [
     path: '/tickets',
     name: 'tickets',
     component: () => import('@/views/Movie/Tickets.vue'),
+    meta: {
+      keepAlive: true,
+    },
   },
   {
     path: '/schedule/:id',
@@ -101,8 +104,14 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   // eslint-disable-next-line no-unused-vars
-  scrollBehavior(to, from, savedPosition) {
-    return { top: 0 }
+  scrollBehavior(to, from, savePosition) {
+    // if (savePosition) {
+    //   //解决页面从列表页跳转到详情页返回,初始在原来位置
+    //   return savePosition
+    // } else {
+    //   //解决页面跳转后页面高度和前一个页面高度一样
+    // return { x: 0, y: 0 }
+    // }
   },
 })
 
