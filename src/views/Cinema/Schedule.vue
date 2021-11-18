@@ -262,6 +262,7 @@ const goBack = () => {
   line-height: 46pX;
   font-size: 18pX;
   color: #fff;
- 
+  // position: absolute;
+  // bottom: 0;
 }
 </style>

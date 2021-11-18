@@ -134,9 +134,3 @@ const goback = () => {
   width: 100vw;
 }
 </style>
-
-<style lang="less">
-  :root {
-  --van-nav-bar-icon-color: #555;
- }
-</style>

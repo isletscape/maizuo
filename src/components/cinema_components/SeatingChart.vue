@@ -1,11 +1,7 @@
 <template>
   <div class="container" ref="containerRef">
     <!-- 索引条 -->
-    <div
-      class="index-bar"
-      :style="[indexBarStyle, indexBarTransStyle]"
-      ref="indexBarRef"
-    >
+    <div class="index-bar" :style="[indexBarStyle, indexBarTransStyle]">
       <div class="indexCell" v-for="rowCount in numbersOfRows" :key="rowCount">
         {{ rowCount }}
       </div>
@@ -59,7 +55,7 @@ const props = defineProps({
 
 const seatsRef = ref(null)
 const containerRef = ref(null)
-const indexBarRef = ref(null)
+// const indexBarRef = ref(null)
 
 //横排的总数量（矩阵高度）
 const numbersOfRows = ref(props.seatingChart.height)
@@ -75,29 +71,24 @@ const indexBarStyle = ref(null)
 //单元格尺寸
 const cellSize = ref(null)
 
-watch(
-  [seatsRef, containerRef, indexBarRef],
-  ([seatsRef, containerRef, indexBarRef]) => {
-    indexBarRef
+watch(seatsRef, (seatsRef) => {
+  cellSize.value =
+    document.documentElement.clientWidth / maxNumbersOfCells.value - 4
 
-    cellSize.value =
-      containerRef.getBoundingClientRect().width / maxNumbersOfCells.value - 4
+  hammerIt(seatsRef)
 
-    hammerIt(seatsRef)
-
-    rowStyle.value = {
-      width: cellSize.value * maxNumbersOfCells.value + 'pX',
-      height: cellSize.value + 4 + 'pX',
-    }
-    cellStyle.value = {
-      width: cellSize.value + 'pX',
-      height: cellSize.value + 'pX',
-    }
-    indexBarStyle.value = {
-      height: (cellSize.value + 4) * numbersOfRows.value + 'pX',
-    }
+  rowStyle.value = {
+    width: cellSize.value * maxNumbersOfCells.value + 'pX',
+    height: cellSize.value + 4 + 'pX',
   }
-)
+  cellStyle.value = {
+    width: cellSize.value + 'pX',
+    height: cellSize.value + 'pX',
+  }
+  indexBarStyle.value = {
+    height: (cellSize.value + 4) * numbersOfRows.value + 'pX',
+  }
+})
 
 const indexBarTransStyle = computed(() => {
   return `transform: translate(0pX, ${tMatrix.value[5]}pX) scale(${tMatrix.value[3]})`

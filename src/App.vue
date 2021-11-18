@@ -80,7 +80,7 @@ nav {
 </style>
 
 
-<style lang="less">
+<style lang="less" scoped>
 @import url('/src/style/root.css');
 
 html,
@@ -98,6 +98,7 @@ body,
 
 :root {
   // 导航栏高度
+  --van-nav-bar-icon-color: #555;
   --van-nav-bar-height: 46pX !important;
   --van-tab-font-size:15pX !important;
   --van-tab-line-height:15pX  !important;
