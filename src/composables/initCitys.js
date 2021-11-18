@@ -1,6 +1,8 @@
 import { cityAPI } from '@/api/cityAPI.js'
 
-export default async function initCitys(citys, k) {
+export { initCitys }
+
+async function initCitys(citys, k) {
   if (localStorage.getItem('citys'))
     return (citys.value = JSON.parse(localStorage.getItem('citys')))
 

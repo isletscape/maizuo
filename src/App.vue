@@ -1,45 +1,36 @@
 <template>
-  <!-- <router-view v-slot="{ Component }">
+  <div class="xxx">
+    <router-view v-slot="{ Component }">
       <transition name="fade">
         <keep-alive>
           <component :is="Component" />
         </keep-alive>
       </transition>
-    </router-view> -->
-  <router-view></router-view>
+    </router-view>
 
-  <nav v-if="router.currentRoute.value.meta.showNav">
-    <router-link to="/movie" class="link">
-      <van-icon class="icon" name="gem-o" :size="iconSize" />
-      <div class="name">电影</div>
-    </router-link>
-    <router-link to="/cinemas" class="link">
-      <van-icon class="icon" name="shop-o" :size="iconSize" />
-      <div class="name">影院</div>
-    </router-link>
-    <router-link to="/mine" class="link">
-      <van-icon class="icon" name="manager-o" :size="iconSize" />
-      <div class="name">我的</div>
-    </router-link>
-  </nav>
+    <!-- <router-view></router-view> -->
+
+    <nav v-if="router.currentRoute.value.meta.showNav">
+      <router-link to="/movie" class="link">
+        <van-icon class="icon" name="gem-o" :size="iconSize" />
+        <div class="name">电影</div>
+      </router-link>
+      <router-link to="/cinemas" class="link">
+        <van-icon class="icon" name="shop-o" :size="iconSize" />
+        <div class="name">影院</div>
+      </router-link>
+      <router-link to="/mine" class="link">
+        <van-icon class="icon" name="manager-o" :size="iconSize" />
+        <div class="name">我的</div>
+      </router-link>
+    </nav>
+  </div>
 </template>
+
 <script setup>
 import router from '@/router'
-
 const iconSize = '22pX'
-// import { ref } from '@vue/reactivity'
-// import { nextTick, provide } from '@vue/runtime-core'
-
-// const isRouterAlive = ref(true)
-// const reload = () => {
-//   isRouterAlive.value = false
-//   nextTick(() => {
-//     isRouterAlive.value = true
-//   })
-// }
-// provide('reload', reload)
 </script>
-
 
 <style lang="less" scoped>
 nav {
@@ -58,7 +49,6 @@ nav {
   align-items: center;
   justify-content: stretch;
 }
-
 .link {
   display: flex;
   flex-flow: column nowrap;
@@ -80,9 +70,8 @@ nav {
 </style>
 
 
-<style lang="less" scoped>
+<style lang="less">
 @import url('/src/style/root.css');
-
 html,
 body,
 #app {
@@ -95,9 +84,7 @@ body,
   -moz-osx-font-smoothing: grayscale;
   font-family: Microsoft YaHei, Tahoma, Helvetica, Arial, sans-serif;
 }
-
 :root {
-  // 导航栏高度
   --van-nav-bar-icon-color: #555;
   --van-nav-bar-height: 46pX !important;
   --van-tab-font-size:15pX !important;
@@ -111,12 +98,9 @@ body,
   height: 44pX !important;   
   background-color: #fff;
 }
-
-
-
 // 路由切换动画
 .fade-enter-active {
-  transition: opacity 0.4s ease;
+  transition: opacity 4s ease;
 }
 .fade-enter-from,
 .fade-leave-to {

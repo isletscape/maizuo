@@ -2,11 +2,10 @@
   <div class="seat" @click="selectSeat">
     <Icon :name="iconName" />
   </div>
-  <!-- <div class="seat">1</div> -->
 </template>
 
 <script setup>
-import Icon from '@/icon/icon.vue'
+import Icon from '@/components/Icon.vue'
 import { computed, toRefs, ref } from '@vue/reactivity'
 import { inject } from '@vue/runtime-core'
 import { Toast } from 'vant'
@@ -28,7 +27,7 @@ const selectSeat = () => {
   if (!seatInfo.value.isBroken && !seatInfo.value.isOccupied) {
     // 改变座位状态
     checked.value = !checked.value
-    // 让schedule处理业务
+    // 让schedule处理选座业务
     scheduleHandleSelectSeat(seatInfo.value, checked.value)
   } else {
     Toast('不可选')

@@ -85,12 +85,9 @@ const seatsString = ref('')
 seats.forEach((item) => {
   seatsString.value += item.rowId + '排' + item.columnId + '座' + '  '
 })
-// {{ item.rowId }}排{{ item.columnId }}座
+
 const submitOrder = () => {}
 
-const back = () => {
-  router.go(-1)
-}
 const countDown = useCountDown({
   time: 30 * 1000, // 倒计时 10 秒
   onFinish: () => {
@@ -104,6 +101,10 @@ const countDown = useCountDown({
 })
 countDown.start()
 const { current } = countDown
+
+const back = () => {
+  router.go(-1)
+}
 </script>
 
 <style lang="less" scoped>

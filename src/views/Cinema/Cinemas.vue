@@ -4,7 +4,7 @@
       <!-- title -->
       <van-nav-bar title="影院">
         <template #left>
-          <div class="city-name" @click="goSearchCityPage">{{ cityName }}</div>
+          <div class="city-name" @click="goCity">{{ cityName }}</div>
         </template>
         <!-- <template #right>
           <van-icon
@@ -43,22 +43,22 @@
         @click="goCinema(cinema)"
       />
     </van-list>
+    <!-- 模态框 -->
+    <van-popup
+      v-model:show="show"
+      position="top"
+      close-on-click-overlay
+      @click-overlay="closePopup"
+    >
+      <template #default>
+        <Popup
+          :region="regionList"
+          :type="popupType"
+          :selectRegion="handleSelectRegion"
+        />
+      </template>
+    </van-popup>
   </div>
-  <!-- 模态框 -->
-  <van-popup
-    v-model:show="show"
-    position="top"
-    close-on-click-overlay
-    @click-overlay="closePopup"
-  >
-    <template #default>
-      <Popup
-        :region="regionList"
-        :type="popupType"
-        :selectRegion="handleSelectRegion"
-      />
-    </template>
-  </van-popup>
 </template>
 
 <script setup>
@@ -79,7 +79,7 @@ const regionList = ref([])
 const regionCinemaList = ref([])
 const currentregion = ref('全部')
 
-//初始化电影院列表，地区列表
+// 初始化电影院列表，地区列表
 initCinemasList(
   allCinemaList,
   regionCinemaList,
@@ -89,20 +89,17 @@ initCinemasList(
   k
 )
 
-//去往购票页
 const goCinema = (cinema) => {
   store.commit('updateCurrentCinema', cinema)
   sessionStorage.removeItem('hall_params')
-
   router.push(`/cinema/${cinema.cinemaId}`)
 }
-const goSearchCityPage = () => {
+
+const goCity = () => {
   router.push({ name: 'city' })
 }
-// const goSearchCinemaPage = () => {
-//   console.log('go search cinema')
-// }
-//pop选择地区的回调
+
+// pop选择地区的回调
 const handleSelectRegion = (regionName) => {
   currentregion.value = regionName
   regionCinemaList.value = allCinemaList.value.filter((item) => {
@@ -111,7 +108,7 @@ const handleSelectRegion = (regionName) => {
   closePopup()
 }
 
-//模态窗口
+// 模态窗口
 const popupType = ref(0)
 const show = ref(false)
 const popup = (type) => {

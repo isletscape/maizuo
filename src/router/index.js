@@ -65,7 +65,6 @@ const routes = [
     component: () => import('@/views/Cinema/Order.vue'),
     meta: {
       requireAuth: true,
-      needToast: true,
     },
   },
   {
@@ -111,7 +110,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth && !store.state.userInfo) {
     next({
       name: 'login',
-      params: { fromPath: from.fullPath }, // 将要跳转路由的path作为参数，传递到登录页面
+      params: { fromPath: from.fullPath }, // 将原路由的path传递到登录页
     })
   } else {
     next()

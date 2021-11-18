@@ -31,7 +31,7 @@
 
 <script setup>
 import { watch, ref } from 'vue'
-import initCitys from '@/composables/initCitys.js'
+import { initCitys } from '@/composables/initCitys.js'
 import router from '@/router/index.js'
 import { Search } from 'vant'
 import FullList from '@/components/city_components/FullList.vue'
@@ -42,15 +42,12 @@ const store = useStore()
 const k = ref(3782949)
 var citys = ref([])
 var serchResults = ref([])
-//搜索关键字
-const keyword = ref('')
+const keyword = ref('') //搜索关键字
 
-//城市数据
 initCitys(citys, k)
 
-//检索结果
+// 检索结果
 watch(keyword, (keyword) => {
-  // if (keyword === '') return (serchResults.value = [])
   serchResults.value = []
   citys.value.forEach((item) => {
     serchResults.value = [

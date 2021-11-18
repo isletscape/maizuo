@@ -29,7 +29,7 @@ import { useStore } from 'vuex'
 import { Tab as VanTab, Tabs as VanTabs } from 'vant'
 import { timestampToDate } from '@/utils/time.js'
 import { initMovieHallList } from '@/composables/initCinemas.js'
-import { onMounted, onUnmounted, watch } from '@vue/runtime-core'
+import { onMounted, watch } from '@vue/runtime-core'
 import HallCell from '@/components/cinema_components/HallCell.vue'
 import router from '@/router/index.js'
 // import { isEmpty } from '@/utils/isEmpty.js'
@@ -39,15 +39,14 @@ const store = useStore()
 const hallList = ref([])
 const active = ref(0)
 
-//当前电影Id
 const movieId = computed(() => {
   return Number(route.params.movieId)
 })
-//当前影院Id
+
 const cinemaId = computed(() => {
   return Number(route.params.cinemaId)
 })
-//上映日期数组
+
 const showDates = computed(() => {
   return store.state.currentMovie.showDate
 })
@@ -102,9 +101,7 @@ onMounted(() => {
     )
   }
 })
-onUnmounted(() => {
-  // sessionStorage.removeItem('hall_params')
-})
+
 window.addEventListener('beforeunload', (e) => {
   console.log('e', e)
   sessionStorage.setItem(

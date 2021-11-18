@@ -1,7 +1,6 @@
 <template>
   <div id="login">
     <div class="navbar">
-      <!-- <van-icon class="backword" name="arrow-left" @click="backword" /> -->
       <van-icon class="backword" name="cross" size="27" @click="back" />
     </div>
     <van-form @submit="onSubmit" validate-trigger="onBlur">
@@ -54,7 +53,7 @@ import router from '@/router/'
 const tel = ref('')
 const password = ref('')
 const keepLoginState = ref(false)
-//手机号校验规则
+// 手机号校验规则
 const pattern = /^1[3456789]\d{9}$/
 
 const onSubmit = () => {
@@ -85,18 +84,11 @@ const verifySuccess = () => {
     id: tel.value,
     keepLogin: keepLoginState.value,
   })
-
   if (router.currentRoute.value.params.fromPath) {
     router.push(router.currentRoute.value.params.fromPath)
   } else {
     router.push('/mine')
   }
-  // if (router.query.redirect) { //如果存在参数
-  //            let redirect = router.query.redirect
-  //            router.push(redirect)//则跳转至进入登录页前的路由
-  //          } else {
-  //            router.push('/')//否则跳转至首页
-  //          }
   Toast('登录成功')
 }
 

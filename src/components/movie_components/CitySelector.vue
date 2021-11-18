@@ -26,6 +26,7 @@ const bindStyle = {
   height: `${height}px`,
   top: `${titleBarHeight / 2 - height / 2}px`,
 }
+
 //动态样式
 const dynamicStyle = computed(() => {
   if (val.value < 1) {
@@ -35,7 +36,6 @@ const dynamicStyle = computed(() => {
       backgroundColor: '#fff',
     }
   } else {
-    // return { color: '#000', backgroundColor: '#fff' }
     return { color: '#fff', backgroundColor: '#111' }
   }
 })

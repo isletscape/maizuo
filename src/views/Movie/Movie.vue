@@ -1,8 +1,10 @@
 <template>
-  <CitySelector />
-  <TitleBar />
-  <MovieSwipe />
-  <TabBar />
+  <div>
+    <CitySelector />
+    <TitleBar />
+    <MovieSwipe />
+    <TabBar />
+  </div>
 </template>
 
 <script setup>

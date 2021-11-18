@@ -8,18 +8,21 @@
     </div>
     <!-- 座位区域 -->
     <div class="seats" ref="seatsRef">
+      <!-- 行 -->
       <div
         class="row"
         v-for="rowIndex in numbersOfRows"
         :key="rowIndex"
         :style="[rowStyle]"
       >
+        <!-- 格 -->
         <div
           class="cell"
           v-for="cellIndex in maxNumbersOfCells"
           :key="cellIndex"
           :style="[cellStyle]"
         >
+          <!-- 座位 -->
           <Seat
             v-if="
               seatingChart.seats.some((item) => {
@@ -74,7 +77,7 @@ const cellSize = ref(null)
 watch(seatsRef, (seatsRef) => {
   cellSize.value =
     document.documentElement.clientWidth / maxNumbersOfCells.value - 4
-
+  // 添加手势
   hammerIt(seatsRef)
 
   rowStyle.value = {

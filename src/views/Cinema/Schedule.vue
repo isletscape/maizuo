@@ -80,14 +80,15 @@ import { useRoute } from 'vue-router'
 import router from '@/router'
 import store from '@/store'
 
+const VanDialog = Dialog.Component
 const seatingChart = ref(null)
 const schedules = ref(null)
 const scheduleId = useRoute().params.id
 const k = 9983952
 // 默认不显示影厅列表
 const switcherStatus = ref(false)
-const VanDialog = Dialog.Component
 const movie = ref()
+
 // 票务信息
 initSchedule(schedules, scheduleId, k)
 // 座次信息
@@ -99,7 +100,7 @@ watch(schedules, (schedules) => {
 // 用户选中的座位数组
 const selectedSeats = ref([])
 
-// 选中座位总金额,Number
+// 选中座位总金额
 const amount = computed(() => {
   return (
     (selectedSeats.value.length * schedules.value.price.sale) /
@@ -117,19 +118,7 @@ const handleSelectSeat = (seatInfo, checked) => {
   }
 }
 provide('selectSeatEvent', handleSelectSeat)
-// 跳转支付页面
-// const confirmSchedule = () => {
-//   Dialog.confirm({
-//     title: '未登录',
-//     message: '是否跳转登录界面',
-//   }).then(() => {
-//     // router.push({
-//     //   name: 'login',
-//     //   params: { redirect: router.currentRoute.value.fullPath }, //从哪个页面跳转
-//     // })
-//     router.push('/login')
-//   })
-// }
+
 const confirmSchedule = () => {
   if (store.state.userInfo) {
     store.commit('saveOrderInfo', {

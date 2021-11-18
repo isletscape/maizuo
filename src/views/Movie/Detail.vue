@@ -51,7 +51,6 @@
 </template>
 
 <script setup>
-// import Tickets from '@/views/Home/Movie/Tickets.vue'
 import router from '@/router/index.js'
 import { ref } from '@vue/reactivity'
 import { useRoute } from 'vue-router'
@@ -59,6 +58,7 @@ import { initSingleMovie } from '@/composables/initMovies.js'
 
 const { id } = useRoute().params
 const movie = ref()
+
 initSingleMovie(movie, id)
 
 const backword = () => {

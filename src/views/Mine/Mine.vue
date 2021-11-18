@@ -44,8 +44,8 @@
       v-if="store.state.userInfo"
       @click="clickOn('singout')"
     />
+    <VanDialog />
   </div>
-  <VanDialog />
 </template>
 
 <script setup>
@@ -58,6 +58,7 @@ const loginAction = () => {
     router.push('/login')
   }
 }
+
 const clickOn = (type) => {
   switch (type) {
     case 'unable':
@@ -65,9 +66,6 @@ const clickOn = (type) => {
       break
     case 'coupons':
       router.push('/coupons')
-      break
-    case 'clear':
-      console.log('clear')
       break
     case 'singout':
       Dialog.confirm({

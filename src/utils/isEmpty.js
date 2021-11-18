@@ -1,4 +1,4 @@
-//undefined，null，''，NaN，false，0，[]，{}，空白字符串：返回true
+// undefined，null，''，NaN，false，0，[]，{}，空白字符串：返回true
 export function isEmpty(val) {
   switch (typeof val) {
     case 'undefined':

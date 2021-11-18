@@ -17,7 +17,6 @@
 
 <script setup>
 import { useAttrs } from '@vue/runtime-core'
-
 const { cinema } = useAttrs()
 </script>
 

@@ -12,16 +12,16 @@ export function hammerIt(el) {
       }
     )
   })()
-  tMatrix.value = [1, 0, 0, 1, 0, 0] //x缩放，无，无，y缩放，x平移，y平移
+  tMatrix.value = [1, 0, 0, 1, 0, 0] // x缩放，无，无，y缩放，x平移，y平移
 
-  var initScale = 1 //初始化scale
+  var initScale = 1 // 初始化scale
   var mc = new Hammer.Manager(el)
   var ticking = false
-  var poscenter = point2D(0, 0) //缓存双指的中心坐标
-  var duration = '' //设置过渡效果，用于双击缩放效果
-  var lastTranslate = point2D(0, 0) //记录上次的偏移值
+  var poscenter = point2D(0, 0) // 缓存双指的中心坐标
+  var duration = '' // 设置过渡效果，用于双击缩放效果
+  var lastTranslate = point2D(0, 0) // 记录上次的偏移值
 
-  var lastcenter = point2D(el.offsetWidth / 2, el.offsetHeight / 2) //图像的中心点，用于对比双指中心点
+  var lastcenter = point2D(el.offsetWidth / 2, el.offsetHeight / 2) // 图像的中心点，用于对比双指中心点
 
   var center = lastcenter
   mc.add(new Hammer.Pan({ threshold: 0, pointers: 1 }))
@@ -37,7 +37,7 @@ export function hammerIt(el) {
     return { x: x, y: y }
   }
   function onPanStart() {
-    lastTranslate = point2D(tMatrix.value[4], tMatrix.value[5]) //缓存上一次的偏移值
+    lastTranslate = point2D(tMatrix.value[4], tMatrix.value[5]) // 缓存上一次的偏移值
   }
   function onPan(ev) {
     duration = ''
@@ -48,11 +48,11 @@ export function hammerIt(el) {
   }
   function onPinchStart(ev) {
     duration = ''
-    lastTranslate = point2D(tMatrix.value[4], tMatrix.value[5]) //记录上一次的偏移值
+    lastTranslate = point2D(tMatrix.value[4], tMatrix.value[5]) // 记录上一次的偏移值
     initScale = tMatrix.value[0] || 1
     poscenter = point2D(ev.center.x, ev.center.y)
 
-    lastcenter = point2D(center.x + lastTranslate.x, center.y + lastTranslate.y) //重新计算放大后的中心坐标
+    lastcenter = point2D(center.x + lastTranslate.x, center.y + lastTranslate.y) // 重新计算放大后的中心坐标
     poscenter = point2D(ev.center.x - lastcenter.x, ev.center.y - lastcenter.y)
     requestElementUpdate('onpinchStart')
   }
@@ -64,7 +64,7 @@ export function hammerIt(el) {
     tMatrix.value[4] =
       poscenter.x -
       ((poscenter.x - lastcenter.x) * ev.scale + lastcenter.x) +
-      lastTranslate.x //最后加上上一次的偏移值
+      lastTranslate.x // 最后加上上一次的偏移值
     tMatrix.value[5] =
       poscenter.y -
       ((poscenter.y - lastcenter.y) * ev.scale + lastcenter.y) +

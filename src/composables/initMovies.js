@@ -19,7 +19,6 @@ async function initMovieList(params) {
       pageSize.value,
       type.value
     )
-
     movies.value = [...movies.value, ...films]
     pageNum.value += 1
     loading.value = false
@@ -40,21 +39,3 @@ async function initSingleMovie(movie, filmId) {
     item.role = item.role.split(' ')[0]
   })
 }
-
-// export default async function initMovies(showState) {
-//   const { movies, cityId, pageNum, pageSize, type, loading, finished } =
-//     showState
-
-//   const data = await movieAPI(cityId, pageNum.value, pageSize, type)
-//   if (!handleRequest(data)) return
-//   const {
-//     data: {
-//       data: { films },
-//     },
-//   } = data
-//   console.log('pageNum', pageNum.value, films)
-//   movies.value = [...movies.value, ...films]
-//   pageNum.value += 1
-//   loading.value = false
-//   if (films.length < 9) finished.value = true
-// }

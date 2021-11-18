@@ -61,8 +61,6 @@ import { initCinemasList } from '@/composables/initCinemas.js'
 import { useStore } from 'vuex'
 import router from '@/router'
 
-// const route = useRoute()
-// const { filmId } = route.params
 const { cityId } = useStore().state.currentCity
 const allCinemaList = ref([])
 const regionCinemaList = ref([])
@@ -88,6 +86,7 @@ const handleSelectRegion = (regionName) => {
   })
   closePopup()
 }
+
 const selectCinema = (cinemaId) => {
   router.push(`/cinema/${cinemaId}`)
 }

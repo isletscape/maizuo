@@ -26,16 +26,13 @@ const props = defineProps({
   hall: Object,
   selectHall: Function,
 })
-// const { hall } = toRefs(props)
-// const spaceIndex = timestampToDate(hall.value.showAt).indexOf(' ')
+
 const onCilckHall = () => {
   props.selectHall(props.hall.scheduleId)
 }
 
 const showAt = timestampToTime(props.hall.showAt)
 const endAt = timestampToTime(props.hall.endAt)
-// const b = props.hall.hallName.indexOf('（')
-// const hallName = props.hall.hallName
 const price = String(props.hall.salePrice).slice(0, 2)
 </script>
 

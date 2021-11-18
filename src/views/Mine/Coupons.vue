@@ -1,7 +1,7 @@
 <template>
   <van-nav-bar title="优惠券">
     <template #left>
-      <van-icon name="arrow-left" color="#444" @click="closepage" />
+      <van-icon name="arrow-left" color="#444" @click="router.go(-1)" />
     </template>
   </van-nav-bar>
   <ul>
@@ -14,10 +14,6 @@
 </template>
 <script setup>
 import router from '@/router'
-
-const closepage = () => {
-  router.go(-1)
-}
 </script>
 
 <style lang="less" scoped>
