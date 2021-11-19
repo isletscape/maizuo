@@ -73,7 +73,7 @@
 import { initSeatingChart, initSchedule } from '@/composables/initSchedule.js'
 import { initSingleMovie } from '@/composables/initMovies.js'
 import { computed, provide, ref, watch } from 'vue'
-import { NoticeBar, Dialog } from 'vant'
+import { NoticeBar, Dialog, Toast } from 'vant'
 import SeatingChart from '@/components/cinema_components/SeatingChart.vue'
 import { timestampToFullTime } from '@/utils/time.js'
 import { useRoute } from 'vue-router'
@@ -120,19 +120,23 @@ const handleSelectSeat = (seatInfo, checked) => {
 provide('selectSeatEvent', handleSelectSeat)
 
 const confirmSchedule = () => {
-  if (store.state.userInfo) {
-    store.commit('saveOrderInfo', {
-      movieName: movie.value.name,
-      poster: movie.value.poster,
-      cinemaName: schedules.value.cinema.name,
-      date: timestampToFullTime(schedules.value.showAt),
-      user: { tel: '188 8888 8888' },
-      hallName: schedules.value.hall.name,
-      seats: selectedSeats.value,
-      amount: amount.value,
-    })
+  if (selectedSeats.value.length <= 0) {
+    Toast('请先选择座位')
+  } else {
+    if (store.state.userInfo) {
+      store.commit('saveOrderInfo', {
+        movieName: movie.value.name,
+        poster: movie.value.poster,
+        cinemaName: schedules.value.cinema.name,
+        date: timestampToFullTime(schedules.value.showAt),
+        user: { tel: '188 8888 8888' },
+        hallName: schedules.value.hall.name,
+        seats: selectedSeats.value,
+        amount: amount.value,
+      })
+    }
+    router.push('/order')
   }
-  router.push('/order')
 }
 
 const goBack = () => {
@@ -246,7 +250,7 @@ const goBack = () => {
 .confirm-button{
   height: 46pX;
   width: 100vw;
-  background-color: #f35e25;
+  background-color: var(--themeColor);
   text-align: center;
   line-height: 46pX;
   font-size: 18pX;

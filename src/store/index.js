@@ -13,6 +13,7 @@ const store = createStore({
         cityId: 110100,
       },
       orderInfo: {},
+      themeColor: '#1989fa',
     }
   },
   mutations: {
@@ -47,6 +48,9 @@ const store = createStore({
     },
     saveOrderInfo(state, order) {
       state.orderInfo = order
+    },
+    changeThemeColor(state, color) {
+      state.themeColor = color
     },
   },
 })

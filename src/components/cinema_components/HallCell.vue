@@ -74,11 +74,11 @@ const price = String(props.hall.salePrice).slice(0, 2)
   .buy {
     width: 50pX;
     height: 25pX;
-    border: 1px solid #ff5f16;
+    border: 1px solid var(--themeColor);
     border-radius: 2px;
     font-size: 14pX;
     line-height: 25pX;
-    color: #ff5f16;
+    color: var(--themeColor);
     text-align: center;
   }
 </style>ian1

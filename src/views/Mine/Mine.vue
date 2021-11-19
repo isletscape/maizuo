@@ -74,7 +74,6 @@ const clickOn = (type) => {
         store.commit('clearUserInfo')
         router.go(0)
       })
-
       break
     default:
       break
@@ -96,7 +95,7 @@ const VanDialog = Dialog.Component
   display: flex;
   align-items: center;
   color: #fff;
-  background-color: #1989fa;
+  background-color: var(--themeColor);
 }
 
 .nav .nav-title {

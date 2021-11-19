@@ -137,9 +137,9 @@ const cilckOn = (type, filmId) => {
     line-height: 25pX;
     font-size: 13pX;
     text-align: center;
-    border: 1px solid #1989fa;
+    border: 1px solid var(--themeColor);
     border-radius: 2px;
-    color: #1989fa;
+    color: var(--themeColor);
     padding: 0;
     background-color: #fff;
   }

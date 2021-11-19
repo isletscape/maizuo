@@ -34,7 +34,7 @@ var heightStyleObject = {
 <style lang="less" scoped>
 #titlebar {
   position: fixed;
-  background-color: skyblue;
+  background-color: var(--themeColor);
   width: 100%;
   z-index: 10;
   font-size: 18px;

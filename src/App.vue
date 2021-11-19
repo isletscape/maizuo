@@ -1,7 +1,7 @@
 <template>
   <div class="xxx">
     <router-view v-slot="{ Component }">
-      <transition name="fade">
+      <transition :name="transitionName">
         <component :is="Component" />
       </transition>
     </router-view>
@@ -22,12 +22,20 @@
         <div class="name">我的</div>
       </router-link>
     </nav>
+    <function :changeTransitionName="changeTransitionName"></function>
   </div>
 </template>
 
 <script setup>
 import router from '@/router'
+import { ref } from '@vue/reactivity'
+import Function from '@/Function.vue'
+
 const iconSize = '22pX'
+const transitionName = ref('slide-fade')
+const changeTransitionName = (transName) => {
+  transitionName.value = transName
+}
 </script>
 
 <style lang="less" scoped>
@@ -55,27 +63,48 @@ nav {
   width: 33.33vw;
   flex: 1;
   font-size: 12pX;
-  color: #1989fa;
+  color: var(--themeColor);
 }
 .icon{
   height: v-bind('iconSize');
+  width: 100%;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
+
 .name {
   height: 15pX;
   line-height: 15pX;
   font-size: 10pX;
+}
+
+// fade-only
+.fade-only-enter-active {
+  transition: opacity .5s ease;
+}
+.fade-only-enter-from,
+.fade-only-leave-to {
+  opacity: 0;
+}
+// silde-fade
+.slide-fade-enter-active {
+  transition: all .3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateY(-50px);
+  opacity: 0;
 }
 </style>
 
 
 <style lang="less">
 @import url('/src/style/root.css');
+
 html,
 body,
 #app {
-  height: 100vh;
-  // overflow;
-  // -webkit-overflow-scrolling: touch;
   min-width: 280pX;
   background-color: #fff;
   -webkit-font-smoothing: antialiased;
@@ -87,6 +116,7 @@ body,
   --van-nav-bar-height: 46pX !important;
   --van-tab-font-size:15pX !important;
   --van-tab-line-height:15pX  !important;
+  
 }
 // van-tabs 设置高度
 .van-tabs__wrap,
@@ -96,19 +126,5 @@ body,
   height: 44pX !important;   
   background-color: #fff;
 }
-// 路由切换动画
-.fade-enter-active {
-  transition: opacity .5s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-.icon {
-  width: 100%;
-  height: 100%;
-  vertical-align: -0.15em;
-  fill: currentColor;
-  overflow: hidden;
-}
+
 </style>
