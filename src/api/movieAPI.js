@@ -1,6 +1,21 @@
 import request from '@/api/request'
 
-export const movieListAPI = function (cityId, pageNum, pageSize, type) {
+export { bannerListAPI, movieListAPI, singleMovieAPI }
+
+const bannerListAPI = function (type, cityId, k) {
+  return request.get('/gateway', {
+    params: {
+      type: type,
+      cityId: cityId,
+      k: k,
+    },
+    headers: {
+      'X-Host': 'mall.cfg.common-banner',
+    },
+  })
+}
+
+const movieListAPI = function (cityId, pageNum, pageSize, type) {
   return request.get('/gateway', {
     params: {
       cityId: cityId,
@@ -15,7 +30,7 @@ export const movieListAPI = function (cityId, pageNum, pageSize, type) {
   })
 }
 
-export const singleMovieAPI = function (filmId) {
+const singleMovieAPI = function (filmId) {
   return request.get('/gateway', {
     params: {
       filmId: filmId,

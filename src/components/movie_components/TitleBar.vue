@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { titleBarHeight } from '@/style/'
+import { titleBarHeight } from '@/style/globalStyle.js'
 import mitt from '@/utils/mitt.js'
 import { computed, ref } from 'vue'
 
@@ -40,5 +40,6 @@ var heightStyleObject = {
   font-size: 18px;
   text-align: center;
   transform: translateZ(0);
+  color: #fff;
 }
 </style>

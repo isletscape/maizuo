@@ -6,8 +6,6 @@
       </transition>
     </router-view>
 
-    <!-- <router-view></router-view> -->
-
     <nav v-if="router.currentRoute.value.meta.showNav">
       <router-link to="/movie" class="link">
         <van-icon class="icon" name="gem-o" :size="iconSize" />
@@ -22,17 +20,19 @@
         <div class="name">我的</div>
       </router-link>
     </nav>
-    <function :changeTransitionName="changeTransitionName"></function>
+    <StyleSwitcher :changeTransitionName="changeTransitionName" />
   </div>
 </template>
 
 <script setup>
 import router from '@/router'
 import { ref } from '@vue/reactivity'
-import Function from '@/Function.vue'
+import StyleSwitcher from '@/style/StyleSwitcher.vue'
 
 const iconSize = '22pX'
-const transitionName = ref('slide-fade')
+// 默认无过渡效果
+const transitionName = ref('')
+// 切换路由动画
 const changeTransitionName = (transName) => {
   transitionName.value = transName
 }
@@ -101,7 +101,6 @@ nav {
 
 <style lang="less">
 @import url('/src/style/root.css');
-
 html,
 body,
 #app {
@@ -111,14 +110,13 @@ body,
   -moz-osx-font-smoothing: grayscale;
   font-family: Microsoft YaHei, Tahoma, Helvetica, Arial, sans-serif;
 }
+// vant样式
 :root {
   --van-nav-bar-icon-color: #555;
   --van-nav-bar-height: 46pX !important;
   --van-tab-font-size:15pX !important;
-  --van-tab-line-height:15pX  !important;
-  
+  --van-tab-line-height:15pX  !important;  
 }
-// van-tabs 设置高度
 .van-tabs__wrap,
 .van-tabs__wrap scroll-view,
 .van-tabs__nav,
@@ -126,5 +124,4 @@ body,
   height: 44pX !important;   
   background-color: #fff;
 }
-
 </style>
